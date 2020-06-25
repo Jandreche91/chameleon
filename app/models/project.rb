@@ -3,4 +3,5 @@ class Project < ApplicationRecord
   belongs_to :user
   has_many :assignments
   has_many :alerts
+  has_many :milestones
 end
