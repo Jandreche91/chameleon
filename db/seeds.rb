@@ -75,7 +75,6 @@ end
 
 puts "🌱 Creation of the projects starts 🌱"
 
-
 ###########################################################################################
 #################### PROJECT ARRAY ########################################################
 ###########################################################################################
@@ -173,8 +172,6 @@ project_array = [
     ]
   ]
 
-
-
 ###########################################################################################
 ####################### AUTOMATIC CREATOR OF MILESTONES ###################################
 ###########################################################################################
@@ -221,25 +218,13 @@ def milestone_creator(new_project)
       puts "Milestone id #{new_milestone.id} for project #{new_project.name} saved successfully 🎟" if new_milestone.save
     end
 
-
-
-  #create the milestone
-
-
 end
-
-
 
 ###########################################################################################
 ####################### CREATION OF THE PROJECTS WITH THE MILESTONES#######################
 ###########################################################################################
 
-
-
-
-
-
-  # creation of the models , all are owned by the manager user
+# creation of the models , all are owned by the manager user
 
   project_array.each do |project|
 
@@ -252,4 +237,35 @@ end
     puts "#{new_project.name} sucessfully created! 🌱" if new_project.save
     milestone_creator(new_project)
   end
+
+
+###########################################################################################
+####################### CREATION OF ASSIGNMENTS TO USERS ##################################
+###########################################################################################
+
+
+# as array and not as activerecord relation
+
+senior_associates =  [] + User.where("hourly_rate > 400")
+  #delete from this array the manager
+
+senior_associates.delete(manager)
+
+
+
+Project.all.each_with_index do |project, index|
+
+  assignment = Assignment.new
+  assignment.project = project
+
+      if senior_associates[index].nil?
+        assignment.user = senior_associates.sample
+      else
+        assignment.user  = senior_associates[index]
+      end
+
+  puts "#{assignment.user.username} (#{assignment.user.id}) has been assingned to project #{project.name} (#{project.id}) 👾" if assignment.save
+
+  end
+
 
