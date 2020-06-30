@@ -23,4 +23,10 @@ puts "All users destroyed ❗"
 
 puts "🌱 Creation of manager starts 🌱"
 
-manager = User.new()
+manager = User.new( unsername: "john_smith",
+                    first_name: "John",
+                    last_name: "Smith",
+                    hourly_rate: 750,
+                    email: "john.smith@our_team.org",
+                    password:"123456")
+puts "🌱 Manager has User id #{manager.id} and was successfully saved! 🌱" if manager.save
