@@ -286,4 +286,82 @@ junior_associates.each do |associate|
   end
 end
 
+###########################################################################################
+####################### CREATION OF TASKS in MILESTONE ####################################
+###########################################################################################
+
+
+def give_description
+  descriptions = ["Drafting document to send to client",
+                  "Reviewing document of the case",
+                  "Making important calls with the other party",
+                  "Making important calls with the client",
+                  "Internal meetings and drafting documents",
+                  "Doing legal research",
+                  "Doing fact checking",
+                  "Doing fact finding"
+                ]
+  descriptions.sample
+end
+
+
+# method to add tasks to a finished milestone
+
+
+def add_tasks_to_milestone(milestone)
+
+  # determination of random compliance with budget between 0.95 and 1.2 in of assigmnent
+  budget_compliance = rand(0.95..1.1)
+  project = milestone.project
+  budget_of_milestone = project.estimated_cost * milestone.progress_rate / 100
+  actual_cost_of_milestone = budget_of_milestone * budget_compliance
+  associates = project.users_as_billers
+
+      until actual_cost_of_milestone < 1_000
+        task = Task.new
+        task.user = associates.sample
+        task.hours_spent = rand(1..8)
+        task.description = give_description
+        task.milestone = milestone
+        early_date = milestone.end_date - 200 < project.estimated_start_date ? project.estimated_start_date : milestone.end_date - rand(100-200)
+        task.date = rand(early_date..milestone.end_date)
+            if task.save
+              puts "New task registered for milestone #{milestone.id} of project #{project.name} ⏰"
+              actual_cost_of_milestone -= task.hours_spent * task.user.hourly_rate
+              puts "Cost of milestone is #{actual_cost_of_milestone}"
+            end
+        end
+end
+
+Milestone.all.each do |milestone|
+
+  if milestone.done == true
+    add_tasks_to_milestone(milestone)
+  else
+    puts "nothing for the moment 😆"
+  end
+
+end
+
+# add task to an unfinished milestone
+
+# method to add tasks to unfinished milestones
+
+def add_task_to_unfinished_milestone(milestone)
+  budget_weight = rand(0.25..0.75)
+
+
+end
+
+
+Project.all.each do |project|
+
+  unfinished_milestones = project.milestones.select {|milestone| milestone.done == false }
+
+
+
+end
+
+
+
 
