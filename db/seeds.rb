@@ -251,7 +251,7 @@ senior_associates =  [] + User.where("hourly_rate > 400")
 
 senior_associates.delete(manager)
 
-
+puts "🌱 assigning senior associates 🌱"
 
 Project.all.each_with_index do |project, index|
 
@@ -264,8 +264,26 @@ Project.all.each_with_index do |project, index|
         assignment.user  = senior_associates[index]
       end
 
-  puts "#{assignment.user.username} (#{assignment.user.id}) has been assingned to project #{project.name} (#{project.id}) 👾" if assignment.save
+  puts "#{assignment.user.username} (#{assignment.user.id}) has been assigned to project #{project.name} (#{project.id}) 👾" if assignment.save
 
   end
+
+
+# assigning junior associates
+
+puts "🌱 assigning junior associates 🌱"
+
+junior_associates = [] + User.where("hourly_rate <= 400")
+
+
+junior_associates.each do |associate|
+  projects = Project.all.sample(4)
+  projects.each do |project|
+    assignment = Assignment.new
+    assignment.project = project
+    assignment.user = associate
+    puts "#{assignment.user.username} (#{assignment.user.id}) has been assigned to project #{project.name} (#{project.id}) 👾" if assignment.save
+  end
+end
 
 
