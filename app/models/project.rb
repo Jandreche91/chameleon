@@ -4,4 +4,5 @@ class Project < ApplicationRecord
   has_many :assignments, dependent: :destroy
   has_many :alerts, dependent: :destroy
   has_many :milestones, dependent: :destroy
+  has_many :tasks, through: :milestones
 end

@@ -71,11 +71,14 @@ team_hash.each do |name, values|
   puts "🌱 Profile for #{associate.first_name + " " + associate.last_name} created successfully 🌱" if associate.save
 end
 
-###########################################################################################
-####################### CREATION OF THE PROJECTS ##########################################
-###########################################################################################
+
 
 puts "🌱 Creation of the projects starts 🌱"
+
+
+###########################################################################################
+#################### PROJECT ARRAY ########################################################
+###########################################################################################
 
 # Here we will add 10 basic projects to the database
 
@@ -170,6 +173,72 @@ project_array = [
     ]
   ]
 
+
+
+###########################################################################################
+####################### AUTOMATIC CREATOR OF MILESTONES ###################################
+###########################################################################################
+
+# generate a random distribution of 100%
+# return an array with the four distribution equally 100 as a sum
+def create_distribution
+  results = []
+  distribution = 100
+  first_distribution = rand(10..28)
+  results << first_distribution
+  distribution -= first_distribution
+  second_distribution = rand(30..40)
+  results << second_distribution
+  distribution -= second_distribution
+  third_distribution = rand(25..30)
+  results << third_distribution
+  distribution -= third_distribution
+  results << distribution
+  results
+end
+
+def milestone_creator(new_project)
+  #array with a random distribution as per the method above
+    distribution = create_distribution
+    descriptions = ["Initial phase and revision of documents", "Written phase", "Oral phase", "Analysis of decision and strategy of enforcement / challenge"]
+    #create four milestones according to the four elements of the proportion
+    distribution.each_with_index do | proportion, index |
+
+      #calculate the number of days of the project
+
+      total_project_days = (new_project.estimated_end_date - new_project.estimated_start_date).to_i
+
+      new_milestone = Milestone.new
+      new_milestone.progress_rate = proportion
+      new_milestone.description = descriptions[index]
+      #establish the end date of the milestone as initial date of project plus relative proportion
+      relative_proportion = distribution[0..index].sum
+      new_milestone.end_date = new_project.estimated_start_date + (total_project_days * relative_proportion / 100)
+      #establish a cutoff date to randomise whether the milestone is over as at today
+      cutoff_date = Date.today + rand(60) - rand(60)
+      new_milestone.done = true if new_milestone.end_date <= cutoff_date
+      new_milestone.project = new_project
+      puts "Milestone id #{new_milestone.id} for project #{new_project.name} saved successfully 🎟" if new_milestone.save
+    end
+
+
+
+  #create the milestone
+
+
+end
+
+
+
+###########################################################################################
+####################### CREATION OF THE PROJECTS WITH THE MILESTONES#######################
+###########################################################################################
+
+
+
+
+
+
   # creation of the models , all are owned by the manager user
 
   project_array.each do |project|
@@ -181,10 +250,6 @@ project_array = [
       estimated_cost: project[4])
     new_project.user = manager
     puts "#{new_project.name} sucessfully created! 🌱" if new_project.save
-
-
-
-
-
+    milestone_creator(new_project)
   end
 
