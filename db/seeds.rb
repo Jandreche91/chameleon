@@ -38,8 +38,10 @@ puts "🌱 Manager has User id #{manager.id} and was successfully saved! 🌱" i
 
 puts "🌱 Creation of the team starts 🌱"
 
+# team hash contains information of the team members to always populate the db in the same manner
+
 team_hash = { "Nancy"=>["Yost", 650],
- "Jarrod"=>["Mante", 650],
+ "Jarrod"=>["Pelosi", 650],
  "Joan"=>["Mraz", 558],
  "Stepanie"=>["Murphy", 450],
  "Theodore"=>["Fisher", 440],
@@ -68,3 +70,62 @@ team_hash.each do |name, values|
                     password:"123456")
   puts "🌱 Profile for #{associate.first_name + " " + associate.last_name} created successfully 🌱" if associate.save
 end
+
+###########################################################################################
+####################### CREATION OF THE PROJECTS ##########################################
+###########################################################################################
+
+puts "🌱 Creation of the projects starts 🌱"
+
+# Here we will add 10 basic projects to the database
+
+project_array = [
+   # Project No. 1
+  ["Bay View",
+    "We represent Bay View Group LLC and The Spalena Company LLC in a claim brought against the Republic of Rwanda under the Rwanda – USA BIT in relation to the alleged expropriation of a mine.",
+    "11-02-2017",
+    "31-12-2021",
+    1_500_000],
+
+    # Project No. 2
+
+    ["Singapore Matter",
+      "We represent the shareholder of an Asian power plant in an ICC Arbitration in Singapore in relation to a claim against its gas supplier for breach of its gas supply contract.",
+      "20-01-2016",
+      "05-12-2020",
+      2_000_000
+    ],
+
+    # Project No. 3
+
+    ["Chapter 11 Proceedings",
+      "We represent the committee of unsecured creditors of a major US retailer in its Chapter 11 restructuring.",
+      "5-05-2019",
+      "8-04-2020",
+      800_000
+    ]
+
+    # Project No. 4
+
+    [ "Seized Planes",
+      "We represent a European investor in an arbitration arising from the seizure of planes in bankruptcy proceedings.",
+      "20-02-2017",
+      "20-08-2021",
+      1_750_000
+    ]
+
+    # Project No. 5
+
+    [ "Korean Energy Dispute",
+      "We represent a Korean engineering company in an ad hoc construction arbitration relating to alleged delayed and deficient building works.",
+      "25-08-2018",
+      "29-03-2022",
+      5_000_000
+    ]
+
+
+
+
+
+
+]
