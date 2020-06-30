@@ -5,4 +5,5 @@ class Project < ApplicationRecord
   has_many :alerts, dependent: :destroy
   has_many :milestones, dependent: :destroy
   has_many :tasks, through: :milestones
+  has_many :users_as_billers, through: :assignments, source: :user
 end
