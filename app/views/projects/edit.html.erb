@@ -1,0 +1,11 @@
+<div class="container">
+  <h1>Edit the project</h1>
+  <%= simple_form_for(@project) do |f| %>
+    <%= f.input :name %>
+    <%= f.input :description, as: :text %>
+    <%= f.input :estimated_cost %>
+    <%= f.input :estimated_start_date %>
+    <%= f.input :estimated_end_date %>
+    <%= f.button :submit, class: "btn-primary" %>
+  <% end %>
+</div>
