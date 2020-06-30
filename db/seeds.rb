@@ -103,7 +103,7 @@ project_array = [
       "5-05-2019",
       "8-04-2020",
       800_000
-    ]
+    ],
 
     # Project No. 4
 
@@ -112,20 +112,79 @@ project_array = [
       "20-02-2017",
       "20-08-2021",
       1_750_000
-    ]
+    ],
 
     # Project No. 5
 
     [ "Korean Energy Dispute",
-      "We represent a Korean engineering company in an ad hoc construction arbitration relating to alleged delayed and deficient building works.",
+      "We represent a Korean engineering company in a dispute relating to alleged delayed and deficient building works.",
       "25-08-2018",
       "29-03-2022",
       5_000_000
+    ],
+
+    # Project No. 6
+
+    [ "Egg Dispute",
+      "We represent a French company in dispute relating to delayed delivery of eggs.",
+      "13-05-2019",
+      "29-11-2021",
+      700_000
+    ],
+
+    #Project No. 7
+
+    [ "Highway Dispute",
+      "We represent a Spanish construction company in a dispute against a South American State arising from delays in the construction of a highway.",
+      "11-01-2016",
+      "20-09-2020",
+      2_800_000
+    ],
+
+    # Project No. 8
+
+    ["Glass Dispute",
+      "We represent a Russian company in a dispute against a French Company arising from alleged defects in the production of glass products.",
+      "19-05-2019",
+      "20-10-2020",
+      1_300_000
+    ],
+
+
+    # Project No. 9
+
+    [ "Ice Cream Dispute",
+      "We represent an American Ice Cream manufacturer in a dispute for delays in the delivery of raw material shipments.",
+      "20-08-2016",
+      "20-12-2021",
+      1_000_000
+    ],
+
+    # Project No. 10
+
+    ["Oil Companies Dispute",
+      "We represente an oil company in a dispute against another oil company concerning the payment of gasoil deliveries.",
+      "20-11-2019",
+      "20-12-2022",
+      500_000
     ]
+  ]
+
+  # creation of the models , all are owned by the manager user
+
+  project_array.each do |project|
+
+    new_project = Project.new( name: project[0],
+      description: project[1],
+      estimated_start_date: project[2],
+      estimated_end_date: project[3],
+      estimated_cost: project[4])
+    new_project.user = manager
+    puts "#{new_project.name} sucessfully created! 🌱" if new_project.save
 
 
 
 
 
+  end
 
-]
