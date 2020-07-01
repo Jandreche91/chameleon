@@ -43,7 +43,7 @@ puts "🌱 Creation of the team starts 🌱"
 team_hash = { "Nancy"=>["Yost", 650],
  "Jarrod"=>["Pelosi", 650],
  "Joan"=>["Mraz", 558],
- "Stepanie"=>["Murphy", 450],
+ "Stephanie"=>["Murphy", 450],
  "Theodore"=>["Fisher", 440],
  "Pedro"=>["Ortiz", 330],
  "Chad"=>["Pfeffer", 330],
@@ -323,9 +323,10 @@ def add_tasks_to_milestone(milestone)
         task.milestone = milestone
         early_date = milestone.end_date - 200 < project.estimated_start_date ? project.estimated_start_date : milestone.end_date - rand(100-200)
         task.date = rand(early_date..milestone.end_date)
+        task.value = task.hours_spent * task.user.hourly_rate
             if task.save
               puts "New task registered for milestone #{milestone.id} of project #{project.name} ⏰"
-              actual_cost_of_milestone -= task.hours_spent * task.user.hourly_rate
+              actual_cost_of_milestone -= task.value
               puts "Cost of milestone is #{actual_cost_of_milestone}"
             end
         end
@@ -359,9 +360,10 @@ def add_task_to_unfinished_milestone(milestone)
         task.milestone = milestone
         before = Date.today - 200
         task.date = rand(before..Date.today)
+        task.value = task.hours_spent * task.user.hourly_rate
             if task.save
               puts "New task registered for milestone #{milestone.id} of project #{project.name} ⏰"
-              budget_of_milestone -= task.hours_spent * task.user.hourly_rate
+              budget_of_milestone -= task.value
               puts "Cost of milestone is #{budget_of_milestone}"
             end
 

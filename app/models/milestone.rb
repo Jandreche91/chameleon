@@ -4,11 +4,7 @@ class Milestone < ApplicationRecord
   validates :description, :end_date, :progress_rate, presence: true
 
   def executed_value
-    sum = 0
-    tasks.each do |task|
-      sum += task.value
-    end
-    sum
+    tasks.sum(:value)
   end
 
   def hours_spent
