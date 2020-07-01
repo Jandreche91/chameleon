@@ -1,3 +1,63 @@
+
+
+<div class="container my-5">
+
+
+  <div class="row">
+
+
+    <div class="col-12 card-overall-performance">
+
+
+
+      <h3>Welcome  back, <%= current_user.first_name %>!</h3>
+      <h5>Here is your team's overall <span style="color: #900C3F">performance</span>:</h5>
+
+      <div class="card-overall-internal">
+
+
+
+        <div class="dashboard-overall-chart">
+
+          <h6>The dashboard</h6>
+
+        </div>
+
+        <div class="alert-board">
+          <h6 class="title-alert-board"><i class="mr-2 fas fa-exclamation-circle"></i>Your <span style="color: #900C3F">alert board</span></h6>
+
+          <% if @alerts.empty? %>
+
+          <div class="alert-card">
+            <p>You don't have any outstanding alerts. Congratulations!</p>
+
+          </div>
+
+
+
+
+
+          <% else %>
+
+          <% end %>
+
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+
+
 <div class="container">
   <h1>All the projects</h1>
   <ul>

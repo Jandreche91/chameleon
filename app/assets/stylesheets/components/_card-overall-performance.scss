@@ -1,0 +1,29 @@
+
+.card-overall-performance {
+
+  padding: 16px;
+  background-color: white;
+  border-radius: 8px;
+};
+
+.card-overall-internal {
+  background-color: $dark-blue;
+  padding: 16px 4px;
+  border-radius: 8px;
+
+  display: inline-grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+};
+
+.dashboard-overall-chart {
+    height: 250px;
+    border-radius: 8px;
+    background-color: white;
+    margin: 0 8px;
+    grid-column-start: 1;
+    grid-column-end: 4;
+    padding: 8px;
+
+
+}
+

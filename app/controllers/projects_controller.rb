@@ -2,6 +2,7 @@ class ProjectsController < ApplicationController
   # correspond a tous les projets
   def index
     @projects = Project.all
+    @alerts = Alert.all
   end
 
   def new
