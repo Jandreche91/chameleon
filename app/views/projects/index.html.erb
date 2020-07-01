@@ -8,14 +8,14 @@
 
     <div class="col-12 card-overall-performance">
 
-      <h3>Welcome  back, <%= current_user.first_name %>!</h3>
-      <h5>Here is your team's overall <span style="color: #900C3F">performance</span>:</h5>
+      <h2>Welcome  back, <%= current_user.first_name %>!</h2>
+      <h6>Here is your team's overall <span style="color: #900C3F">performance</span>:</h6>
 
       <div class="card-overall-internal">
 
         <div class="dashboard-overall-chart">
 
-          <h6>dashboard showing performance per month in terms of money and hours. The data is the following:</h6>
+          <h6>Dashboard showing performance per month in terms of money and hours. The data is the following:</h6>
 
           <% @dashboard_data.each do |month, values| %>
 
@@ -53,19 +53,26 @@
 
 
 
-      <h3>Projects currently tracked with <span style="color:#AAEF68">Chameleon</span>:</h3>
+      <h2>Projects currently tracked with <span style="color:#AAEF68">Chameleon</span>:</h2>
 
 </div>
 
 
 
-<div class="container">
-  <h1>All the projects</h1>
-  <ul>
-    <% @projects.each do |project| %>
-    <li><%= link_to project.name, project_path(project) %></li>
-    <% end %>
-  </ul>
+<div class="container project-card-grid">
 
+  <% @projects.each do |project| %>
+
+      <%= link_to project_path(project), class: "index-link"  do %>
+
+      <div class="project-card">
+        <h6><%= project.name %></h6>
+      </div>
+
+
+
+      <% end %>
+
+  <% end %>
 
 </div>
