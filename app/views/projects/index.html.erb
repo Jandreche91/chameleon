@@ -19,7 +19,14 @@
 
         <div class="dashboard-overall-chart">
 
-          <h6>The dashboard</h6>
+          <h6>dashboard showing performance per month in terms of money and hours. The data is the following:</h6>
+
+          <% @dashboard_data.each do |month, values| %>
+
+          <p><%= "#{month == "1"? month + " month" : month + " months"} ago: US$ #{values[:value]} billed for #{values[:hours_spent]} hours of the team" %></p>
+
+
+          <% end %>
 
         </div>
 

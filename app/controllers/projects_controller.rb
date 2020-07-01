@@ -3,6 +3,7 @@ class ProjectsController < ApplicationController
   def index
     @projects = Project.all
     @alerts = Alert.all
+    @dashboard_data = Task.past_year
   end
 
   def new
