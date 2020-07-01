@@ -43,5 +43,4 @@ class ProjectsController < ApplicationController
   def project_params
     params.require(:project).permit(:name, :description, :estimated_start_date, :estimated_end_date, :estimated_cost)
   end
-
 end
