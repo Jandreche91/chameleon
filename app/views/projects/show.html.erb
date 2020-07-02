@@ -1,8 +1,61 @@
-<div class="container">
-  <h1><%= @project.name %></h1>
-  <p><%= @project.description %></p>
-  <p><%= @project.estimated_cost %></p>
-  <p><%= @project.estimated_start_date %></p>
-  <p><%= @project.estimated_end_date %></p>
+
+
+<div class="container mt-3 card-project-dashboard">
+
+  <div class="card-project-dashboard-right">
+
+  <div class="card-project-general-info">
+    <h2><%= @project.name %></h2>
+    <p>Started on <span style="color: #900C3F"><strong><%= @project.estimated_start_date.strftime("%d %B %Y") %></strong></span></p>
+    <br>
+    <p><%= @project.description %></p>
+  </div>
+
+  <div class="card-project-specifics">
+
+    <div class="card-project-specifics-item">
+      <p>Budget:</p>
+      <p>US$ <%= @project.estimated_cost_formatted %> </p>
+    </div>
+    <div class="card-project-specifics-item">
+      <p>Budget spent:</p>
+      <p><strong> US$ <%= @project.executed_cost_formatted %> (<%= @project.executed_budget_percentage %>%)</strong></p>
+    </div>
+    <div class="card-project-specifics-item">
+      <p>Hours spent by the team:</p>
+      <p><%= @project.hours_spent_formatted %></p>
+    </div>
+    <div class="card-project-specifics-item">
+      <p>Average cost per hour:</p>
+      <p> US$ <%= @project.cost_per_hour %></p>
+    </div>
+    <div class="card-project-specifics-item">
+      <p>Estimated end date</p>
+      <p><%= @project.estimated_end_date.strftime("%d %B %Y") %></p>
+    </div>
+    <div class="card-project-specifics-item">
+      <strong><p style="color: #900C3F">Avg. hours left of budgeted work:</p></strong>
+      <strong> <p style="color: #900C3F"><%= (@project.estimated_cost - @project.tasks.sum(:value)) / @project.cost_per_hour %></p> </strong>
+    </div>
+
+  </div>
+
+
+  <%= link_to "Manage Milestones", "#", class: "btn btn-success" %>
+
+  </div>
+
+    <div class="card-project-chart">
+      <p>Chart</p>
+    </div>
+
+
+</div>
+
+<div class="container card-project-milestone-dashboard">
+  <div class="d-flex align-items-center justify-content-center">
+  <h2><i class="far fa-calendar-alt"></i> Milestone progression <i class="far fa-calendar-alt"></i></h2>
+  </div>
+
 </div>
 

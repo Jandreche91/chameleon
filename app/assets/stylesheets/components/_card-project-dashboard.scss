@@ -1,0 +1,56 @@
+.card-project-dashboard {
+  background-color: white;
+  border-radius: 8px;
+  padding: 16px 24px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+
+// container with all the information to the left
+
+.card-project-dashboard-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  grid-column-start: 1;
+    grid-column-end: 3;
+}
+
+// container with specific information about the project (boereded blue)
+
+
+
+// Title and descripction of the project
+
+.card-project-general-info {
+
+}
+
+.card-project-general-info p {
+margin: 0
+}
+
+// chart
+
+.card-project-chart {
+
+    grid-column-start: 3;
+    grid-column-end: 6;
+    height: 100%
+
+}
+
+.card-project-specifics {
+  display: flex;
+  flex-direction: column;
+  border: solid 1px $blue;
+  border-radius: 8px;
+  margin: 16px 0;
+  padding: 16px;
+}
+
+.card-project-specifics-item {
+  display: flex;
+  justify-content: space-between;
+
+}
