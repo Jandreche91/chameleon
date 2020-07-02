@@ -9,13 +9,13 @@
     <div class="col-12 card-overall-performance">
 
       <h2>Welcome  back, <%= current_user.first_name %>!</h2>
-      <h6>Here is your team's overall <span style="color: #900C3F">performance</span>:</h6>
+      <h5>Here is your team's overall <span style="color: #900C3F">performance</span>:</h5>
 
       <div class="card-overall-internal">
 
         <div class="dashboard-overall-chart">
 
-          <h6>Dashboard showing performance per month in terms of money and hours. The data is the following:</h6>
+          <h5>Dashboard showing performance per month in terms of money and hours. The data is the following:</h5>
 
           <% @dashboard_data.each do |month, values| %>
 
@@ -27,7 +27,7 @@
         </div>
 
         <div class="alert-board">
-          <h6 class="title-alert-board"><i class="mr-2 fas fa-exclamation-circle"></i>Your <span style="color: #900C3F">alert board</span></h6>
+          <h5 class="title-alert-board"><i class="mr-2 fas fa-exclamation-circle"></i>Your <span style="color: #900C3F">alert board</span></h5>
 
           <% if @alerts.empty? %>
 
@@ -53,25 +53,37 @@
 
 
 
-      <h2>Projects currently tracked with <span style="color:#AAEF68">Chameleon</span>:</h2>
+      <h2>Projects currently tracked with <span style="color:#AAEF68">Chameleon</span></h2>
 
 </div>
 
 
 
-<div class="container project-card-grid">
+<div class="container project-card-grid mb-5">
 
   <% @projects.each do |project| %>
 
       <%= link_to project_path(project), class: "index-link"  do %>
 
       <div class="project-card">
-        <h6><%= project.name %></h6>
+        <div  class="mb-2 border-bottom d-flex justify-content-between">
+          <h5 class="pb-2"><%= project.name %></h5>
+          <span><%= (image_tag "bell.png", size: "20x20") unless project.outstanding_alerts.empty? %></span>
+        </div>
+
+       <p><i class="fas fa-money-bill mr-2"></i> Budget: US$ <%= project.estimated_cost_formatted %></p>
+       <p><i class="fas fa-money-bill mr-2"></i> Part of the budget executed: <%= project.executed_budget_percentage %> % (must be a progression bar)</p>
+       <p><i class="fas fa-running mr-2"></i> Progress until end date: <%= project.progress_date_percentage %> % (id) </p>
+       <p><i class="fas fa-users mr-2"></i> In this project:</p>
+
+       <%= image_tag "avatar_pics/John.jpg", class: "avatar"%>
+
         <% project.users_as_billers.each do |user| %>
 
         <%= image_tag "avatar_pics/#{user.first_name}.jpg", class: "avatar"%>
 
         <% end %>
+
       </div>
 
 

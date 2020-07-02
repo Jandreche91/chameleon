@@ -103,7 +103,7 @@ project_array = [
     ["Chapter 11 Proceedings",
       "We represent the committee of unsecured creditors of a major US retailer in its Chapter 11 restructuring.",
       "5-05-2019",
-      "8-04-2020",
+      "8-08-2020",
       800_000
     ],
 
