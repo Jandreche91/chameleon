@@ -2,6 +2,8 @@ class ProjectsController < ApplicationController
   # correspond a tous les projets
   def index
     @projects = Project.all
+    @outstanding_alerts = Alert.outstanding
+    @dashboard_data = Task.past_year
   end
 
   def new
@@ -41,5 +43,4 @@ class ProjectsController < ApplicationController
   def project_params
     params.require(:project).permit(:name, :description, :estimated_start_date, :estimated_end_date, :estimated_cost)
   end
-
 end

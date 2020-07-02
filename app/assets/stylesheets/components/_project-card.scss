@@ -1,0 +1,22 @@
+
+
+.project-card-grid {
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 16px;
+}
+
+.project-card {
+  background-color: $dark-blue;
+  color: $white-blue;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  height: 290px;
+  padding: 16px 32px;
+
+}
+
+.project-card h5 {
+  margin-bottom: 0;
+}

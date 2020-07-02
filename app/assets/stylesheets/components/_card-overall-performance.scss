@@ -1,0 +1,32 @@
+
+.card-overall-performance {
+
+  padding: 16px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+};
+
+.card-overall-internal {
+  background-color: $dark-blue;
+  padding: 16px 4px;
+  border-radius: 8px;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+};
+
+.dashboard-overall-chart {
+    height: 400px;
+    border-radius: 8px;
+    background-color: white;
+    margin: 0 8px;
+    grid-column-start: 1;
+    grid-column-end: 4;
+    padding: 8px;
+    // for the time being -- remove when we will have a chart
+    overflow: scroll;
+
+
+}
+
