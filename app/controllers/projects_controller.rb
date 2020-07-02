@@ -2,7 +2,7 @@ class ProjectsController < ApplicationController
   # correspond a tous les projets
   def index
     @projects = Project.all
-    @alerts = Alert.all
+    @outstanding_alerts = Alert.outstanding
     @dashboard_data = Task.past_year
   end
 
