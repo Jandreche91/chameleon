@@ -24,11 +24,11 @@ puts "All users destroyed ❗"
 
 puts "🌱 Creation of manager starts 🌱"
 
-manager = User.new( username: "john_smith",
-                    first_name: "John",
+manager = User.new( username: "patricia_smith",
+                    first_name: "Patricia",
                     last_name: "Smith",
                     hourly_rate: 750,
-                    email: "john.smith@our_team.org",
+                    email: "patricia.smith@our_team.org",
                     password:"123456")
 puts "🌱 Manager has User id #{manager.id} and was successfully saved! 🌱" if manager.save
 
@@ -383,5 +383,19 @@ Project.all.each do |project|
 end
 
 
+###########################################################################################
+####################### Adding a Little alert in the end###################################
+###########################################################################################
+
+project = Project.where(name:"Singapore Matter")[0]
+alert = Alert.new
+alert.description = "has surpassed 85 percent of the budget"
+alert.project = project
+
+puts "alert created related to #{alert.project.name} was created" if alert.save
 
 
+
+# The end
+
+puts "🎊🎊🎊🎊 Seed has finalised successfully! 🎊🎊🎊🎊"
