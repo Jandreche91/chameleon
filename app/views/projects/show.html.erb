@@ -1,5 +1,8 @@
 
 
+
+<!-- General dashboard -->
+
 <div class="container mt-3 card-project-dashboard">
 
   <div class="card-project-dashboard-right">
@@ -52,6 +55,8 @@
 
 </div>
 
+<!-- Milestone progression -->
+
 <div class="container card-project-milestone-dashboard mb-3">
   <div class="d-flex align-items-center justify-content-center">
   <h2><i class="fas fa-stream"></i> Milestone progression</h2>
@@ -60,6 +65,8 @@
   <p class="text-center">Add data</p>
 
 </div>
+
+<!-- users in the project -->
 
 <div class="container card-project-milestone-dashboard mb-3">
 
@@ -99,19 +106,62 @@
 
 </div>
 
+
+<!-- Task log -->
+
+<!-- title -->
+
 <div class="container card-project-milestone-dashboard mb-3">
 
-  <h2 class="text-center"> <i class="fas fa-clipboard-list"></i> Task log</h2>
+  <div class="d-flex justify-content-center mb-3">
 
-  <div class="project-card-task-log">
+      <%= image_tag "task-log-icon.png", size: "38x38", class: "mr-2" %>
 
-    <% @project.tasks.sort_by {|task| task.date } .reverse.each do |task| %>
+      <h2>Task log</h2>
 
-    <p>On <%= task.date.strftime("%d %B %Y") %>, <%= task.user.username %> spent <%= task.hours_spent %> hours on <%= task.description %> and billed US$ <%= task.value %></p>
+  </div>
+
+
+
+    <% @project.milestones.sort_by { |milestone| milestone.end_date}.each do |milestone| %>
+
+
+    <div class="project-task-log-milestone-wrapper">
+
+
+      <h3><%= milestone.description %></h3>
+
+      <p><%= milestone.done ? "Ended on #{milestone.end_date.strftime("%d %B %Y")}" : "Estimated to end on #{milestone.end_date.strftime("%d %B %Y")}" %></p>
+         <% if  milestone.tasks.empty?%>
+
+          <strong><p>No tasks have been logged toward completion of this milestone.</p></strong>
+
+          <% else %>
+
+            <p class="mb-2 border-bottom border-success">Tasks logged associated with this milestone:</p>
+
+            <div class="project-card-task-log">
+
+            <% milestone.tasks.sort_by {|task| task.date } .reverse.each do |task| %>
+
+              <p>On <%= task.date.strftime("%d %B %Y") %>, <%= task.user.username %> spent <%= task.hours_spent %> hours on <%= task.description.downcase %> and billed US$ <%= task.value %></p>
+
+            <% end %>
+
+            </div>
+
+          <% end %>
+
+      </div>
 
     <% end %>
 
-  </div>
+
+
+
+
+
+
 
 
 
