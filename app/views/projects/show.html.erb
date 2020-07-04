@@ -1,8 +1,172 @@
-<div class="container">
-  <h1><%= @project.name %></h1>
-  <p><%= @project.description %></p>
-  <p><%= @project.estimated_cost %></p>
-  <p><%= @project.estimated_start_date %></p>
-  <p><%= @project.estimated_end_date %></p>
+
+
+
+<!-- General dashboard -->
+
+<div class="container mt-3 card-project-dashboard">
+
+  <div class="card-project-dashboard-right">
+
+  <div class="card-project-general-info">
+    <h2><%= @project.name %></h2>
+    <p>Started on <span style="color: #900C3F"><strong><%= @project.estimated_start_date.strftime("%d %B %Y") %></strong></span></p>
+    <br>
+    <p><%= @project.description %></p>
+  </div>
+
+  <div class="card-project-specifics">
+
+    <div class="card-project-specifics-item">
+      <p>Budget:</p>
+      <p>US$ <%= @project.estimated_cost_formatted %> </p>
+    </div>
+    <div class="card-project-specifics-item">
+      <p>Budget spent:</p>
+      <p><strong> US$ <%= @project.executed_cost_formatted %> (<%= @project.executed_budget_percentage %>%)</strong></p>
+    </div>
+    <div class="card-project-specifics-item">
+      <p>Hours spent by the team:</p>
+      <p><%= @project.hours_spent_formatted %></p>
+    </div>
+    <div class="card-project-specifics-item">
+      <p>Average cost per hour:</p>
+      <p> US$ <%= @project.cost_per_hour %></p>
+    </div>
+    <div class="card-project-specifics-item">
+      <p>Estimated end date</p>
+      <p><%= @project.estimated_end_date.strftime("%d %B %Y") %></p>
+    </div>
+    <div class="card-project-specifics-item">
+      <strong><p style="color: #900C3F">Avg. hours left of budgeted work:</p></strong>
+      <strong> <p style="color: #900C3F"><%= (@project.estimated_cost - @project.tasks.sum(:value)) / @project.cost_per_hour %></p> </strong>
+    </div>
+
+  </div>
+
+
+  <%= link_to "Manage Milestones", "#", class: "btn btn-success" %>
+
+  </div>
+
+    <div class="card-project-chart">
+      <p>Chart</p>
+    </div>
+
+
+</div>
+
+<!-- Milestone progression -->
+
+<div class="container card-project-milestone-dashboard mb-3">
+  <div class="d-flex align-items-center justify-content-center">
+  <h2><i class="fas fa-stream"></i> Milestone progression</h2>
+  </div>
+
+  <p class="text-center">Add data</p>
+
+</div>
+
+<!-- users in the project -->
+
+<div class="container card-project-milestone-dashboard mb-3">
+
+  <h2 class="text-center"><i class="fas fa-users"></i> Associates in this project</h2>
+
+  <div class="grid-project-associate-cards">
+
+
+      <% @project.array_users_hours.each do |data| %>
+
+      <div class="card-project-user-performance">
+
+        <div class="d-flex align-items-center mb-3">
+
+
+          <%= image_tag "avatar_pics/#{data[:user].first_name}.jpg", class: "avatar mr-2"%>
+
+          <% if User.senior_associates.include?(data[:user])  %>
+
+              <strong><span style="color: #900C3F"><p><%= "#{data[:user].first_name} #{data[:user].last_name}" %> (Senior Associate) (US$ <%= data[:user].hourly_rate %> / hour) </p></span></strong>
+
+          <% else %>
+
+              <strong><p><%= "#{data[:user].first_name} #{data[:user].last_name}" %> (US$ <%= data[:user].hourly_rate %> / hour)</p></strong>
+
+          <% end %>
+
+        </div>
+
+        <p>Has billed <span style="color: #900C3F">US$ <%= data[:value].to_s.reverse.scan(/\d{3}|.+/).join(".").reverse %></span> and spent <span style="color: #900C3F"><%= data[:hours_spent] %> hours</span> in this project</p>
+      </div>
+
+      <% end %>
+
+  </div>
+
+
+</div>
+
+
+<!-- Task log -->
+
+<!-- title -->
+
+<div class="container card-project-milestone-dashboard mb-3">
+
+  <div class="d-flex justify-content-center mb-3">
+
+      <%= image_tag "task-log-icon.png", size: "38x38", class: "mr-2" %>
+
+      <h2>Task log</h2>
+
+  </div>
+
+
+
+    <% @project.milestones.sort_by { |milestone| milestone.end_date}.each do |milestone| %>
+
+
+    <div class="project-task-log-milestone-wrapper">
+
+
+      <h3><%= milestone.description %></h3>
+
+      <p><%= milestone.done ? "Ended on #{milestone.end_date.strftime("%d %B %Y")}" : "Estimated to end on #{milestone.end_date.strftime("%d %B %Y")}" %></p>
+         <% if  milestone.tasks.empty?%>
+
+          <strong><p>No tasks have been logged toward completion of this milestone.</p></strong>
+
+          <% else %>
+
+            <p class="mb-2 border-bottom border-success">Tasks logged associated with this milestone:</p>
+
+            <div class="project-card-task-log">
+
+            <% milestone.tasks.sort_by {|task| task.date } .reverse.each do |task| %>
+
+              <p>On <%= task.date.strftime("%d %B %Y") %>, <%= task.user.username %> spent <%= task.hours_spent %> hours on <%= task.description.downcase %> and billed US$ <%= task.value %></p>
+
+            <% end %>
+
+            </div>
+
+          <% end %>
+
+      </div>
+
+    <% end %>
+
+
+
+
+
+
+
+
+
+
+
+
+
 </div>
 

@@ -9,7 +9,21 @@ class Project < ApplicationRecord
 
   # little method to return a formatted string instead of a plain integer
   def estimated_cost_formatted
-    estimated_cost.to_s.reverse.scan(/\d{3}|.+/).join(".").reverse
+    formatter(estimated_cost)
+  end
+
+  def executed_cost_formatted
+    formatter(tasks.sum(:value))
+  end
+
+  def hours_spent_formatted
+    formatter(tasks.sum(:hours_spent))
+  end
+
+  # cost per hour on average
+
+  def cost_per_hour
+    tasks.sum(:value) / tasks.sum(:hours_spent)
   end
 
   # auto calculate budget percentage -- returns integer between 0 and 100
@@ -30,5 +44,24 @@ class Project < ApplicationRecord
 
   def outstanding_alerts
     alerts.where(done: false)
+  end
+
+  # returns an array of hashes with the info of users billing
+  # the time built and the value billed -- mirrors symbols of Taks model
+  #retuns data sorted by value
+  def array_users_hours
+    data = []
+    users_as_billers.each do |user|
+      data << { user: user,
+                hours_spent: tasks.where(user: user).sum(:hours_spent),
+                value: tasks.where(user: user).sum(:value) }
+    end
+    return data.sort_by { |user_hash| user_hash[:value] }.reverse
+  end
+
+  private
+
+  def formatter(int)
+    int.to_s.reverse.scan(/\d{3}|.+/).join(".").reverse
   end
 end

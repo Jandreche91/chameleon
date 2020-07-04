@@ -1,5 +1,6 @@
 class ProjectsController < ApplicationController
-  # correspond a tous les projets
+  before_action :find_a_project, only: [:show, :edit, :update]
+
   def index
     @projects = Project.all
     @outstanding_alerts = Alert.outstanding
@@ -18,27 +19,28 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    # projects/3
-    @project = Project.find(params[:id])
+    # projects
   end
 
   def edit
-    @project = Project.find(params[:id])
   end
 
   def update
-    @project = Project.find(params[:id])
     @project.update(project_params)
     redirect_to project_path(@project)
   end
 
-  def destroy
-    @project = Project.find(params[:id])
-    @project.destroy
-    redirect_to projects_path
-  end
+  # Projects should only be destroyed by admin
+  # def destroy
+  #   @project.destroy
+  #   redirect_to projects_path
+  # end
 
   private
+
+  def find_a_project
+    @project = Project.find(params[:id])
+  end
 
   def project_params
     params.require(:project).permit(:name, :description, :estimated_start_date, :estimated_end_date, :estimated_cost)

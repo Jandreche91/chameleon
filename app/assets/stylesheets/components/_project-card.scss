@@ -7,6 +7,8 @@
   grid-gap: 16px;
 }
 
+
+
 .project-card {
   background-color: $dark-blue;
   color: $white-blue;
@@ -20,3 +22,13 @@
 .project-card h5 {
   margin-bottom: 0;
 }
+
+
+
+
+@media (max-width: 1000px) {
+  .project-card-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
