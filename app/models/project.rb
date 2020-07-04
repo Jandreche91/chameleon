@@ -46,6 +46,19 @@ class Project < ApplicationRecord
     alerts.where(done: false)
   end
 
+  # returns an array of hashes with the info of users billing
+  # the time built and the value billed -- mirrors symbols of Taks model
+  #retuns data sorted by value
+  def array_users_hours
+    data = []
+    users_as_billers.each do |user|
+      data << { user: user,
+                hours_spent: tasks.where(user: user).sum(:hours_spent),
+                value: tasks.where(user: user).sum(:value) }
+    end
+    return data.sort_by { |user_hash| user_hash[:value] }.reverse
+  end
+
   private
 
   def formatter(int)

@@ -52,10 +52,30 @@
 
 </div>
 
-<div class="container card-project-milestone-dashboard">
+<div class="container card-project-milestone-dashboard mb-3">
   <div class="d-flex align-items-center justify-content-center">
-  <h2><i class="far fa-calendar-alt"></i> Milestone progression <i class="far fa-calendar-alt"></i></h2>
+  <h2><i class="fas fa-stream"></i> Milestone progression</h2>
   </div>
+
+  <p class="text-center">Add data</p>
+
+</div>
+
+<div class="container card-project-milestone-dashboard">
+
+  <h2 class="text-center"><i class="fas fa-users"></i> Associates in this project</h2>
+
+
+  <% @project.array_users_hours.each do |data| %>
+
+  <div>
+    <%= image_tag "avatar_pics/#{data[:user].first_name}.jpg", class: "avatar"%>
+    <p><%= "#{data[:user].first_name} #{data[:user].last_name}" %></p>
+    <p>Has billed US$ <%= data[:value] %> amd spent <%= data[:hours_spent] %> in this project</p>
+  </div>
+
+  <% end %>
+
 
 </div>
 
