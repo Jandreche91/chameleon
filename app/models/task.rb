@@ -12,9 +12,10 @@ class Task < ApplicationRecord
       start_time = end_time - 30
       results[:value] << Task.where(date: start_time..end_time).sum(:value)
       results[:hours_spent] << Task.where(date: start_time..end_time).sum(:hours_spent)
-                   # hours_spent: T}
       end_time = start_time
     end
+    results[:value].reverse!
+    results[:hours_spent].reverse!
     results
   end
 

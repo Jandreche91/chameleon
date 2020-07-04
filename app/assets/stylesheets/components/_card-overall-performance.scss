@@ -24,8 +24,12 @@
     grid-column-end: 4;
     padding: 8px;
     // for the time being -- remove when we will have a chart
-    overflow: scroll;
+    // overflow: scroll; WE HAVE A CHART!
 
 
 }
 
+
+#overallPerformance {
+  height: 100%;
+}
