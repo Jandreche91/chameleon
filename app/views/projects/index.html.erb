@@ -15,16 +15,13 @@
 
         <div class="dashboard-overall-chart">
 
-          <canvas id="myChart"></canvas>
+          <canvas id="myChart"
+          data-value="<%= @dashboard_data[:value].to_json %>"
+          data-time-spent="<%= @dashboard_data[:value].to_json%>"></canvas>
 
           <h5>Dashboard showing performance per month in terms of money and hours. The data is the following:</h5>
 
-          <% @dashboard_data.each do |month, values| %>
 
-          <p><%= "#{month == "1"? month + " month" : month + " months"} ago: US$ #{values[:value]} billed for #{values[:hours_spent]} hours of the team" %></p>
-
-
-          <% end %>
 
         </div>
 
