@@ -61,36 +61,61 @@
 
 </div>
 
-<div class="container card-project-milestone-dashboard">
+<div class="container card-project-milestone-dashboard mb-3">
 
   <h2 class="text-center"><i class="fas fa-users"></i> Associates in this project</h2>
 
-
-  <% @project.array_users_hours.each do |data| %>
-
-  <div class="card-project-user-performance">
-
-    <div class="d-flex align-items-center mb-2">
+  <div class="grid-project-associate-cards">
 
 
-      <%= image_tag "avatar_pics/#{data[:user].first_name}.jpg", class: "avatar mr-2"%>
+      <% @project.array_users_hours.each do |data| %>
 
-      <% if User.senior_associates.include?(data[:user])  %>
+      <div class="card-project-user-performance">
 
-          <strong><span style="color: #900C3F"><p><%= "#{data[:user].first_name} #{data[:user].last_name}" %> (Senior Associate) (US$ <%= data[:user].hourly_rate %> / hour) </p></span></strong>
+        <div class="d-flex align-items-center mb-3">
 
-      <% else %>
 
-          <strong><p><%= "#{data[:user].first_name} #{data[:user].last_name}" %> (US$ <%= data[:user].hourly_rate %> / hour)</p></strong>
+          <%= image_tag "avatar_pics/#{data[:user].first_name}.jpg", class: "avatar mr-2"%>
+
+          <% if User.senior_associates.include?(data[:user])  %>
+
+              <strong><span style="color: #900C3F"><p><%= "#{data[:user].first_name} #{data[:user].last_name}" %> (Senior Associate) (US$ <%= data[:user].hourly_rate %> / hour) </p></span></strong>
+
+          <% else %>
+
+              <strong><p><%= "#{data[:user].first_name} #{data[:user].last_name}" %> (US$ <%= data[:user].hourly_rate %> / hour)</p></strong>
+
+          <% end %>
+
+        </div>
+
+        <p>Has billed <span style="color: #900C3F">US$ <%= data[:value].to_s.reverse.scan(/\d{3}|.+/).join(".").reverse %></span> and spent <span style="color: #900C3F"><%= data[:hours_spent] %> hours</span> in this project</p>
+      </div>
 
       <% end %>
 
-    </div>
-
-    <p>Has billed <span style="color: #900C3F">US$ <%= data[:value].to_s.reverse.scan(/\d{3}|.+/).join(".").reverse %></span> and spent <span style="color: #900C3F"><%= data[:hours_spent] %> hours</span> in this project</p>
   </div>
 
-  <% end %>
+
+</div>
+
+<div class="container card-project-milestone-dashboard mb-3">
+
+  <h2 class="text-center"> <i class="fas fa-clipboard-list"></i> Task log</h2>
+
+  <div class="project-card-task-log">
+
+    <% @project.tasks.sort_by {|task| task.date } .reverse.each do |task| %>
+
+    <p>On <%= task.date.strftime("%d %B %Y") %>, <%= task.user.username %> spent <%= task.hours_spent %> hours on <%= task.description %> and billed US$ <%= task.value %></p>
+
+    <% end %>
+
+  </div>
+
+
+
+
 
 
 </div>
