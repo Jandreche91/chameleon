@@ -68,10 +68,26 @@
 
   <% @project.array_users_hours.each do |data| %>
 
-  <div>
-    <%= image_tag "avatar_pics/#{data[:user].first_name}.jpg", class: "avatar"%>
-    <p><%= "#{data[:user].first_name} #{data[:user].last_name}" %></p>
-    <p>Has billed US$ <%= data[:value] %> amd spent <%= data[:hours_spent] %> in this project</p>
+  <div class="card-project-user-performance">
+
+    <div class="d-flex align-items-center mb-2">
+
+
+      <%= image_tag "avatar_pics/#{data[:user].first_name}.jpg", class: "avatar mr-2"%>
+
+      <% if User.senior_associates.include?(data[:user])  %>
+
+          <strong><span style="color: #900C3F"><p><%= "#{data[:user].first_name} #{data[:user].last_name}" %> (Senior Associate) (US$ <%= data[:user].hourly_rate %> / hour) </p></span></strong>
+
+      <% else %>
+
+          <strong><p><%= "#{data[:user].first_name} #{data[:user].last_name}" %> (US$ <%= data[:user].hourly_rate %> / hour)</p></strong>
+
+      <% end %>
+
+    </div>
+
+    <p>Has billed <span style="color: #900C3F">US$ <%= data[:value].to_s.reverse.scan(/\d{3}|.+/).join(".").reverse %></span> and spent <span style="color: #900C3F"><%= data[:hours_spent] %> hours</span> in this project</p>
   </div>
 
   <% end %>
