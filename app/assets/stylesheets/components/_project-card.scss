@@ -24,6 +24,17 @@
 }
 
 
+.project-card p {
+  margin-bottom: 0;
+}
+
+
+ .project-card-infos {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 80%;
+}
 
 
 @media (max-width: 1000px) {

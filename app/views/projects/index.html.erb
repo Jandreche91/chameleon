@@ -8,8 +8,8 @@
 
     <div class="col-12 card-overall-performance">
 
-      <h2>Welcome  back, <%= current_user.first_name %>!</h2>
-      <h5>Here is your team's<span style="color: #900C3F"> overall performance</span>:</h5>
+      <h2>Dashboard</h2>
+      <p>Your team's<span style="color: #900C3F"> overall performance</span>:</p>
 
       <div class="card-overall-internal">
 
@@ -67,15 +67,18 @@
   </div>
 </div>
 
-<div class="container text-center general-header-index-card">
-
-      <h2>Projects currently tracked with <span style="color:#AAEF68">Chameleon</span></h2>
-
-</div>
+<div class="container general-header-index-card">
 
 
 
-<div id="projects-general-view" class="container project-card-grid mb-5" data-array="<%= @array_of_projects %>">
+      <h2>Projects</h2>
+      <p>An overview of the projects you are currentl tracking with Chameleon</p>
+
+    <div id="projects-general-view" class="container project-card-grid mb-2" data-array="<%= @array_of_projects %>">
+
+
+
+
 
   <% @projects.each do |project| %>
 
@@ -86,38 +89,57 @@
           <h5 class="pb-2"><%= project.name %></h5>
           <span><%= (image_tag "bell.png", size: "20x20") unless project.outstanding_alerts.empty? %></span>
         </div>
+            <div class="project-card-infos">
+
+             <p><i class="fas fa-money-bill mr-2"></i> Budget: US$ <%= project.estimated_cost_formatted %></p>
+             <!-- progress bars -->
+
+             <p><i class="fas fa-money-bill mr-2"></i> Part of the budget executed: <%= (project.executed_budget_percentage*100).floor %> %</p>
+             <div id="<%= project.id%>-budget-bar" data-percentage ="<%=  project.executed_budget_percentage%>"></div>
+             <p><i class="fas fa-running mr-2"></i> Progress until end date: <%= (project.progress_date_percentage*100).floor %> % </p>
+             <div id="<%= project.id%>-time-bar" data-percentage ="<%=  project.progress_date_percentage%>"></div>
+
+             <!-- end of progress bars -->
+
+             <p><i class="fas fa-users mr-2"></i> In this project:</p>
+
+               <div class="d-flex align-items-center">
+
+                <%= image_tag "avatar_pics/#{current_user.first_name}.jpg", class: "avatar mr-2"%>
+
+                <% users = project.users_as_billers %>
+                <% users.first(7).each do |user| %>
+
+                <%= image_tag "avatar_pics/#{user.first_name}.jpg", class: "avatar mr-2"%>
+
+               <% end %>
+
+               <% if users.count > 7 %>
+
+               <i class="fas fa-plus m-0" style="font-size:20px"></i>
+
+               <% end %>
 
 
 
-       <p><i class="fas fa-money-bill mr-2"></i> Budget: US$ <%= project.estimated_cost_formatted %></p>
-       <!-- progress bars -->
-
-       <p><i class="fas fa-money-bill mr-2"></i> Part of the budget executed: <%= (project.executed_budget_percentage*100).floor %> %</p>
-       <div id="<%= project.id%>-budget-bar" data-percentage ="<%=  project.executed_budget_percentage%>"></div>
-       <p><i class="fas fa-running mr-2"></i> Progress until end date: <%= (project.progress_date_percentage*100).floor %> % </p>
-       <div id="<%= project.id%>-time-bar" data-percentage ="<%=  project.progress_date_percentage%>"></div>
-
-       <!-- end of progress bars -->
-
-       <p><i class="fas fa-users mr-2"></i> In this project:</p>
-
-       <%= image_tag "avatar_pics/#{current_user.first_name}.jpg", class: "avatar"%>
-
-        <% project.users_as_billers.each do |user| %>
-
-        <%= image_tag "avatar_pics/#{user.first_name}.jpg", class: "avatar"%>
-
-        <% end %>
-
+                </div>
+              </div>
       </div>
-
-
-
       <% end %>
+
+
 
   <% end %>
 
+
+
 </div>
+
+
+</div>
+
+
+
 
 
 
