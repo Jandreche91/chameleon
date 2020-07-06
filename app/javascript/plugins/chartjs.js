@@ -31,8 +31,8 @@ const overallPerformance = new Chart(overallPerformanceChart, {
       backgroundColor: ['rgba(170, 239, 104, 0.0)'],
       borderWidth: 4,
       pointRadius: 0.1,
-      pointHitRadius: 5
-    },
+      pointHitRadius: 5,
+      },
     {
       label: 'Hours spent',
       yAxisID: 'Hours',
@@ -46,6 +46,12 @@ const overallPerformance = new Chart(overallPerformanceChart, {
     ]
   },
   options: {
+    ///
+
+
+
+    ///
+
     legend: {
       position: "bottom"
     },
@@ -62,13 +68,31 @@ const overallPerformance = new Chart(overallPerformanceChart, {
         id: 'Billed',
         type: 'linear',
         position: 'left',
-      }, {
+        //
+          ticks: {
+              userCallback: function(value, index, values) {
+                  value = value.toString();
+                  value = value.split(/(?=(?:...)*$)/);
+                  value = "$ " + value.join('.');
+                  return value;
+              }
+          }
+
+        //
+      },
+      {
         id: 'Hours',
         type: 'linear',
         position: 'right',
         ticks: {
           max: 4000,
-          min: 0
+          min: 0,
+          userCallback: function(value, index, values) {
+                  value = value.toString();
+                  value = value.split(/(?=(?:...)*$)/);
+                  value = value.join('.');
+                  return value;
+              }
         }
       }]
     }
