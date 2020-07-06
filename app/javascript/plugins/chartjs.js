@@ -30,8 +30,10 @@ const overallPerformance = new Chart(overallPerformanceChart, {
       borderColor: ['rgba(170, 239, 104, 0.9)'],
       backgroundColor: ['rgba(170, 239, 104, 0.0)'],
       borderWidth: 4,
-      pointRadius: 0.1,
+      pointRadius: 2,
       pointHitRadius: 5,
+      pointBackgroundColor: 'rgba(170, 239, 104, 0.9)',
+      pointBorderColor:'rgba(170, 239, 104, 0.9)'
       },
     {
       label: 'Hours spent',
@@ -40,8 +42,10 @@ const overallPerformance = new Chart(overallPerformanceChart, {
       borderColor: ['rgba(144, 12, 63, 0.9)'],
       backgroundColor: ['rgba(170, 239, 104, 0.0)'],
       borderWidth: 4,
-      pointRadius: 0.1,
-      pointHitRadius: 5
+      pointRadius: 2,
+      pointHitRadius: 5,
+      pointBackgroundColor: 'rgba(144, 12, 63, 0.9)',
+      pointBorderColor: 'rgba(144, 12, 63, 1)'
     }
     ]
   },
@@ -49,6 +53,7 @@ const overallPerformance = new Chart(overallPerformanceChart, {
     ///
 
     tooltips: {
+        multiKeyBackground: '#1E334D',
         callbacks: {
           label: function(tooltipItem, data) {
             let value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
@@ -56,6 +61,9 @@ const overallPerformance = new Chart(overallPerformanceChart, {
             value = value.split(/(?=(?:...)*$)/);
             value = `${value.join('.')}`;
             let label = data.datasets[tooltipItem.datasetIndex].label
+            if (label === "Billed") {
+              return `${label}: $${value}`;
+            };
             return `${label}: ${value}`;
           }
         }, // end callbacks
