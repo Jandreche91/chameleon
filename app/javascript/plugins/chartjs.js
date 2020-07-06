@@ -16,21 +16,34 @@ const constructXAxisMonths = (months) => {
 };
 
 
-let overallPerformanceChart = document.getElementById('overallPerformance');
+const overallPerformanceChart = document.getElementById('overallPerformance');
 // console.log(overallPerformanceChart.dataset)
 const overallPerformance = new Chart(overallPerformanceChart, {
   type: 'line',
   data: {
     labels: constructXAxisMonths(12),
-    datasets: [{
+    datasets: [
+    {
       label: 'Billed',
+      yAxisID: 'Billed',
       data: JSON.parse(overallPerformanceChart.dataset.value),
       borderColor: ['rgba(170, 239, 104, 0.9)'],
       backgroundColor: ['rgba(170, 239, 104, 0.0)'],
       borderWidth: 4,
       pointRadius: 0.1,
       pointHitRadius: 5
-    }]
+    },
+    {
+      label: 'Hours spent',
+      yAxisID: 'Hours',
+      data: JSON.parse(overallPerformanceChart.dataset.hoursSpent),
+      borderColor: ['rgba(144, 12, 63, 0.9)'],
+      backgroundColor: ['rgba(170, 239, 104, 0.0)'],
+      borderWidth: 4,
+      pointRadius: 0.1,
+      pointHitRadius: 5
+    }
+    ]
   },
   options: {
     legend: {
@@ -46,8 +59,16 @@ const overallPerformance = new Chart(overallPerformanceChart, {
         },
     scales: {
       yAxes: [{
+        id: 'Billed',
+        type: 'linear',
+        position: 'left',
+      }, {
+        id: 'Hours',
+        type: 'linear',
+        position: 'right',
         ticks: {
-          beginAtZero: true
+          max: 4000,
+          min: 0
         }
       }]
     }
