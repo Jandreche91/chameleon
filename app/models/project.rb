@@ -1,4 +1,10 @@
 class Project < ApplicationRecord
+  # scope to get an array of the current ID's in the project
+
+  scope :id, -> { all.select("id").map(&:id) }
+
+  # validations and associations
+
   validates :name, :description, :estimated_start_date, :estimated_end_date, :estimated_cost, presence: true
   belongs_to :user
   has_many :assignments, dependent: :destroy
@@ -29,7 +35,7 @@ class Project < ApplicationRecord
   # auto calculate budget percentage -- returns integer between 0 and 100
 
   def executed_budget_percentage
-    (tasks.sum(:value).fdiv(estimated_cost) * 100).to_i
+    tasks.sum(:value).fdiv(estimated_cost)
   end
 
   # auto calculate progress in time percentage -- returns integer between 0 and 100
@@ -37,7 +43,7 @@ class Project < ApplicationRecord
   def progress_date_percentage
     remaining_days = (estimated_end_date - Date.today).to_i
     total_days = (estimated_end_date - estimated_start_date).to_i
-    100 - (remaining_days.fdiv(total_days) * 100).to_i
+    1 - remaining_days.fdiv(total_days)
   end
 
   # returns array with outstanding alerts
@@ -48,7 +54,7 @@ class Project < ApplicationRecord
 
   # returns an array of hashes with the info of users billing
   # the time built and the value billed -- mirrors symbols of Taks model
-  #retuns data sorted by value
+  # returns data sorted by value
   def array_users_hours
     data = []
     users_as_billers.each do |user|
