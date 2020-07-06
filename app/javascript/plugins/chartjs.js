@@ -16,6 +16,11 @@ const constructXAxisMonths = (months) => {
 };
 
 
+//#########################################################################
+//######################### Dashboard general performance##################
+//#########################################################################
+
+
 const overallPerformanceChart = document.getElementById('overallPerformance');
 // console.log(overallPerformanceChart.dataset)
 const overallPerformance = new Chart(overallPerformanceChart, {
@@ -125,3 +130,6 @@ const overallPerformance = new Chart(overallPerformanceChart, {
   } // end options
 });
 
+//#########################################################################
+//######################### END OF CHART ##################################
+//#########################################################################
