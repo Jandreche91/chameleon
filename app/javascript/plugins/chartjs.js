@@ -48,6 +48,19 @@ const overallPerformance = new Chart(overallPerformanceChart, {
   options: {
     ///
 
+    tooltips: {
+        callbacks: {
+          label: function(tooltipItem, data) {
+            let value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+            value = value.toString();
+            value = value.split(/(?=(?:...)*$)/);
+            value = `${value.join('.')}`;
+            let label = data.datasets[tooltipItem.datasetIndex].label
+            return `${label}: ${value}`;
+          }
+        }, // end callbacks
+        // mode: 'index'
+      }, //end tooltips
 
 
     ///
@@ -70,13 +83,15 @@ const overallPerformance = new Chart(overallPerformanceChart, {
         position: 'left',
         //
           ticks: {
-              userCallback: function(value, index, values) {
-                  value = value.toString();
+            beginAtZero: false,
+            userCallback: function(value, index, values) {
+                value = value.toString();
                   value = value.split(/(?=(?:...)*$)/);
-                  value = "$ " + value.join('.');
-                  return value;
-              }
+                  value = value.join('.');
+                  return `$ ${value}`;
+            }
           }
+
 
         //
       },
@@ -92,7 +107,7 @@ const overallPerformance = new Chart(overallPerformanceChart, {
                   value = value.split(/(?=(?:...)*$)/);
                   value = value.join('.');
                   return value;
-              }
+              } // end callBack
         }
       }]
     }
