@@ -50,7 +50,14 @@ const overallPerformance = new Chart(overallPerformanceChart, {
     ]
   },
   options: {
-    ///
+
+    //
+
+    animation: {
+            duration: 3000
+        },
+
+    //
 
     tooltips: {
         multiKeyBackground: '#1E334D',
@@ -67,11 +74,7 @@ const overallPerformance = new Chart(overallPerformanceChart, {
             return `${label}: ${value}`;
           }
         }, // end callbacks
-        // mode: 'index'
       }, //end tooltips
-
-
-    ///
 
     legend: {
       position: "bottom"
@@ -83,7 +86,7 @@ const overallPerformance = new Chart(overallPerformanceChart, {
                 top: 25,
                 bottom: 25
             }
-        },
+        }, // end legend
     scales: {
       yAxes: [{
         id: 'Billed',
@@ -117,8 +120,8 @@ const overallPerformance = new Chart(overallPerformanceChart, {
                   return value;
               } // end callBack
         }
-      }]
-    }
-  }
+      }] // end yAxes arrays
+    } // end scales
+  } // end options
 });
 
