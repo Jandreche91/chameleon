@@ -11,6 +11,7 @@
     "datejs": "^1.0.0-rc3",
     "jquery": "^3.5.1",
     "popper.js": "^1.16.1",
+    "progressbar.js": "^1.1.0",
     "turbolinks": "^5.2.0"
   },
   "version": "0.1.0",
