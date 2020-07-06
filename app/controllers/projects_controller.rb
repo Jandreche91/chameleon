@@ -5,6 +5,7 @@ class ProjectsController < ApplicationController
     @projects = Project.all
     @outstanding_alerts = Alert.outstanding
     @dashboard_data = Task.past_year
+    @array_of_projects = Project.id
   end
 
   def new
