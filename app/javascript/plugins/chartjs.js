@@ -143,16 +143,19 @@ if (overallPerformanceChart) {
 //#########################Project general performance   ##################
 //#########################################################################
 
-const projectPerformance = document.getElementById("individualProjectChart");
+const projectDashboard = document.getElementById("individualProjectChart");
 
-const projectPerformanceChart = new Chart(projectPerformance, {
-  type: 'line',
-  data: {
-    labels: JSON.parse(projectPerformance.dataset.date),
-    datasets: [{
-      data: JSON.parse(projectPerformance.dataset.value)
+if (projectDashboard) {
+
+  const projectDashboardChart = new Chart(projectDashboard, {
+    type: 'line',
+    data: {
+      labels: JSON.parse(projectDashboard.dataset.date),
+      datasets: [{
+        data: JSON.parse(projectDashboard.dataset.value)
+      }
+      ]
     }
-    ]
   }
+    );
 }
-  );
