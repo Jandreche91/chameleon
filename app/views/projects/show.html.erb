@@ -84,6 +84,11 @@
   </div>
 
   <p class="text-center">Add data</p>
+  <%= simple_form_for [@project, @milestone] do|f| %>
+    <%= f.input :description  %>
+    <%= f.input :end_date, as: :string, required: false, input_html: {class: "datepicker"} %>
+    <%= f.button :submit, class: "btn btn-success" %>
+  <%end%>
 
 </div>
 
