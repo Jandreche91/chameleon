@@ -4,8 +4,8 @@ const ProgressBar = require('progressbar.js');
 
 // constant with an array of the ids of the project
 
-let projects = document.getElementById("projects-general-view").dataset.array;
-projects = JSON.parse(projects);
+let projects = document.getElementById("projects-general-view")
+
 
 
 // method to adjust colors in progressbars according to progression of container
@@ -24,7 +24,10 @@ const colorPicker = (container) => {
 };
 
 
+if (projects) {
 
+projects = projects.dataset.array;
+projects = JSON.parse(projects);
 
 
 // method to generate progressbars
@@ -71,6 +74,7 @@ let timeBar = document.getElementById(`${projectId}-time-bar`);
 
 // barGenerator(projects[0]);
 
+}
 
 console.log("Progressbar page is loading!");
 

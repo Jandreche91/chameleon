@@ -9,7 +9,7 @@
 
   <div class="card-project-general-info">
     <h2><%= @project.name %></h2>
-    <p>Started on <span style="color: #900C3F"><strong><%= @project.estimated_start_date.strftime("%d %B %Y") %></strong></span></p>
+    <p>Started on <span style="color: "><strong><%= @project.estimated_start_date.strftime("%d %B %Y") %></strong></span></p>
     <br>
     <p><%= @project.description %></p>
   </div>
@@ -22,7 +22,7 @@
     </div>
     <div class="card-project-specifics-item">
       <p>Budget spent:</p>
-      <p><strong> US$ <%= @project.executed_cost_formatted %> (<%= @project.executed_budget_percentage %>%)</strong></p>
+      <p><strong> US$ <%= @project.executed_cost_formatted %> (<%= (@project.executed_budget_percentage * 100).to_i %>%)</strong></p>
     </div>
     <div class="card-project-specifics-item">
       <p>Hours spent by the team:</p>
@@ -34,7 +34,7 @@
     </div>
     <div class="card-project-specifics-item">
       <p>Estimated end date</p>
-      <p><%= @project.estimated_end_date.strftime("%d %B %Y") %></p>
+      <span style="color:#900C3F"><p><%= @project.estimated_end_date.strftime("%d %B %Y") %></p></span>
     </div>
     <div class="card-project-specifics-item">
       <strong><p style="color: #900C3F">Avg. hours left of budgeted work:</p></strong>
@@ -48,9 +48,9 @@
 
   </div>
 
-    <div class="card-project-chart">
-      <p>Chart</p>
-    </div>
+    <canvas id="individualProjectChart" data-date = "<%=  @cummulative_value.keys%>" data-value = "<%= @cummulative_value.values %>" >
+
+    </canvas>
 
 
 </div>
@@ -134,7 +134,7 @@
       <p><%= milestone.done ? "Ended on #{milestone.end_date.strftime("%d %B %Y")}" : "Estimated to end on #{milestone.end_date.strftime("%d %B %Y")}" %></p>
          <% if  milestone.tasks.empty?%>
 
-          <strong><p>No tasks have been logged toward completion of this milestone.</p></strong>
+          <strong><p>No tasks have been logged toward the completion of this milestone.</p></strong>
 
           <% else %>
 

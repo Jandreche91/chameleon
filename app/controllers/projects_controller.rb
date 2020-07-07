@@ -21,6 +21,7 @@ class ProjectsController < ApplicationController
 
   def show
     # projects
+    @cummulative_value = @project.hash_cummulative_value
   end
 
   def edit
