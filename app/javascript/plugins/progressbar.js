@@ -7,7 +7,27 @@ const ProgressBar = require('progressbar.js');
 let projects = document.getElementById("projects-general-view").dataset.array;
 projects = JSON.parse(projects);
 
-// method to generate progressbars (budget)
+
+// method to adjust colors in progressbars according to progression of container
+
+const colorPicker = (container) => {
+
+  const getColor = parseFloat(container.dataset.percentage);
+
+  if (getColor < 0.4) {
+    return '#338508'
+  } else if (getColor < 0.8) {
+    return '#1C68AC'
+  } else {
+    return '#900C3F'
+  };
+};
+
+
+
+
+
+// method to generate progressbars
 
 
 const barGenerator = (container) => {
@@ -19,9 +39,9 @@ const barGenerator = (container) => {
                   color: '#AAEF68',
                   trailColor: '#E2EAF4',
                   trailWidth: 4,
-                  svgStyle: {width: '100%', height: '100%'},
+                  svgStyle: {width: '100%', height: '12px'},
                   from: {color: '#AAEF68'},
-                  to: {color: '#900C3F'},
+                  to: {color: colorPicker(container)},
                   step: (state, bar) => {
                     bar.path.setAttribute('stroke', state.color);
                   }
