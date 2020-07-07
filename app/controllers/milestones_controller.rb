@@ -4,13 +4,12 @@ class MilestonesController < ApplicationController
     @milestone = Milestone.new(milestone_params)
     @milestone.project = @project
     @milestone.progress_rate = 0
-    @milestone.save
-    redirect_to project_path(@project)
+    redirect_to project_path(@project) if @milestone.save
   end
 
   private
 
   def milestone_params
-    params.require(:milestone).permit(:description, :end_date)
+    params.require(:milestone).permit(:description, :end_date, :progress_rate)
   end
 end
