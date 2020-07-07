@@ -187,7 +187,9 @@ const milestoneDataLogger = (arrayOfData) => {
       }, // first dataset ends
       { // dataset 2
         data: milestoneDataLogger(milestoneData),
-
+        borderColor: ['rgba(170, 239, 104, 0.9)'],
+        backgroundColor: ['rgba(170, 239, 104, 0.2)'],
+        label: "Evolution according to milestones"
       }
       ] // datasets end
     }, // data ends
