@@ -64,9 +64,9 @@
       <canvas id="individualProjectChart"
       data-date = "<%=  @cummulative_value.keys%>"
       data-value = "<%= @cummulative_value.values %>"
-      data-milestone-names ="<%= @milestones_names %>"
-      data-milestone-dates = "@milestone_values.keys"
-      data-milestone-values = ""   >
+      data-milestone-names ="<%= @milestone_names %>"
+      data-milestone-dates = "<%=  @milestone_values.keys %>"
+      data-milestone-values = "<%=  @milestone_values.to_json %>">
 
     </canvas>
 

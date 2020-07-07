@@ -78,6 +78,12 @@ class Project < ApplicationRecord
     formatter(tasks.sum(:hours_spent))
   end
 
+  # returns an array with the milestone names
+
+  def milestone_names
+    milestones.pluck(:description)
+  end
+
   # returns array with outstanding alerts
 
   def outstanding_alerts

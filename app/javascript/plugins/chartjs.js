@@ -147,6 +147,30 @@ const projectDashboard = document.getElementById("individualProjectChart");
 
 if (projectDashboard) {
 
+
+let milestoneData = JSON.parse(projectDashboard.dataset.milestoneValues)
+milestoneData = Object.entries(milestoneData)
+console.log(milestoneData);
+
+// method to log the data of the milestones as an array of objects
+
+const milestoneDataLogger = (arrayOfData) => {
+  let arrayOfResults = [];
+  arrayOfData.forEach( (array) => {
+    let anObject = new Object;
+    anObject.x = new Date(array[0]);
+    anObject.y = array[1];
+    arrayOfResults.push(anObject)
+    });
+  return arrayOfResults
+  }
+
+
+  console.log(milestoneDataLogger(milestoneData))
+
+
+
+
   const projectDashboardChart = new Chart(projectDashboard, {
     type: 'line',
     // data starts
@@ -160,7 +184,11 @@ if (projectDashboard) {
         borderWidth: 4,
         pointRadius: 0,
         pointHitRadius: 5
-      } // first dataset ends
+      }, // first dataset ends
+      { // dataset 2
+        data: milestoneDataLogger(milestoneData),
+
+      }
       ] // datasets end
     }, // data ends
     options: {
