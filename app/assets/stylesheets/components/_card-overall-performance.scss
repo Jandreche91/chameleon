@@ -1,11 +1,19 @@
 
 .card-overall-performance {
 
-  padding: 16px;
+  padding: 32px;
   background-color: white;
   border-radius: 8px;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  h2{
+    margin-bottom: 8px;
+  }
+
+  p{
+    margin-bottom: 32px;
+  }
 };
+
 
 .card-overall-internal {
   background-color: $dark-blue;
@@ -24,8 +32,12 @@
     grid-column-end: 4;
     padding: 8px;
     // for the time being -- remove when we will have a chart
-    overflow: scroll;
+    // overflow: scroll; WE HAVE A CHART!
 
 
 }
 
+
+#overallPerformance {
+  height: 100%;
+}

@@ -6,14 +6,16 @@ class Task < ApplicationRecord
   # class method giving access to values per month over the past year, returns a hash with a hash per month
 
   def self.past_year
-    results = {}
+    results = { value: [], hours_spent: [] }
     end_time = Date.today
-    12.times do |x|
+    12.times do
       start_time = end_time - 30
-      results[(x + 1).to_s] = { value: Task.where(date: start_time..end_time).sum(:value),
-                                hours_spent: Task.where(date: start_time..end_time).sum(:hours_spent) }
+      results[:value] << Task.where(date: start_time..end_time).sum(:value)
+      results[:hours_spent] << Task.where(date: start_time..end_time).sum(:hours_spent)
       end_time = start_time
     end
+    results[:value].reverse!
+    results[:hours_spent].reverse!
     results
   end
 
