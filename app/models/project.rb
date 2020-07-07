@@ -59,6 +59,21 @@ class Project < ApplicationRecord
     results
   end
 
+  # returns a hash with dates on keys and cummulated values on the values for milestones
+
+  def hash_milestone_estimated_cummulative_value
+    results = { estimated_start_date.strftime('%Y-%m-%d %H:%M:%S') => 0 }
+    value = 0
+    milestones.sort_by(&:end_date).each do |milestone|
+      value += milestone.progress_rate * estimated_cost / 100
+      results[milestone.end_date.strftime('%Y-%m-%d %H:%M:%S')] = value
+    end
+    unless unassigned_progress_rate.zero?
+      results[estimated_end_date.strftime('%Y-%m-%d %H:%M:%S')] = estimated_cost - value
+    end
+    results
+  end
+
   def hours_spent_formatted
     formatter(tasks.sum(:hours_spent))
   end
@@ -75,6 +90,16 @@ class Project < ApplicationRecord
     remaining_days = (estimated_end_date - Date.today).to_i
     total_days = (estimated_end_date - estimated_start_date).to_i
     1 - remaining_days.fdiv(total_days)
+  end
+
+  # returns the unnasinged part of a project progress rate as an integer between 0 and 100
+
+  def unassigned_progress_rate
+    value = 100
+    milestones.pluck(:progress_rate).each do |rate|
+      value -= rate
+    end
+    return value
   end
 
   private

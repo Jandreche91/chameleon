@@ -149,13 +149,49 @@ if (projectDashboard) {
 
   const projectDashboardChart = new Chart(projectDashboard, {
     type: 'line',
+    // data starts
     data: {
       labels: JSON.parse(projectDashboard.dataset.date),
       datasets: [{
-        data: JSON.parse(projectDashboard.dataset.value)
-      }
-      ]
-    }
-  }
-    );
-}
+        data: JSON.parse(projectDashboard.dataset.value),
+        label: "Budget evolution",
+        borderColor: ['rgba(30, 51, 77, 1)'],
+        backgroundColor: ['rgba(170, 239, 104, 0.0)'],
+        borderWidth: 4,
+        pointRadius: 0,
+        pointHitRadius: 5
+      } // first dataset ends
+      ] // datasets end
+    }, // data ends
+    options: {
+      scales: {
+                xAxes: [{
+                    type: 'time',
+                    ticks: {
+                        autoSkip: true,
+                        maxTicksLimit: 20
+                    }
+                }], // XAxes ends
+
+                yAxes: [{
+                  type: 'linear',
+                  position: 'left',
+                 ticks: {
+                          beginAtZero: true,
+                          userCallback: function(value, index, values) {
+                            value = value.toString();
+                            value = value.split(/(?=(?:...)*$)/);
+                            value = value.join('.');
+                            return `$ ${value}`;
+                            }
+                      } // yAxes ticks ends
+                }] // yAxes ends
+      }, // scales ends
+      legend: {
+        position: "bottom"
+      } // legend ends
+
+    } // options ends
+  } // Chart definition ends
+    ); // Chart new ends
+} // conditional ends
