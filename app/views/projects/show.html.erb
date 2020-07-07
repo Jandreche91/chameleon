@@ -62,10 +62,8 @@
       <p>Time effectively spent vs. time according to milestone projection</p>
 
       <canvas id="individualProjectChart"
-      data-date = "<%=  @cummulative_value.keys%>"
-      data-value = "<%= @cummulative_value.values %>"
+      data-actual-values = "<%= @cummulative_value.to_json %>"
       data-milestone-names ="<%= @milestone_names %>"
-      data-milestone-dates = "<%=  @milestone_values.keys %>"
       data-milestone-values = "<%=  @milestone_values.to_json %>">
 
     </canvas>
