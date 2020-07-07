@@ -13,12 +13,11 @@
     <ul class="navbar-nav mr-auto">
       <% if user_signed_in? %>
         <li class="nav-item">
-          <%= link_to "Home", root_path, class: "nav-link" %>
-        </li>
-        <li class="nav-item">
+          <%= image_tag "dashboard.png", alt: "Dashboard", width: 20 %>
           <%= link_to "Dashboard", projects_path, class: "nav-link" %>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" >
+          <%= image_tag "add_button.png", alt: "Dashboard", width: 20 %>
           <%= link_to "Add Project", new_project_path, class: "nav-link" %>
         </li>
         <li class="nav-item dropdown">
