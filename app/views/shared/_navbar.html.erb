@@ -1,11 +1,11 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
-  <div class="leftblock w-25">
+  <div class="leftblock">
     <%= link_to root_path, class: "navbar-brand" do %>
       <%= image_tag "logo.png" %><span style="color:#AAEF68"><strong>Chameleon</strong></span>
     <% end %>
   </div>
 
-  <div class="rightblock w-75">
+  <div class="rightblock flex-grow-1">
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto d-flex justify-content-between w-100">
         <% if user_signed_in? %>
