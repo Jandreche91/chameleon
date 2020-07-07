@@ -93,11 +93,11 @@
 
              <p><i class="fas fa-money-bill mr-2"></i> Budget: US$ <%= project.estimated_cost_formatted %></p>
              <!-- progress bars -->
-
-             <p><i class="fas fa-money-bill mr-2"></i> Part of the budget executed: <%= (project.executed_budget_percentage*100).floor %> %</p>
              <div id="<%= project.id%>-budget-bar" data-percentage ="<%=  project.executed_budget_percentage%>"></div>
-             <p><i class="fas fa-running mr-2"></i> Progress until end date: <%= (project.progress_date_percentage*100).floor %> % </p>
+             <p><i class="fas fa-percent mr-2"></i> Part of the budget executed: <%= (project.executed_budget_percentage*100).floor %> %</p>
              <div id="<%= project.id%>-time-bar" data-percentage ="<%=  project.progress_date_percentage%>"></div>
+             <p><i class="fas fa-running mr-2"></i> Progress until end date: <%= (project.progress_date_percentage*100).floor %> % </p>
+
 
              <!-- end of progress bars -->
 
