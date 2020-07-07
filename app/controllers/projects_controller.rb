@@ -5,6 +5,7 @@ class ProjectsController < ApplicationController
     @projects = Project.all
     @outstanding_alerts = Alert.outstanding
     @dashboard_data = Task.past_year
+    @array_of_projects = Project.id
   end
 
   def new
@@ -20,6 +21,11 @@ class ProjectsController < ApplicationController
 
   def show
     # projects
+    @cummulative_value = @project.hash_cummulative_value
+    @milestone_names = @project.milestone_names
+    # Add unassingned to the above array to take into account possible unassigned portions of budget
+    @milestones_names << "Unassigned" unless @project.unassigned_progress_rate.zero?
+    @milestone_values = @project.hash_milestone_estimated_cummulative_value
   end
 
   def edit
