@@ -118,8 +118,6 @@ if (overallPerformanceChart) {
           type: 'linear',
           position: 'right',
           ticks: {
-            max: 4000,
-            min: 0,
             userCallback: function(value, index, values) {
                     value = value.toString();
                     value = value.split(/(?=(?:...)*$)/);
@@ -147,14 +145,17 @@ const projectDashboard = document.getElementById("individualProjectChart");
 
 if (projectDashboard) {
 
-
 let milestoneData = JSON.parse(projectDashboard.dataset.milestoneValues)
 milestoneData = Object.entries(milestoneData)
+
+let actualData = JSON.parse(projectDashboard.dataset.actualValues);
+actualData = Object.entries(actualData);
+
 console.log(milestoneData);
 
 // method to log the data of the milestones as an array of objects
 
-const milestoneDataLogger = (arrayOfData) => {
+const dataLogger = (arrayOfData) => {
   let arrayOfResults = [];
   arrayOfData.forEach( (array) => {
     let anObject = new Object;
@@ -165,19 +166,12 @@ const milestoneDataLogger = (arrayOfData) => {
   return arrayOfResults
   }
 
-
-  console.log(milestoneDataLogger(milestoneData))
-
-
-
-
   const projectDashboardChart = new Chart(projectDashboard, {
     type: 'line',
     // data starts
     data: {
-      labels: JSON.parse(projectDashboard.dataset.date),
       datasets: [{
-        data: JSON.parse(projectDashboard.dataset.value),
+        data: dataLogger(actualData),
         label: "Budget evolution",
         borderColor: ['rgba(30, 51, 77, 1)'],
         backgroundColor: ['rgba(170, 239, 104, 0.0)'],
@@ -186,15 +180,45 @@ const milestoneDataLogger = (arrayOfData) => {
         pointHitRadius: 5
       }, // first dataset ends
       { // dataset 2
-        data: milestoneDataLogger(milestoneData),
-
+        data: dataLogger(milestoneData),
+        borderColor: ['rgba(170, 239, 104, 0.9)'],
+        backgroundColor: ['rgba(170, 239, 104, 0.2)'],
+        label: "Evolution according to milestones"
       }
       ] // datasets end
     }, // data ends
     options: {
-      scales: {
-                xAxes: [{
+      animation: {
+              duration: 4000
+          },
+      tooltips: {
+          multiKeyBackground: '#1E334D',
+          callbacks: {
+            label: function(tooltipItem, data) {
+              // console.log(data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index].x)
+              // console.log(data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index].y)
+              let tipValue = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index].y
+              tipValue = tipValue.toString();
+              tipValue = tipValue.split(/(?=(?:...)*$)/);
+              tipValue = tipValue.join(".");
+              return `Cummulative budget: $ ${tipValue}`;
+            }
+          }, // end callbacks
+        }, //end tooltips
+
+      scales: { xAxes: [{
                     type: 'time',
+                    //
+                     time: {
+              parser: 'DD/MM/YYYY',
+              tooltipFormat: 'DD/MM/YYYY',
+              unit: 'day',
+              unitStepSize: 1,
+              displayFormats: {
+                'day': 'MM/YYYY'
+              }
+            },
+                    //
                     ticks: {
                         autoSkip: true,
                         maxTicksLimit: 20
