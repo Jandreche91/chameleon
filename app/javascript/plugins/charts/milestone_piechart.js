@@ -58,7 +58,7 @@ if (milestoneProgressCanvas){
     }, // end data
     options: {
       legend: {
-        position: 'bottom'}, // end legend
+        position: 'right'}, // end legend
 
         //
 
@@ -73,7 +73,15 @@ if (milestoneProgressCanvas){
               return `${label}: $${value}`
               }
             } //end callbacks
-          } // end tooltips
+          }, // end tooltips
+          layout: {
+              padding: {
+                  left: 0,
+                  right: 0,
+                  top: 0,
+                  bottom: 25
+              }
+            }
         } //  // end options
 
         //
