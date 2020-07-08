@@ -137,7 +137,7 @@
                   <%= simple_form_for [@project, milestone] do|f| %>
                       <%= f.input :description  %>
                       <%= f.input :end_date, as: :string, required: false, input_html: {class: "datepicker"} %>
-                      <%= f.input :progress_rate %>
+                      <%= f.input :progress_rate, collection: (0..(milestone.progress_rate + @project.unassigned_progress_rate)).to_a %>
                       <%= f.button :submit, class: "btn btn-primary" %>
                     <% end %>
 
@@ -169,7 +169,7 @@
       <%= simple_form_for [@project, @new_milestone] do|f| %>
                     <%= f.input :description  %>
                     <%= f.input :end_date, as: :string, required: false, input_html: {class: "datepicker"} %>
-                    <%= f.input :progress_rate %>
+                    <%= f.input :progress_rate, collection: (0..@project.unassigned_progress_rate).to_a %>
                     <%= f.button :submit, class: "btn btn-primary" %>
                   <% end %>
 
