@@ -22,10 +22,10 @@ class ProjectsController < ApplicationController
   def show
     # projects
     @cummulative_value = @project.hash_cummulative_value
-    @milestone_names = @project.milestone_names
     # Add unassingned to the above array to take into account possible unassigned portions of budget
     @milestones_names << "Unassigned" unless @project.unassigned_progress_rate.zero?
     @milestone_values = @project.hash_milestone_estimated_cummulative_value
+    @milestone_progress_rates = @project.hash_milestone_progress_rates
     @milestone = Milestone.new
   end
 
