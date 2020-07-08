@@ -58,9 +58,25 @@ if (milestoneProgressCanvas){
     }, // end data
     options: {
       legend: {
-        position: 'bottom'}
-    }
+        position: 'bottom'}, // end legend
 
+        //
+
+        tooltips: {
+          callbacks: {
+            label: function(tooltipItem, data) {
+              let value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+              let label = data.labels[tooltipItem.index]
+              value = value.toString();
+              value = value.split(/(?=(?:...)*$)/);
+              value = value.join('.');
+              return `${label}: $${value}`
+              }
+            } //end callbacks
+          } // end tooltips
+        } //  // end options
+
+        //
   });
 }
 
