@@ -1,3 +1,6 @@
 import flatpickr from "flatpickr";
-
-flatpickr(".datepicker", {});
+require("flatpickr/dist/themes/material_green.css");
+flatpickr(".datepicker", {
+  altInput: true,
+  allowInput: true
+});
