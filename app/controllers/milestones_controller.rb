@@ -7,7 +7,12 @@ class MilestonesController < ApplicationController
     redirect_to project_path(@project) if @milestone.save
   end
 
-  private
+
+  def update
+
+  end
+
+ private
 
   def milestone_params
     params.require(:milestone).permit(:description, :end_date, :progress_rate)

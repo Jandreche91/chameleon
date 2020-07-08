@@ -76,7 +76,8 @@
 
 <div class="container card-project-milestone-dashboard mb-3">
 
-  <h2 class="mb-5"> Distribution of budget by milestones</h2>
+  <h2 class=""> Distribution of budget by milestones</h2>
+  <p class="mb-5">Portion of the budget unnassigned: <%= @project.unassigned_progress_rate %>%</p>
 
 
   <!-- Here is the chart -->
@@ -88,15 +89,55 @@
 
   <%= link_to "Manage Milestones", "#", class: "btn btn-primary btn-block" %>
 
+    <!-- Show milestones that cannot be updated -->
+
+    <div class="project-task-log-milestone-wrapper mt-3">
+
+    <% unless @finished_milestones.empty? %>
+
+      <p>You can only edit milestones that have not been completed</p>
+      <p>The following milestones have already been completed:</p>
+
+      <ul>
+
+      <% @finished_milestones.each do |milestone| %>
+
+        <li><%= milestone.description %> (completed on <%= milestone.end_date.strftime("%d %B %Y") %>) - <%= milestone.progress_rate %> %</li>
 
 
-
-      <%= simple_form_for [@project, @milestone] do|f| %>
-        <%= f.input :description  %>
-        <%= f.input :end_date, as: :string, required: false, input_html: {class: "datepicker"} %>
-        <%= f.input :progress_rate %>
-        <%= f.button :submit, class: "btn btn-primary btn-block" %>
       <% end %>
+
+      </ul>
+    </div>
+
+
+    <% end %>
+
+
+
+    <!-- Edit unfinished milestones -->
+
+          <% unless @unfinished_milestones.empty?  %>
+
+
+
+            <% @unfinished_milestones.each do |milestone| %>
+
+              <%= simple_form_for [@project, milestone] do|f| %>
+                  <%= f.input :description  %>
+                  <%= f.input :end_date, as: :string, required: false, input_html: {class: "datepicker"} %>
+                  <%= f.input :progress_rate %>
+                  <%= f.button :submit, class: "btn btn-primary" %>
+                <% end %>
+
+          <% end %>
+
+  <% end %>
+
+
+
+
+
 
 
 

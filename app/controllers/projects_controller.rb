@@ -26,7 +26,9 @@ class ProjectsController < ApplicationController
     @milestones_names << "Unassigned" unless @project.unassigned_progress_rate.zero?
     @milestone_values = @project.hash_milestone_estimated_cummulative_value
     @milestone_progress_rates = @project.hash_milestone_progress_rates
-    @milestone = Milestone.new
+    @finished_milestones = @project.milestones.select { |m| m.done == true }
+    @unfinished_milestones = @project.milestones.select { |m| m.done == false }
+    @new_milestone = Milestone.new
   end
 
   def edit
