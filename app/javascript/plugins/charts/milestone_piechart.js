@@ -26,17 +26,21 @@ if (milestoneProgressCanvas){
   // array of colors to be used by the chart
 
   const arrayOfColors = [
-        'rgba(255,99,132,1)',
         'rgba(54, 162, 235, 1)',
         'rgba(255, 206, 86, 1)',
         'rgba(170, 239, 104, 1)',
         'rgba(144, 12, 63, 1)',
         'rgba(248, 169, 22,1)',
         'rgba(51, 133, 8, 1)',
-        'rgba(28, 104, 172, 1)'];
+        'rgba(255,99,132,1)',
+        'rgba(28, 104, 172, 1)',
+        'rgba(115,238,220,1)',
+        'rgba(33,78,52,1)'];
+
 
   //automatically create an array of colors based on the length
 
+  let colorsToUse = arrayOfColors.slice(0,myLabels.length)
 
 
   // create the piechart
@@ -47,18 +51,8 @@ if (milestoneProgressCanvas){
       labels: myLabels,
       datasets:[{
         data: myValues,
-        backgroundColor: [
-        'rgba(255, 99, 132, 0.5)',
-        'rgba(54, 162, 235, 0.2)',
-        'rgba(255, 206, 86, 0.2)',
-        'rgba(75, 192, 192, 0.2)'
-      ],
-      borderColor: [
-        'rgba(255,99,132,1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(255, 206, 86, 1)',
-        'rgba(75, 192, 192, 1)'
-      ],
+        backgroundColor: colorsToUse,
+      borderColor: colorsToUse,
       borderWidth: 1
       }] // end datasets
     }, // end data
