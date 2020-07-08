@@ -69,7 +69,7 @@ class Project < ApplicationRecord
       results[milestone.end_date.strftime('%Y-%m-%d %H:%M:%S')] = value
     end
     unless unassigned_progress_rate.zero?
-      results[estimated_end_date.strftime('%Y-%m-%d %H:%M:%S')] = estimated_cost - value
+      results[estimated_end_date.strftime('%Y-%m-%d %H:%M:%S')] = value += unassigned_progress_rate * estimated_cost / 100
     end
     results
   end
