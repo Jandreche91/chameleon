@@ -138,14 +138,7 @@
 
 <div class="container card-project-milestone-dashboard mb-3">
 
-  <div class="d-flex justify-content-center mb-3">
-
-      <i class="fas fa-stream"></i>
-
-      <h2>Task log</h2>
-
-  </div>
-
+  <h2 class="text-center mb-5"> <i class="fas fa-stream"></i> Task Log</h2>
 
 
     <% @project.milestones.sort_by { |milestone| milestone.end_date}.each do |milestone| %>
