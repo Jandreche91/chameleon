@@ -87,9 +87,11 @@
 
   <!-- Here ends the chart -->
 
-  <%= link_to "Manage Milestones", "#", class: "btn btn-primary btn-block" %>
+  <div class = "btn btn-primary btn-block" id = "button-toggler-milestone-dashboard" > Manage Milestones <i class=" ml-2 far fa-hand-point-down"></i></div>
 
-  <div id="milestone-board">
+
+
+  <div id="milestone-board" style="display: none;">
 
     <!-- Show milestones that cannot be updated -->
 
@@ -145,43 +147,35 @@
 
 
 
-  <% end %>
+            <% end %>
 
 
   <!-- Add new milestone -->
 
-  <% if  @project.unassigned_progress_rate.zero? %>
+    <% if  @project.unassigned_progress_rate.zero? %>
 
-    <div class="project-task-log-milestone-wrapper mt-3">
-      <h3>Create a <span style="color: #900C3F">new milestone</span></h3>
-      <p class="mb-1">You cannot add new Milestones because all budget has already been assigned.</p>
-      <p class="mb-1">Edit the unfinished milestones above.</p>
-    </div>
+      <div class="project-task-log-milestone-wrapper mt-3">
+        <h3>Create a <span style="color: #900C3F">new milestone</span></h3>
+        <p class="mb-1">You cannot add new Milestones because all budget has already been assigned.</p>
+        <p class="mb-1">Edit the unfinished milestones above.</p>
+      </div>
 
-    <% else %>
+      <% else %>
 
-    <div class="project-task-log-milestone-wrapper">
+      <div class="project-task-log-milestone-wrapper">
 
-      <h3>Create a <span style="color: #900C3F">new milestone</span></h3>
+        <h3>Create a <span style="color: #900C3F">new milestone</span></h3>
 
-    <%= simple_form_for [@project, @new_milestone] do|f| %>
-                  <%= f.input :description  %>
-                  <%= f.input :end_date, as: :string, required: false, input_html: {class: "datepicker"} %>
-                  <%= f.input :progress_rate %>
-                  <%= f.button :submit, class: "btn btn-primary" %>
-                <% end %>
+      <%= simple_form_for [@project, @new_milestone] do|f| %>
+                    <%= f.input :description  %>
+                    <%= f.input :end_date, as: :string, required: false, input_html: {class: "datepicker"} %>
+                    <%= f.input :progress_rate %>
+                    <%= f.button :submit, class: "btn btn-primary" %>
+                  <% end %>
 
+      </div>
+      <% end %>
   </div>
-
-  </div>
-  <% end %>
-
-
-
-
-
-
-
 
 </div>
 

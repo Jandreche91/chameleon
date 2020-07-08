@@ -3,7 +3,6 @@ class MilestonesController < ApplicationController
   def create
     @milestone = Milestone.new(milestone_params)
     @milestone.project = @project
-    @milestone.progress_rate = 0
     redirect_to project_path(@project) if @milestone.save
   end
 

@@ -32,6 +32,7 @@ import "../plugins/flatpickr"
 // import { initSelect2 } from '../components/init_select2';
 import {chartjs} from '../plugins/chartjs.js';
 import {progressbar} from '../plugins/progressbar.js';
+import {togglerevealer} from '../plugins/togglerevealer.js';
 
 // importing specific charts
 import {project_value_chart} from '../plugins/charts/project_value_chart.js';
