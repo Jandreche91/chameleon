@@ -78,10 +78,10 @@ class Project < ApplicationRecord
 
   def hash_milestone_progress_rates
     results = {}
-    milestones.select(:description, :progress_rate).each do |milestone|
-      results[milestone.description] = milestone.progress_rate * estimated_cost / 100
+    milestones.sort_by(&:end_date).each do |milestone|
+      results[piechart_formatter(milestone)] = milestone.progress_rate * estimated_cost / 100
     end
-    results["Unassigned"] = unassigned_progress_rate * estimated_cost / 100 unless unassigned_progress_rate.zero?
+    results["Unassigned #{unassigned_progress_rate}%"] = unassigned_progress_rate * estimated_cost / 100 unless unassigned_progress_rate.zero?
     results
   end
 
@@ -117,5 +117,16 @@ class Project < ApplicationRecord
 
   def formatter(int)
     int.to_s.reverse.scan(/\d{3}|.+/).join(".").reverse
+  end
+
+  # a formatter for the keys in :hash_milestone_progress_rates
+
+  def piechart_formatter(milestone)
+    if milestone.end_date < Date.today
+      ended_or_not = "Ended on #{milestone.end_date.strftime('%d %B %Y')}"
+    else
+      ended_or_not = "Ends on #{milestone.end_date.strftime("%d %B %Y")}"
+    end
+    "#{milestone.description} (#{milestone.progress_rate}%) -- #{ended_or_not}}"
   end
 end
