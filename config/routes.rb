@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   resources :projects, except: [:destroy] do
     resources :milestones, only: [:create, :update]
   end
+  resources :assignments, only: :index
 end
