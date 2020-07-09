@@ -100,11 +100,11 @@
     <% unless @finished_milestones.empty? %>
 
       <h3>You can only edit milestones that have not been completed</h3>
-      <p>The following milestones have already been completed:</p>
+      <p class="mb-1">The following milestones have already been completed:</p>
 
       <ul>
 
-      <% @finished_milestones.each do |milestone| %>
+      <% @finished_milestones.sort_by(&:end_date).each do |milestone| %>
 
         <li><%= milestone.description %> (completed on <%= milestone.end_date.strftime("%d %B %Y") %>) - <%= milestone.progress_rate %> %</li>
 
@@ -123,13 +123,16 @@
 
           <% unless @unfinished_milestones.empty?  %>
 
+          <h3 class="mb-4"><i class="far fa-edit"></i> Edit milestones</h3>
 
 
-            <% @unfinished_milestones.each do |milestone| %>
+
+            <% @unfinished_milestones.sort_by(&:end_date).each do |milestone| %>
 
             <div class="project-task-log-milestone-wrapper">
-
-                <h3><%= milestone.description %></h3>
+              <div class="d-flex align-items-baseline">
+                <h3><%= milestone.description %></h3><p class="ml-2">(Edit)</p>
+              </div>
                 <p class="mb-0"><%="Estimated to end on #{milestone.end_date.strftime("%d %B %Y")}" %></p>
                 <p><%= "Weight of the budget: #{(milestone.progress_rate * @project.estimated_cost / 100).to_i.to_s.reverse.scan(/\d{3}|.+/).join(".").reverse} (#{milestone.progress_rate} %)" %></p>
 

@@ -127,6 +127,6 @@ class Project < ApplicationRecord
     else
       ended_or_not = "Ends on #{milestone.end_date.strftime("%d %B %Y")}"
     end
-    "#{milestone.description} (#{milestone.progress_rate}%) -- #{ended_or_not}}"
+    "#{milestone.description} (#{milestone.progress_rate}%) -- #{ended_or_not}"
   end
 end
