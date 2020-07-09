@@ -26,16 +26,16 @@ if (milestoneProgressCanvas){
   // array of colors to be used by the chart
 
   const arrayOfColors = [
-        'rgba(54, 162, 235, 1)',
         'rgba(255, 206, 86, 1)',
         'rgba(170, 239, 104, 1)',
         'rgba(144, 12, 63, 1)',
-        'rgba(248, 169, 22,1)',
         'rgba(51, 133, 8, 1)',
-        'rgba(255,99,132,1)',
         'rgba(28, 104, 172, 1)',
+        'rgba(248, 169, 22,1)',
         'rgba(115,238,220,1)',
-        'rgba(33,78,52,1)'];
+        'rgba(33,78,52,1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255,99,132,1)'];
 
 
   //automatically create an array of colors based on the length
