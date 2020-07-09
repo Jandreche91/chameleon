@@ -25,10 +25,10 @@ puts "All users destroyed ❗"
 puts "🌱 Creation of manager starts 🌱"
 
 manager = User.new( username: "patricia_smith",
-                    first_name: "Patricia",
+                    first_name: "John",
                     last_name: "Smith",
                     hourly_rate: 750,
-                    email: "patricia.smith@our_team.org",
+                    email: "john.smith@ourteam.org",
                     password:"123456")
 puts "🌱 Manager has User id #{manager.id} and was successfully saved! 🌱" if manager.save
 
@@ -66,7 +66,7 @@ team_hash.each do |name, values|
                     first_name: name,
                     last_name: last_name,
                     hourly_rate: hourly_rate,
-                    email: "#{name.downcase}.#{last_name.downcase}@our_team.org",
+                    email: "#{name.downcase}.#{last_name.downcase}@ourteam.org",
                     password:"123456")
   puts "🌱 Profile for #{associate.first_name + " " + associate.last_name} created successfully 🌱" if associate.save
 end
