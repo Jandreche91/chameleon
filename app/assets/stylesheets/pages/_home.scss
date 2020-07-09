@@ -15,7 +15,24 @@
     text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
     font-size: 32px;
     font-weight: bold;
+    // animation: type 5s steps(39);
+    animation: type 4s linear;
+    overflow: hidden;
+    white-space:nowrap;
+    border-right:4px solid black;
+    width:49ch;
+    // position:relative;
+    align-items: right;
   }
+  @keyframes type {
+    0% {
+      width:0ch;
+    }
+    100% {
+      width:39ch;
+    }
+  }
+
   p {
     font-size: 20px;
     color: white;
@@ -105,3 +122,6 @@
 .footer .fa-heart {
   color: #D23333;
 }
+
+
+
