@@ -38,7 +38,7 @@
     </div>
     <div class="card-project-specifics-item">
       <strong><p style="color: #900C3F">Avg. hours left of budgeted work:</p></strong>
-      <strong> <p style="color: #900C3F"><%= (@project.estimated_cost - @project.tasks.sum(:value)) / @project.cost_per_hour %></p> </strong>
+      <strong> <p style="color: #900C3F"><%= (@project.estimated_cost - @project.tasks.sum(:value)) / @project.cost_per_hour unless @project.cost_per_hour.zero? %></p> </strong>
     </div>
 
   </div>
