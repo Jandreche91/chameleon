@@ -69,19 +69,24 @@ class Project < ApplicationRecord
       results[milestone.end_date.strftime('%Y-%m-%d %H:%M:%S')] = value
     end
     unless unassigned_progress_rate.zero?
-      results[estimated_end_date.strftime('%Y-%m-%d %H:%M:%S')] = estimated_cost - value
+      results[estimated_end_date.strftime('%Y-%m-%d %H:%M:%S')] = value += unassigned_progress_rate * estimated_cost / 100
     end
+    results
+  end
+
+  # returns a hash with progress rates -- including unassinged if != 0
+
+  def hash_milestone_progress_rates
+    results = {}
+    milestones.select(:description, :progress_rate).each do |milestone|
+      results[milestone.description] = milestone.progress_rate * estimated_cost / 100
+    end
+    results["Unassigned"] = unassigned_progress_rate * estimated_cost / 100 unless unassigned_progress_rate.zero?
     results
   end
 
   def hours_spent_formatted
     formatter(tasks.sum(:hours_spent))
-  end
-
-  # returns an array with the milestone names
-
-  def milestone_names
-    milestones.pluck(:description)
   end
 
   # returns array with outstanding alerts

@@ -6,7 +6,8 @@
 require("@rails/ujs").start()
 require("turbolinks").start()
 require("@rails/activestorage").start()
-require("channels")
+require("channels");
+require("datejs");
 
 
 
@@ -29,9 +30,14 @@ import "../plugins/flatpickr"
 
 // Internal imports, e.g:
 // import { initSelect2 } from '../components/init_select2';
-import {chartjs} from '../plugins/chartjs.js'
-import {progressbar} from '../plugins/progressbar.js'
+import {chartjs} from '../plugins/chartjs.js';
+import {progressbar} from '../plugins/progressbar.js';
+import {togglerevealer} from '../plugins/togglerevealer.js';
 
+// importing specific charts
+import {project_value_chart} from '../plugins/charts/project_value_chart.js';
+import {general_dashboard_chart} from '../plugins/charts/general_dashboard_chart.js';
+import {milestone_piechart} from '../plugins/charts/milestone_piechart.js';
 
 document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
