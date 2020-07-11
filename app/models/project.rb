@@ -29,9 +29,11 @@ class Project < ApplicationRecord
   # cost per hour on average
 
   def cost_per_hour
-    return 1 if tasks.sum(:hours_spent) == 0
-
-    tasks.sum(:value) / tasks.sum(:hours_spent)
+    if tasks.sum(:hours_spent).zero?
+      0
+    else
+      tasks.sum(:value) / tasks.sum(:hours_spent)
+    end
   end
 
   # auto calculate budget percentage -- returns integer between 0 and 100
