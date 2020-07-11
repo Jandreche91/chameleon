@@ -1,35 +1,55 @@
 .card-project-dashboard {
   background-color: white;
-  border-radius: 8px;
+  // border-radius: 8px;
+  height: 80vh;
   padding: 32px;
+  // overflow: scroll;
   // display: grid;
   // grid-template-columns: 1fr 1fr;
-  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  // box-shadow: 0 0 15px rgba(0,0,0,0.2);
+
 }
 
 // container with all the information to the left
 
-.card-project-dashboard-right {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  // grid-column-start: 1;
-  //   grid-column-end: 3;
+// .card-project-dashboard-right {
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: space-around;
+//   // grid-column-start: 1;
+//   //   grid-column-end: 3;
+// }
+
+
+.card-project-dashboard-divider {
+  height: 550px;
 }
 
-// container with specific information about the project (boereded blue)
+
+
+.task-log {
+  overflow: scroll;
+  overflow-x: hidden;
+ }
+
+
+.milestone-manager {
+  height: 100%;
+  overflow: scroll;
+  overflow-x: hidden;
+}
 
 
 
 // Title and descripction of the project
 
 .card-project-general-info {
-
+  margin: 40px;
+  p {
+    margin: 0
+  }
 }
 
-.card-project-general-info p {
-margin: 0
-}
 
 
 
