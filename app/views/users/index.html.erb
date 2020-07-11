@@ -10,6 +10,7 @@
             <h4 class="card-title"><%= user.first_name %> <%= user.last_name %></h4>
             <% user.projects_per_associate.each do |project| %>
               <p><%= project.name %></p>
+              <p><%= user.total_hours_spent(project) %></p>
             <% end %>
             <p class="card-text"> Poject Name and Hour spend  </p>
           </div>

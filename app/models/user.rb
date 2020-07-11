@@ -10,4 +10,8 @@ class User < ApplicationRecord
   has_many :assignments
   has_many :projects_per_associate, through: :assignments, source: :project
   has_many :tasks
+
+  def total_hours_spent(project)
+    tasks.includes(:milestone).where(milestones: { project: project }).sum(:hours_spent)
+  end
 end
