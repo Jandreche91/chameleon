@@ -33,13 +33,24 @@
 
       <div class="tab-pane fade show active" id="v-pills-budgetevolution" role="tabpanel" aria-labelledby="v-pills-budgetevolution-tab">
         <div class="card-project-dashboard">
+
           <h2><%= image_tag "task-log-icon.png", size: "38x38", class: "mr-2" %>Evolution of budget in time</h2>
           <p>Time effectively spent vs. time according to milestone projection</p>
+
+
+          <div class="card-project-dashboard-divider">
+
           <canvas
             id="individualProjectChart"
             data-actual-values = "<%= @cummulative_value.to_json %>"
             data-milestone-values = "<%=  @milestone_values.to_json %>">
           </canvas>
+
+          </div>
+
+
+
+
         </div>
       </div>
 
@@ -101,7 +112,7 @@
       <!-- Associates in the project -->
 
       <div class="tab-pane fade" id="v-pills-associates" role="tabpanel" aria-labelledby="v-pills-associates-tab">
-        <div class="card-project-dashboard mb-3">
+        <div class="card-project-dashboard">
           <h2><i class="fas fa-users"></i> Associates in this project</h2>
             <div class="grid-project-associate-cards">
                 <% @project.array_users_hours.each do |data| %>
@@ -127,7 +138,7 @@
       <!-- Task log -->
 
       <div class="tab-pane fade" id="v-pills-tasks" role="tabpanel" aria-labelledby="v-pills-tasks-tab">
-        <div class="card-project-milestone-dashboard mb-3">
+        <div class="card-project-dashboard">
           <h2 class="mb-4"> <i class="fas fa-stream"></i> Task Log</h2>
           <% @project.milestones.sort_by { |milestone| milestone.end_date}.each do |milestone| %>
           <div class="project-task-log-milestone-wrapper">
@@ -169,6 +180,14 @@
 <!-- Milestone insights -->
 
 
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 
 <div class="card-project-dashboard">
 

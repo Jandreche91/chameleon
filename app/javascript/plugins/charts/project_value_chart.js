@@ -106,8 +106,9 @@ const dataLogger = (arrayOfData) => {
       }, // scales ends
       legend: {
         position: "bottom"
-      } // legend ends
-
+      }, // legend ends
+      maintainAspectRatio: false,
+      responsive: true
     } // options ends
   } // Chart definition ends
     ); // Chart new ends
