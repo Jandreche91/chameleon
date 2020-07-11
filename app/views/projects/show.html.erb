@@ -4,12 +4,13 @@
     <h2><%= @project.name %></h2>
     <p>Started on <span style="color: "><strong><%= @project.estimated_start_date.strftime("%d %B %Y") %></strong></span></p>
     <p><%= @project.description %></p>
+    <%= link_to "Edit this project", edit_project_path(@project), class: "btn btn-outline-success mt-3" %>
 </div>
 
 
   <!-- Tabs on the sidebar -->
 
-<div class="row">
+<div class="row mx-1">
 
   <div class="col-2 p-0">
     <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
@@ -87,7 +88,6 @@
                 <strong><p style="color: #900C3F">Avg. hours left of budgeted work:</p></strong>
                 <strong> <p style="color: #900C3F"><%= (@project.estimated_cost - @project.tasks.sum(:value)) / @project.cost_per_hour unless @project.cost_per_hour.zero? %></p> </strong>
               </div>
-              <%= link_to "Edit this project", edit_project_path(@project), class: "btn btn-primary btn-block" %>
             </div>
         </div>
 
