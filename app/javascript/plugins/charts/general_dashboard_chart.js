@@ -128,7 +128,8 @@ if (overallPerformanceChart) {
                 } // end callBack
           }
         }] // end yAxes arrays
-      } // end scales
+      },
+      maintainAspectRatio: false, // end scales
     } // end options
   });
 
