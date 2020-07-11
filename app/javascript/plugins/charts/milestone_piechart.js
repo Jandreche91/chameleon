@@ -58,7 +58,7 @@ if (milestoneProgressCanvas){
     }, // end data
     options: {
       legend: {
-        position: 'right'}, // end legend
+        position: 'left'}, // end legend
 
         //
 
