@@ -19,6 +19,7 @@
       <a class="nav-link" id="v-pills-budgetdistribution-tab" data-toggle="pill" href="#v-pills-budgetdistribution" role="tab" aria-controls="v-pills-budgetdistribution" aria-selected="false">Budget distribution</a>
       <a class="nav-link" id="v-pills-associates-tab" data-toggle="pill" href="#v-pills-associates" role="tab" aria-controls="v-pills-associates" aria-selected="false">Associates in this project</a>
       <a class="nav-link" id="v-pills-tasks-tab" data-toggle="pill" href="#v-pills-tasks" role="tab" aria-controls="v-pills-tasks" aria-selected="false">Task Log</a>
+      <a class="nav-link" id="v-pills-managemilestones-tab" data-toggle="pill" href="#v-pills-managemilestones" role="tab" aria-controls="v-pills-managemilestones" aria-selected="false">Manage Milestones</a>
     </div>
   </div>
 
@@ -159,6 +160,74 @@
             <% end %>
           </div>
         </div>
+
+            <!-- Manage Milestones -->
+            <!-- Manage Milestones -->
+            <!-- Manage Milestones -->
+            <!-- Manage Milestones -->
+
+        <div class="tab-pane fade" id="v-pills-managemilestones" role="tabpanel" aria-labelledby="v-pills-managemilestones-tab">
+
+          <div class="card-project-dashboard">
+            <div class="milestone-manager">
+              <!-- Show milestones that cannot be updated -->
+              <div class=" mt-3">
+                <% unless @finished_milestones.empty? %>
+                <h3>You can only edit milestones that have not been completed</h3>
+                <p class="mb-1">The following milestones have already been completed:</p>
+
+                <ul>
+                  <% @finished_milestones.sort_by(&:end_date).each do |milestone| %>
+                    <li><%= milestone.description %> (completed on <%= milestone.end_date.strftime("%d %B %Y") %>) - <%= milestone.progress_rate %> %</li>
+                    <% end %>
+                </ul>
+              </div>
+                <% end %>
+
+                <!-- Edit unfinished milestones -->
+
+                <% unless @unfinished_milestones.empty?  %>
+                  <h3 class="mb-4"><i class="far fa-edit"></i> Edit milestones</h3>
+                  <% @unfinished_milestones.sort_by(&:end_date).each do |milestone| %>
+                  <div class="project-task-log-milestone-wrapper">
+                    <div class="d-flex align-items-baseline">
+                      <h3><%= milestone.description %></h3><p class="ml-2">(Edit)</p>
+                    </div>
+                    <p class="mb-0"><%="Estimated to end on #{milestone.end_date.strftime("%d %B %Y")}" %></p>
+                    <p><%= "Weight of the budget: #{(milestone.progress_rate * @project.estimated_cost / 100).to_i.to_s.reverse.scan(/\d{3}|.+/).join(".").reverse} (#{milestone.progress_rate} %)" %></p>
+                      <%= simple_form_for [@project, milestone] do|f| %>
+                          <%= f.input :description  %>
+                          <%= f.input :end_date, as: :string, required: true, input_html: {class: "datepicker"} %>
+                          <%= f.input :progress_rate, collection: (0..(milestone.progress_rate + @project.unassigned_progress_rate)).to_a %>
+                          <%= f.button :submit, class: "btn btn-primary" %>
+                        <% end %>
+                  </div>
+                  <% end %>
+                  <% end %>
+                  <!-- Add new milestone -->
+                  <% if  @project.unassigned_progress_rate.zero? %>
+                  <div class="project-task-log-milestone-wrapper mt-3">
+                    <h3>Create a <span style="color: #900C3F">new milestone</span></h3>
+                    <p class="mb-1">You cannot add new Milestones because all budget has already been assigned.</p>
+                    <p class="mb-1">Edit the unfinished milestones above.</p>
+                  </div>
+                  <% else %>
+                  <div class="project-task-log-milestone-wrapper">
+                    <h3>Create a <span style="color: #900C3F">new milestone</span></h3>
+                    <%= simple_form_for [@project, @new_milestone] do|f| %>
+                      <%= f.input :description  %>
+                      <%= f.input :end_date, as: :string, required: true, input_html: {class: "datepicker"} %>
+                      <%= f.input :progress_rate, collection: (0..@project.unassigned_progress_rate).to_a %>
+                      <%= f.button :submit, class: "btn btn-primary" %>
+                    <% end %>
+                  </div>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+
+
+
         <!-- End of content -->
     </div>
   </div>
@@ -167,136 +236,4 @@
 
 
 
-
-
-<!-- General dashboard -->
-
-
-
-
-<!-- big chart -->
-
-
-
-<!-- Milestone insights -->
-
-
-
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-
-<div class="card-project-dashboard">
-
-
-
-
-  <!-- Here ends the chart -->
-
-  <div class = "btn btn-primary btn-block" id = "button-toggler-milestone-dashboard" > Manage Milestones <i class=" ml-2 far fa-hand-point-down"></i></div>
-
-
-
-  <div id="milestone-board" style="display: none;">
-
-    <!-- Show milestones that cannot be updated -->
-
-    <div class=" mt-3">
-
-    <% unless @finished_milestones.empty? %>
-
-      <h3>You can only edit milestones that have not been completed</h3>
-      <p class="mb-1">The following milestones have already been completed:</p>
-
-      <ul>
-
-      <% @finished_milestones.sort_by(&:end_date).each do |milestone| %>
-
-        <li><%= milestone.description %> (completed on <%= milestone.end_date.strftime("%d %B %Y") %>) - <%= milestone.progress_rate %> %</li>
-
-
-      <% end %>
-
-      </ul>
-    </div>
-
-
-    <% end %>
-
-
-
-    <!-- Edit unfinished milestones -->
-
-          <% unless @unfinished_milestones.empty?  %>
-
-          <h3 class="mb-4"><i class="far fa-edit"></i> Edit milestones</h3>
-
-
-
-            <% @unfinished_milestones.sort_by(&:end_date).each do |milestone| %>
-
-            <div class="project-task-log-milestone-wrapper">
-              <div class="d-flex align-items-baseline">
-                <h3><%= milestone.description %></h3><p class="ml-2">(Edit)</p>
-              </div>
-                <p class="mb-0"><%="Estimated to end on #{milestone.end_date.strftime("%d %B %Y")}" %></p>
-                <p><%= "Weight of the budget: #{(milestone.progress_rate * @project.estimated_cost / 100).to_i.to_s.reverse.scan(/\d{3}|.+/).join(".").reverse} (#{milestone.progress_rate} %)" %></p>
-
-
-                  <%= simple_form_for [@project, milestone] do|f| %>
-                      <%= f.input :description  %>
-                      <%= f.input :end_date, as: :string, required: true, input_html: {class: "datepicker"} %>
-                      <%= f.input :progress_rate, collection: (0..(milestone.progress_rate + @project.unassigned_progress_rate)).to_a %>
-                      <%= f.button :submit, class: "btn btn-primary" %>
-                    <% end %>
-
-              </div>
-
-                <% end %>
-
-
-
-            <% end %>
-
-
-  <!-- Add new milestone -->
-
-    <% if  @project.unassigned_progress_rate.zero? %>
-
-      <div class="project-task-log-milestone-wrapper mt-3">
-        <h3>Create a <span style="color: #900C3F">new milestone</span></h3>
-        <p class="mb-1">You cannot add new Milestones because all budget has already been assigned.</p>
-        <p class="mb-1">Edit the unfinished milestones above.</p>
-      </div>
-
-      <% else %>
-
-      <div class="project-task-log-milestone-wrapper">
-
-        <h3>Create a <span style="color: #900C3F">new milestone</span></h3>
-
-      <%= simple_form_for [@project, @new_milestone] do|f| %>
-                    <%= f.input :description  %>
-                    <%= f.input :end_date, as: :string, required: true, input_html: {class: "datepicker"} %>
-                    <%= f.input :progress_rate, collection: (0..@project.unassigned_progress_rate).to_a %>
-                    <%= f.button :submit, class: "btn btn-primary" %>
-                  <% end %>
-
-      </div>
-      <% end %>
-  </div>
-
-</div>
-
-<!-- users in the project -->
-
-
-
-<!-- Task log -->
-
-<!-- title -->
 
