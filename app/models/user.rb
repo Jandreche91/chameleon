@@ -8,5 +8,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :projects
   has_many :assignments
+  has_many :projects_per_associate, through: :assignments, source: :project
   has_many :tasks
 end
