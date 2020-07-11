@@ -66,6 +66,9 @@ projects.forEach( (projectId) => {
 
 let budgetBar = document.getElementById(`${projectId}-budget-bar`);
 let timeBar = document.getElementById(`${projectId}-time-bar`);
+budgetBar.innerHTML = "";
+timeBar.innerHTML = "";
+
 
   barGenerator(budgetBar);
   barGenerator(timeBar);
