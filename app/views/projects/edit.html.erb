@@ -6,9 +6,8 @@
     <%= f.input :estimated_cost %>
     <%= f.input :estimated_start_date %>
     <%= f.input :estimated_end_date %>
-<!--     <#%= f.association :user, collection: User.all, as: :check_boxes %>
-    <#%= f.association :assignments, collection: Assignment.all, as: :check_boxes %> -->
-    <%#= f.association :user, collection: User.all.map{|user| [user.name, user.id] }, as: :check_boxes %>
+    <%= f.association :assignments, collection: Assignment.where(project_id: params[:id]).map{|assignment| [assignment.name, assignment.id] }, as: :check_boxes %>
+    <%= f.association :user, collection: User.all.reject{|user| user == current_user}, as: :check_boxes, :input_html => { :checked => User.all.map{|user| user.assignments.map{|assi| assi.project_id}.flatten.include?(params[:id])} } %>
     <%= f.button :submit, class: "btn-primary" %>
   <% end %>
 </div>

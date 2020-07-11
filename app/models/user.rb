@@ -10,7 +10,11 @@ class User < ApplicationRecord
   has_many :assignments
   has_many :tasks
 
-  # def name
-  #   "#{first_name} #{last_name}"
-  # end
+  def is_assigned?(project)
+    assignments.find_by(project: project).present?
+  end
+
+  def name
+    "#{first_name} #{last_name}"
+  end
 end
