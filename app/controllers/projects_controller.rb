@@ -14,9 +14,15 @@ class ProjectsController < ApplicationController
 
   def create
     @project = Project.new(project_params)
+
     @project.user = current_user
-    @project.save
-    redirect_to project_path(@project)
+    if @project.save
+      p "test if"
+      redirect_to project_path(@project)
+    else
+      p "test else"
+      render :new
+    end
   end
 
   def show
@@ -32,6 +38,7 @@ class ProjectsController < ApplicationController
   end
 
   def edit
+
   end
 
   def update

@@ -29,6 +29,8 @@ class Project < ApplicationRecord
   # cost per hour on average
 
   def cost_per_hour
+    return 1 if tasks.sum(:hours_spent) == 0
+
     tasks.sum(:value) / tasks.sum(:hours_spent)
   end
 

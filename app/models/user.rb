@@ -9,4 +9,8 @@ class User < ApplicationRecord
   has_many :projects
   has_many :assignments
   has_many :tasks
+
+  # def name
+  #   "#{first_name} #{last_name}"
+  # end
 end

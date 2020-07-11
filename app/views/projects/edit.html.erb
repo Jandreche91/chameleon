@@ -6,6 +6,9 @@
     <%= f.input :estimated_cost %>
     <%= f.input :estimated_start_date %>
     <%= f.input :estimated_end_date %>
+<!--     <#%= f.association :user, collection: User.all, as: :check_boxes %>
+    <#%= f.association :assignments, collection: Assignment.all, as: :check_boxes %> -->
+    <%#= f.association :user, collection: User.all.map{|user| [user.name, user.id] }, as: :check_boxes %>
     <%= f.button :submit, class: "btn-primary" %>
   <% end %>
 </div>
