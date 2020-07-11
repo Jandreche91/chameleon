@@ -5,13 +5,16 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 24px;
+  background-color: $dark-blue;
+  padding: 16px;
+  border-radius: 8px;
 }
 
 
 
 .project-card {
-  background-color: $dark-blue;
-  color: $white-blue;
+  background-color: white;
+  color: $dark-blue;
   border-radius: 8px;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
   height: 390px;

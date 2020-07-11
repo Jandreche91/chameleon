@@ -4,6 +4,7 @@
   background-color: white;
   border-radius: 8px;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  // height: 660px;
   h2{
     margin-bottom: 8px;
   }
@@ -16,10 +17,11 @@
 
 .card-overall-internal {
   background-color: $dark-blue;
-  padding: 16px 4px;
+  padding: 16px;
   border-radius: 8px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
+  // height: 52vh;
 };
 
 .dashboard-overall-chart {
@@ -35,7 +37,3 @@
 
 }
 
-
-#overallPerformance {
-  // height: 100%;
-}

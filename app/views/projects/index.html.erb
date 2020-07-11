@@ -1,8 +1,8 @@
 
-<!-- Headers of the nav in the index view -->
-
 
 <div class="m-5">
+
+<!-- Headers of the nav in the index view -->
 
   <nav>
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -33,13 +33,9 @@
           <div class="dashboard-overall-chart">
 
             <!-- Dashboard showing performance per month in terms of money and hours -->
-
             <canvas id="overallPerformance"
             data-value="<%= @dashboard_data[:value].to_json %>"
             data-hours-spent="<%= @dashboard_data[:hours_spent].to_json%>"></canvas>
-
-
-
           </div>
 
           <div class="alert-board">
