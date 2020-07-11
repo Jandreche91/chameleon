@@ -1,145 +1,153 @@
 
 
-<div class="container mt-5 mb-4">
+<div class="mt-5 mx-5">
 
+<!-- Headers of the nav in the index view -->
 
-  <div class="row">
+  <nav>
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+      <a class="nav-item nav-link active" id="nav-overall-performance-tab" data-toggle="tab" href="#nav-overall-performance" role="tab" aria-controls="nav-overall-performance" aria-selected="true">Overall Performance</a>
+      <a class="nav-item nav-link" id="nav-projects-tab" data-toggle="tab" href="#nav-projects" role="tab" aria-controls="nav-projects" aria-selected="false">Projects</a>
+    </div>
+  </nav>
 
-
-    <div class="col-12 card-overall-performance">
-
-      <h2>Dashboard</h2>
-      <p>Your team's <strong><span style="color: #900C3F"> overall performance</span></strong></p>
-
-      <div class="card-overall-internal">
-
-        <div class="dashboard-overall-chart">
-
-          <!-- Dashboard showing performance per month in terms of money and hours -->
-
-          <canvas id="overallPerformance"
-          data-value="<%= @dashboard_data[:value].to_json %>"
-          data-hours-spent="<%= @dashboard_data[:hours_spent].to_json%>"></canvas>
+<!-- Contents within the nav in the index view -->
 
 
 
-        </div>
+  <div class="tab-content" id="nav-tabContent">
 
-        <div class="alert-board">
-          <h5 class="title-alert-board"><i class="mr-2 fas fa-exclamation-circle"></i><span style="color: #900C3F">Outstanding alerts</span></h5>
+  <!-- Dashboard / Chart -->
 
-          <% if @outstanding_alerts.empty? %>
+    <div class="tab-pane fade show active" id="nav-overall-performance" role="tabpanel" aria-labelledby="nav-overall-performance-tab">
+           <!-- Begin of content -->
 
-          <div class="alert-card">
-            <p>You don't have outstanding alerts. Congratulations!</p>
+
+      <div class="card-overall-performance">
+
+        <h2>Dashboard</h2>
+        <p>Your team's <strong>overall performance</strong></p>
+
+        <div class="card-overall-internal">
+
+          <div class="dashboard-overall-chart">
+
+            <!-- Dashboard showing performance per month in terms of money and hours -->
+            <canvas id="overallPerformance"
+            data-value="<%= @dashboard_data[:value].to_json %>"
+            data-hours-spent="<%= @dashboard_data[:hours_spent].to_json%>"></canvas>
           </div>
 
-           <%= link_to "See past alerts", "#", class: "btn btn-outline-primary btn-block" %>
+          <div class="alert-board">
+            <h5 class="title-alert-board"><i class="mr-2 fas fa-exclamation-circle"></i>Outstanding alerts</h5>
 
-          <% else %>
-
-            <% @outstanding_alerts.each do |alert| %>
-
-            <%= link_to project_path(alert.project), class: "index-link" do %>
+            <% if @outstanding_alerts.empty? %>
 
             <div class="alert-card">
-              <div class="d-flex align-items-center">
-                  <p><span style="color: #900C3F"><%= alert.project.name %></span> <%= alert.description %></p>
+              <p>You don't have outstanding alerts. Congratulations!</p>
+            </div>
 
-                  <span class="alert-caret"><i class="fas fa-caret-right"></i></span>
+             <%= link_to "See past alerts", "#", class: "btn btn-outline-primary btn-block" %>
+
+            <% else %>
+
+              <% @outstanding_alerts.each do |alert| %>
+
+              <%= link_to project_path(alert.project), class: "index-link" do %>
+
+              <div class="alert-card">
+                <div class="d-flex align-items-center">
+                    <p><span style="color: #900C3F"><%= alert.project.name %></span> <%= alert.description %></p>
+
+                    <span class="alert-caret"><i class="fas fa-caret-right"></i></span>
+
+                </div>
+
 
               </div>
 
+              <% end %>
 
-            </div>
+              <% end %>
 
             <% end %>
+          </div>
 
-            <% end %>
-
-          <% end %>
         </div>
+
+      </div>
+
+     </div>
+
+  <!-- Project cards -->
+    <div class="tab-pane fade" id="nav-projects" role="tabpanel" aria-labelledby="nav-projects-tab">
+
+      <div class="general-header-index-card">
+
+        <h2>Projects</h2>
+        <p>An overview of the projects you are currently tracking with <strong><span style="color:#AAEF68">Chameleon</span></strong></p>
+
+            <div id="projects-general-view" class="project-card-grid mb-2" data-array="<%= @array_of_projects %>">
+
+        <% @projects.each do |project| %>
+        <%= link_to project_path(project), class: "index-link"  do %>
+        <div class="project-card">
+          <div  class="mb-3 d-flex justify-content-between border-bottom">
+            <h5 class="pb-2"><%= project.name %></h5>
+            <span><%= (image_tag "bell.png", size: "20x20") unless project.outstanding_alerts.empty? %></span>
+          </div>
+
+          <div class="project-card-infos">
+            <p><i class="fas fa-money-bill mr-2"></i> Budget: US$ <%= project.estimated_cost_formatted %></p>
+               <!-- progress bars -->
+               <div id="<%= project.id%>-budget-bar" data-percentage ="<%=  project.executed_budget_percentage%>"></div>
+               <p><i class="fas fa-percent mr-2"></i> Part of the budget executed: <%= (project.executed_budget_percentage*100).floor %> %</p>
+               <div id="<%= project.id%>-time-bar" data-percentage ="<%=  project.progress_date_percentage%>"></div>
+               <p><i class="fas fa-running mr-2"></i> Progress until end date: <%= (project.progress_date_percentage*100).floor %> % </p>
+
+
+               <!-- end of progress bars -->
+
+               <p><i class="fas fa-users mr-2"></i> In this project:</p>
+
+                 <div class="d-flex align-items-center">
+
+                    <%= image_tag "avatar_pics/#{current_user.first_name}.jpg", class: "avatar mr-2"%>
+
+                    <% users = project.users_as_billers %>
+                    <% users.first(7).each do |user| %>
+
+                    <%= image_tag "avatar_pics/#{user.first_name}.jpg", class: "avatar mr-2"%>
+
+                 <% end %>
+
+                 <% if users.count > 7 %>
+
+                  <i class="fas fa-plus m-0" style="font-size:20px"></i>
+
+                 <% end %>
+
+
+
+                  </div>
+              </div>
+        </div>
+        <% end %>
+
+
+
+        <% end %>
+
+
+
+        </div>
+
+
 
       </div>
 
     </div>
 
   </div>
-</div>
-
-<div class="container general-header-index-card">
-
-
-
-      <h2>Projects</h2>
-      <p>An overview of the projects you are currently tracking with <strong><span style="color:#AAEF68">Chameleon</span></strong></p>
-
-    <div id="projects-general-view" class="container project-card-grid mb-2" data-array="<%= @array_of_projects %>">
-
-
-
-
-
-  <% @projects.each do |project| %>
-
-      <%= link_to project_path(project), class: "index-link"  do %>
-
-      <div class="project-card">
-        <div  class="mb-3 d-flex justify-content-between border-bottom">
-          <h5 class="pb-2"><%= project.name %></h5>
-          <span><%= (image_tag "bell.png", size: "20x20") unless project.outstanding_alerts.empty? %></span>
-        </div>
-            <div class="project-card-infos">
-
-             <p><i class="fas fa-money-bill mr-2"></i> Budget: US$ <%= project.estimated_cost_formatted %></p>
-             <!-- progress bars -->
-             <div id="<%= project.id%>-budget-bar" data-percentage ="<%=  project.executed_budget_percentage%>"></div>
-             <p><i class="fas fa-percent mr-2"></i> Part of the budget executed: <%= (project.executed_budget_percentage*100).floor %> %</p>
-             <div id="<%= project.id%>-time-bar" data-percentage ="<%=  project.progress_date_percentage%>"></div>
-             <p><i class="fas fa-running mr-2"></i> Progress until end date: <%= (project.progress_date_percentage*100).floor %> % </p>
-
-
-             <!-- end of progress bars -->
-
-             <p><i class="fas fa-users mr-2"></i> In this project:</p>
-
-               <div class="d-flex align-items-center">
-
-                <%= image_tag "avatar_pics/#{current_user.first_name}.jpg", class: "avatar mr-2"%>
-
-                <% users = project.users_as_billers %>
-                <% users.first(7).each do |user| %>
-
-                <%= image_tag "avatar_pics/#{user.first_name}.jpg", class: "avatar mr-2"%>
-
-               <% end %>
-
-               <% if users.count > 7 %>
-
-               <i class="fas fa-plus m-0" style="font-size:20px"></i>
-
-               <% end %>
-
-
-
-                </div>
-              </div>
-      </div>
-      <% end %>
-
-
-
-  <% end %>
-
-
 
 </div>
-
-
-</div>
-
-
-
-
-
-
