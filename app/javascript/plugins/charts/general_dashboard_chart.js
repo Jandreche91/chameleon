@@ -36,25 +36,25 @@ if (overallPerformanceChart) {
         label: 'Billed',
         yAxisID: 'Billed',
         data: JSON.parse(overallPerformanceChart.dataset.value),
-        borderColor: ['rgba(170, 239, 104, 0.9)'],
+        borderColor: ['#B37600'],
         backgroundColor: ['rgba(170, 239, 104, 0.0)'],
         borderWidth: 4,
         pointRadius: 2,
         pointHitRadius: 5,
-        pointBackgroundColor: 'rgba(170, 239, 104, 0.9)',
-        pointBorderColor:'rgba(170, 239, 104, 0.9)'
+        pointBackgroundColor: '#B37600',
+        pointBorderColor:'#B37600'
         },
       {
         label: 'Hours spent',
         yAxisID: 'Hours',
         data: JSON.parse(overallPerformanceChart.dataset.hoursSpent),
-        borderColor: ['rgba(144, 12, 63, 0.9)'],
+        borderColor: ['#7900B3'],
         backgroundColor: ['rgba(170, 239, 104, 0.0)'],
         borderWidth: 4,
         pointRadius: 2,
         pointHitRadius: 5,
-        pointBackgroundColor: 'rgba(144, 12, 63, 0.9)',
-        pointBorderColor: 'rgba(144, 12, 63, 1)'
+        pointBackgroundColor: '#7900B3',
+        pointBorderColor: '#7900B3'
       }
       ]
     },
