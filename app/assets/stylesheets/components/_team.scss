@@ -1,0 +1,38 @@
+.cards-team {
+    background: #1E334D;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+}
+
+.cards-team {
+    padding: 60px 0;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.cards-team .section-title {
+    text-align: center;
+    color: #fff;
+    margin-bottom: 50px;
+    text-transform: uppercase;
+}
+
+.cards-team .card-team {
+    border: none;
+    background: #ffffff;
+    margin-bottom: 30px;
+    min-height: 400px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+}
+
+
+.card-team .card-title {
+    color: #E2EAF4 !important;
+}
+.card-team  .card-body img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+}
