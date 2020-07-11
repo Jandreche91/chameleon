@@ -1,0 +1,19 @@
+<div class="container mt-3 cards-team">
+  <h5 class="section-title h1">OUR TEAM</h5>
+  <div class="row">
+    <% @users.each do |user| %>
+      <div class="col-xs-6 col-sm-2 col-md-6">
+        <div class="card-team">
+          <div class="card-body text-center">
+            <p><img class=" img-fluid" src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb" alt="card image"></p>
+            <h4 class="card-title"><%= user.first_name %> <%= user.last_name %></h4>
+            <% user.projects_per_associate.each do |project| %>
+              <p><%= project.name %></p>
+            <% end %>
+            <p class="card-text"> Poject Name and Hour spend  </p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
