@@ -16,7 +16,7 @@ class ProjectsController < ApplicationController
     @project = Project.new(project_params)
     @project.user = current_user
     if @project.save
-      users_assigned
+      # users_assigned
       @users_assigned = params[:project][:user_id]
       create_assignments(@users_assigned, @project)
       redirect_to project_path(@project)
@@ -28,7 +28,6 @@ class ProjectsController < ApplicationController
   def show
     # projects
     @cummulative_value = @project.hash_cummulative_value
-    # Add unassingned to the above array to take into account possible unassigned portions of budget
     # @milestones_names << "Unassigned" unless @project.unassigned_progress_rate.zero?
     @milestone_values = @project.hash_milestone_estimated_cummulative_value
     @milestone_progress_rates = @project.hash_milestone_progress_rates
@@ -41,6 +40,7 @@ class ProjectsController < ApplicationController
   end
 
   def update
+    raise
     @project.update(project_params)
     redirect_to project_path(@project)
   end
