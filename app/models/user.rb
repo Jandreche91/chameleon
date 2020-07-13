@@ -8,13 +8,18 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :projects
   has_many :assignments
+  has_many :projects_per_associate, through: :assignments, source: :project
   has_many :tasks
 
-  def is_assigned?(project)
+  def assigned?(project)
     assignments.find_by(project: project).present?
   end
 
   def name
     "#{first_name} #{last_name}"
+  end
+
+  def total_hours_spent(project)
+    tasks.includes(:milestone).where(milestones: { project: project }).sum(:hours_spent)
   end
 end
