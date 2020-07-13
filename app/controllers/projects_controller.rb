@@ -40,8 +40,15 @@ class ProjectsController < ApplicationController
   end
 
   def update
-    raise
-    @project.update(project_params)
+    new_pool_of_billers = params[:project][:users_as_biller_ids].reject { |i| i == "" }.map { |id| User.find(id.to_i) }
+    updated_pool_of_billers = new_pool_of_billers & @project.users_as_billers
+    old_pool_of_billers = @project.users_as_billers
+    if @project.update(project_params)
+      update_assignments(updated_pool_of_billers, old_pool_of_billers)
+      flash[:notice] = "Project updated successfully"
+    else
+      flash[:notice] = "An error occured. Please try again"
+    end
     redirect_to project_path(@project)
   end
 
@@ -71,6 +78,22 @@ class ProjectsController < ApplicationController
 
   def project_params
     params.require(:project).permit(:name, :description, :estimated_start_date, :estimated_end_date, :estimated_cost, :user_id)
+  end
+
+  def update_assignments(updated_pool_of_billers, old_pool_of_billers)
+    # create the new
+    updated_pool_of_billers.each do |user|
+      next if old_pool_of_billers.include?(user)
+
+      Assignment.create(project: @project, user: user)
+    end
+
+    # delete the old
+    old_pool_of_billers.each do |user|
+      next if new_pool_of_billers.include?(user)
+
+      @project.assignments.where(user: user)[0].destroy
+    end
   end
 
   def users_assigned
