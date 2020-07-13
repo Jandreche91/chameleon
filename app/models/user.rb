@@ -10,6 +10,7 @@ class User < ApplicationRecord
   has_many :assignments
   has_many :projects_per_associate, through: :assignments, source: :project
   has_many :tasks
+  has_many :milestones_worked, through: :tasks, source: :milestone
 
   def assigned?(project)
     assignments.find_by(project: project).present?
@@ -21,5 +22,19 @@ class User < ApplicationRecord
 
   def total_hours_spent(project)
     tasks.includes(:milestone).where(milestones: { project: project }).sum(:hours_spent)
+  end
+
+  def past_projects
+    a = total_projects_worked
+    b = projects_per_associate
+    (a - b) | (b - a)
+  end
+
+  def total_projects_worked
+    array_of_projects = []
+    milestones_worked.joins(:project).distinct.each do |milestone|
+      array_of_projects << milestone.project
+    end
+    array_of_projects.uniq
   end
 end
