@@ -40,8 +40,7 @@ class ProjectsController < ApplicationController
   end
 
   def update
-    new_pool_of_billers = params[:project][:users_as_biller_ids].reject { |i| i == "" }.map { |id| User.find(id.to_i) }
-    updated_pool_of_billers = new_pool_of_billers & @project.users_as_billers
+    updated_pool_of_billers = params[:project][:users_as_biller_ids].reject { |i| i == "" }.map { |id| User.find(id.to_i) }
     old_pool_of_billers = @project.users_as_billers
     if @project.update(project_params)
       update_assignments(updated_pool_of_billers, old_pool_of_billers)
@@ -90,7 +89,7 @@ class ProjectsController < ApplicationController
 
     # delete the old
     old_pool_of_billers.each do |user|
-      next if new_pool_of_billers.include?(user)
+      next if updated_pool_of_billers.include?(user)
 
       @project.assignments.where(user: user)[0].destroy
     end
