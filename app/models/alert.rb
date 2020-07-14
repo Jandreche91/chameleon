@@ -5,4 +5,8 @@ class Alert < ApplicationRecord
   def self.outstanding
     Alert.where(done: false)
   end
+
+  def self.generate
+
+  end
 end
