@@ -1,13 +1,9 @@
 .alert-board {
   background-color: $white-blue;
-  height: 400px;
+  height: 100%;
   border-radius: 8px;
    margin: 0 8px;
-   grid-column-start: 4;
-   grid-column-end: 5;
    padding: 8px;
-   overflow: scroll;
-   overflow: hidden;
 }
 
 

@@ -12,18 +12,21 @@ class Project < ApplicationRecord
   has_many :milestones, dependent: :destroy
   has_many :tasks, through: :milestones
   has_many :users_as_billers, through: :assignments, source: :user
+  # has_many :users_that_billed, through: :tasks, source: :user
 
   # returns an array of hashes with the info of users billing
   # the time built and the value billed -- mirrors symbols of Taks model
   # returns data sorted by value
   def array_users_hours
-    data = []
-    users_as_billers.each do |user|
-      data << { user: user,
-                hours_spent: tasks.where(user: user).sum(:hours_spent),
-                value: tasks.where(user: user).sum(:value) }
+    populate_data(users_as_billers)
+  end
+
+  def array_past_associates
+    array_of_users = []
+    User.all.each do |user|
+      array_of_users << user if user.past_projects.include?(self)
     end
-    return data.sort_by { |user_hash| user_hash[:value] }.reverse
+    populate_data(array_of_users)
   end
 
   # cost per hour on average
@@ -132,5 +135,15 @@ class Project < ApplicationRecord
       ended_or_not = "Ends on #{milestone.end_date.strftime("%d %B %Y")}"
     end
     "#{milestone.description} (#{milestone.progress_rate}%) -- #{ended_or_not}"
+  end
+
+  def populate_data(array_of_users)
+    data = []
+    array_of_users.each do |user|
+      data << { user: user,
+                hours_spent: tasks.where(user: user).sum(:hours_spent),
+                value: tasks.where(user: user).sum(:value) }
+    end
+    return data.sort_by { |user_hash| user_hash[:value] }.reverse
   end
 end
