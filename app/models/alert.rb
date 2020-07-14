@@ -1,10 +1,9 @@
 class Alert < ApplicationRecord
   belongs_to :project
   validates :description, presence: true
-  attr_reader :descriptions
 
-  def initialize
-    @descriptions = {
+  def descriptions
+    {
       budget_surpassed_85: "has surpassed 85 percent of the budget",
       budget_surpassed_50: "has surpassed 50 percent of the budget",
       progress_excess_time: "progress until end date is significantly higher than budget",
