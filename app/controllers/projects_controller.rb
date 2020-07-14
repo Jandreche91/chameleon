@@ -1,4 +1,5 @@
 class ProjectsController < ApplicationController
+  before_action :generate_alerts, only: [:index]
   before_action :find_a_project, only: [:show, :edit, :update]
 
   def index
@@ -70,6 +71,10 @@ class ProjectsController < ApplicationController
       assignment.project = project
       assignment.save
     end
+  end
+
+  def generate_alerts
+    Alert.generate
   end
 
   def find_a_project

@@ -8,6 +8,7 @@
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
       <a class="nav-item nav-link active" id="nav-overall-performance-tab" data-toggle="tab" href="#nav-overall-performance" role="tab" aria-controls="nav-overall-performance" aria-selected="true">Overall Performance</a>
       <a class="nav-item nav-link" id="nav-projects-tab" data-toggle="tab" href="#nav-projects" role="tab" aria-controls="nav-projects" aria-selected="false">Projects</a>
+      <a class="nav-item nav-link" id="nav-alerts-tab" data-toggle="tab" href="#nav-alerts" role="tab" aria-controls="nav-alerts" aria-selected="false">Alerts</a>
     </div>
   </nav>
 
@@ -36,41 +37,6 @@
             <canvas id="overallPerformance"
             data-value="<%= @dashboard_data[:value].to_json %>"
             data-hours-spent="<%= @dashboard_data[:hours_spent].to_json%>"></canvas>
-          </div>
-
-          <div class="alert-board">
-            <h5 class="title-alert-board"><i class="mr-2 fas fa-exclamation-circle"></i>Outstanding alerts</h5>
-
-            <% if @outstanding_alerts.empty? %>
-
-            <div class="alert-card">
-              <p>You don't have outstanding alerts. Congratulations!</p>
-            </div>
-
-             <%= link_to "See past alerts", "#", class: "btn btn-outline-primary btn-block" %>
-
-            <% else %>
-
-              <% @outstanding_alerts.each do |alert| %>
-
-              <%= link_to project_path(alert.project), class: "index-link" do %>
-
-              <div class="alert-card">
-                <div class="d-flex align-items-center">
-                    <p><span style="color: #900C3F"><%= alert.project.name %></span> <%= alert.description %></p>
-
-                    <span class="alert-caret"><i class="fas fa-caret-right"></i></span>
-
-                </div>
-
-
-              </div>
-
-              <% end %>
-
-              <% end %>
-
-            <% end %>
           </div>
 
         </div>
@@ -126,9 +92,6 @@
                   <i class="fas fa-plus m-0" style="font-size:20px"></i>
 
                  <% end %>
-
-
-
                   </div>
               </div>
         </div>
@@ -145,6 +108,45 @@
 
 
       </div>
+
+    </div>
+
+    <!-- Alert Board Content -->
+
+    <div class="tab-pane fade" id="nav-alerts" role="tabpanel" aria-labelledby="nav-alerts-tab">
+
+      <div class="card-overall-performance">
+            <div class="alert-board">
+                <h5 class="title-alert-board"><i class="mr-2 fas fa-exclamation-circle"></i>Outstanding alerts</h5>
+
+                <% if @outstanding_alerts.empty? %>
+
+                <div class="alert-card">
+                  <p>You don't have outstanding alerts. Congratulations!</p>
+                </div>
+
+                <% else %>
+
+                  <% @outstanding_alerts.each do |alert| %>
+
+                  <%= link_to project_path(alert.project), class: "index-link" do %>
+
+                  <div class="alert-card">
+                      <div class="d-flex align-items-center">
+                        <p><span style="color: #900C3F"><%= alert.project.name %></span> <%= alert.description %></p>
+
+                        <span class="alert-caret"><i class="fas fa-caret-right"></i></span>
+
+                      </div>
+                  </div>
+
+                  <% end %>
+
+                  <% end %>
+
+                <% end %>
+            </div>
+        </div>
 
     </div>
 
