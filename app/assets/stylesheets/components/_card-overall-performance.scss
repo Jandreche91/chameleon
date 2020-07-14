@@ -6,6 +6,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   height: 75vh;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
 };
 
 .dashboard-overall-chart {
