@@ -6,7 +6,7 @@
     <%= f.input :estimated_cost %>
     <%= f.input :estimated_start_date, as: :string, required: false, input_html: {class: "datepicker"} %>
     <%= f.input :estimated_end_date, as: :string, required: false, input_html: {class: "datepicker"}  %>
-    <%= f.association :users_as_billers, collection: User.all.reject { |user| user == current_user }, as: :check_boxes %>
+    <%= f.association :users_as_billers, collection: User.all.reject { |user| user == current_user }, input_html: { multiple: true } %>
 
     <%= f.button :submit, class: "btn-primary" %>
   <% end %>

@@ -30,7 +30,32 @@ projects = projects.dataset.array;
 projects = JSON.parse(projects);
 
 
-// method to generate progressbars
+// method to generate progress bars with color
+
+const barGeneratorWithColor = (container, color) => {
+
+          let bar = new ProgressBar.Line( container ,{
+                  strokeWidth: 4,
+                  easing: 'easeInOut',
+                  duration: 1400,
+                  color: color,
+                  trailColor: '#E2EAF4',
+                  trailWidth: 4,
+                  svgStyle: {width: '100%', height: '12px'},
+                  // from: {color: '#AAEF68'},
+                  // to: {color: colorPicker(container)},
+                  // step: (state, bar) => {
+                  //   bar.path.setAttribute('stroke', state.color);
+                  // }
+                });
+
+        bar.animate(parseFloat(container.dataset.percentage));  // Number from 0.0 to 1.0
+      }; // end of barGeneratorBudget
+
+
+
+
+// method to generate progressbars (general -- initial approach)
 
 
 const barGenerator = (container) => {
@@ -70,8 +95,8 @@ budgetBar.innerHTML = "";
 timeBar.innerHTML = "";
 
 
-  barGenerator(budgetBar);
-  barGenerator(timeBar);
+  barGeneratorWithColor(budgetBar, '#B37600');
+  barGeneratorWithColor(timeBar, '#7900B3');
 });
 
 
