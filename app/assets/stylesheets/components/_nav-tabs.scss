@@ -1,16 +1,23 @@
 
 .nav-tabs {
   border: 0;
+  font-weight: lighter;
+
+  a:hover {
+    color: $dark-grey
+  }
+
 
   .active {
-    background-color: white !important;
+    font-weight: bold;
     border: 0;
 
   }
 
   .active:hover {
     border: 0;
-  }
+    color: $dark-grey;
+      }
 
 
 
@@ -19,7 +26,8 @@
 
 .nav-item {
   border: 0;
-}
+  color: $medium-grey;
+  }
 
 
 .nav-item:hover {
