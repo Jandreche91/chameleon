@@ -19,8 +19,18 @@ class User < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
-  def total_hours_spent(project)
+  def total_hours_spent_per_project(project)
     tasks.includes(:milestone).where(milestones: { project: project }).sum(:hours_spent)
+  end
+
+  def total_hours_spent
+    results = { projects: [], hours: [] }
+    sorted_projects = projects_per_associate.map { |project| [project.name, total_hours_spent_per_project(project)] }.sort_by { |project_array| -project_array.last }
+    sorted_projects.each do |project|
+      results[:projects] << project[0]
+      results[:hours] << project[1]
+    end
+    results.to_json
   end
 
   def past_projects

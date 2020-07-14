@@ -6,13 +6,8 @@
         <div class="card-team">
           <div class="card-body text-center">
             <%= image_tag "avatar_pics/#{user.first_name}.jpg", class: "img-fluid" %>
-            <!-- <p><img class=" img-fluid" src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb" alt="card image"></p> -->
             <h4 class="card-title"><%= user.first_name %> <%= user.last_name %></h4>
-            <% user.projects_per_associate.each do |project| %>
-              <p><%= project.name %></p>
-              <p><%= user.total_hours_spent(project) %></p>
-            <% end %>
-            <p class="card-text"> Poject Name and Hour spend  </p>
+            <canvas class='user-chart' width="400" height="400" data-projects-hours="<%= user.total_hours_spent %>"></canvas>
           </div>
         </div>
       </div>
