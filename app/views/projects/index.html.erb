@@ -6,9 +6,9 @@
 
   <nav>
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
-      <a class="nav-item nav-link active" id="nav-overall-performance-tab" data-toggle="tab" href="#nav-overall-performance" role="tab" aria-controls="nav-overall-performance" aria-selected="true">Overall Performance</a>
-      <a class="nav-item nav-link" id="nav-projects-tab" data-toggle="tab" href="#nav-projects" role="tab" aria-controls="nav-projects" aria-selected="false">Projects</a>
-      <a class="nav-item nav-link" id="nav-alerts-tab" data-toggle="tab" href="#nav-alerts" role="tab" aria-controls="nav-alerts" aria-selected="false">Alerts</a>
+      <a class="nav-item nav-link active" id="nav-overall-performance-tab" data-toggle="tab" href="#nav-overall-performance" role="tab" aria-controls="nav-overall-performance" aria-selected="true"><i class="fas fa-chart-line"></i> Overall Performance</a>
+      <a class="nav-item nav-link" id="nav-projects-tab" data-toggle="tab" href="#nav-projects" role="tab" aria-controls="nav-projects" aria-selected="false"><i class="fas fa-tasks"></i> Projects</a>
+      <a class="nav-item nav-link" id="nav-alerts-tab" data-toggle="tab" href="#nav-alerts" role="tab" aria-controls="nav-alerts" aria-selected="false"><i class="mr-2 fas fa-exclamation-circle"></i> Alerts</a>
     </div>
   </nav>
 
@@ -117,7 +117,7 @@
 
       <div class="card-overall-performance">
             <div class="alert-board">
-                <h5 class="title-alert-board"><i class="mr-2 fas fa-exclamation-circle"></i>Outstanding alerts</h5>
+                <h5 class="title-alert-board">Outstanding alerts</h5>
 
                 <% if @outstanding_alerts.empty? %>
 
