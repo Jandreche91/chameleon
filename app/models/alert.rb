@@ -29,11 +29,14 @@ class Alert < ApplicationRecord
     surpass85 = project.executed_budget_percentage > 0.85
     if excess_budget && project.alerts.where(description: alerts[:progress_excess_budget]).empty?
       Alert.create(description: alerts[:progress_excess_budget], project: project)
-    elsif excess_time && project.alerts.where(description: alerts[:progress_excess_time]).empty?
+    end
+    if excess_time && project.alerts.where(description: alerts[:progress_excess_time]).empty?
       Alert.create(description: alerts[:progress_excess_time], project: project)
-    elsif surpass50 && project.alerts.where(description: alerts[:budget_surpassed_50]).empty?
+    end
+    if surpass50 && project.alerts.where(description: alerts[:budget_surpassed_50]).empty?
       Alert.create(description: alerts[:budget_surpassed_50], project: project)
-    elsif surpass85 && project.alerts.where(description: alerts[:budget_surpassed_85]).empty?
+    end
+    if surpass85 && project.alerts.where(description: alerts[:budget_surpassed_85]).empty?
       Alert.create(description: alerts[:budget_surpassed_85], project: project)
     end
   end
