@@ -40,10 +40,24 @@ import {general_dashboard_chart} from '../plugins/charts/general_dashboard_chart
 import {milestone_piechart} from '../plugins/charts/milestone_piechart.js';
 
 document.addEventListener('turbolinks:load', () => {
-  // Call your functions here, e.g:
-  // initSelect2();
+  const userChoices = document.querySelectorAll(".user-choice");
+
+  userChoices.forEach((userChoice) => {
+    userChoice.addEventListener('click', function(event) {
+      const elementClicked = event.target;
+      const checkboxInput = elementClicked.querySelector('input')
+
+      if (elementClicked.classList.contains("active")) {
+        elementClicked.classList.remove("active");
+      } else {
+        elementClicked.classList.add("active");
+      }
+
+      if (checkboxInput.checked == false) {
+        checkboxInput.checked = true;
+      } else {
+        checkboxInput.checked = false;
+      }
+    })
+  })
 });
-
-
-// console.log("This document loads!");
-
