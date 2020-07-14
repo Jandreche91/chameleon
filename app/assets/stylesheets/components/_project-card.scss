@@ -5,8 +5,6 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 24px;
-  background-color: $dark-blue;
-  padding: 16px;
   border-radius: 8px;
 }
 
@@ -17,8 +15,21 @@
   color: $darkest-grey;
   border-radius: 8px;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
-  height: 390px;
+  height: 100%;
   padding: 32px;
+
+  .project-card-avatar {
+    width: 60px;
+    border-radius: 50%;
+    margin-left: -16px;
+    border: 1px solid #FFFFFF;
+  }
+
+  .project-card-associate-container {
+    margin-left: 16px;
+    margin-top: 16px;
+
+  }
 
 }
 
@@ -32,12 +43,6 @@
 }
 
 
- .project-card-infos {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 80%;
-}
 
 
 @media (max-width: 1000px) {

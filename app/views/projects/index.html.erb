@@ -24,8 +24,6 @@
            <!-- Begin of content -->
 
 
-      <div class="card-overall-performance">
-
         <div class="card-overall-internal">
 
           <div class="dashboard-overall-chart">
@@ -38,8 +36,6 @@
 
         </div>
 
-      </div>
-
      </div>
 
   <!-- Project cards -->
@@ -47,8 +43,6 @@
 
       <div class="general-header-index-card">
 
-        <h2>Projects</h2>
-        <p>An overview of the projects you are currently tracking with <strong><span style="color:#AAEF68">Chameleon</span></strong></p>
 
             <div id="projects-general-view" class="project-card-grid mb-2" data-array="<%= @array_of_projects %>">
 
@@ -60,36 +54,48 @@
             <span><%= (image_tag "bell.png", size: "20x20") unless project.outstanding_alerts.empty? %></span>
           </div>
 
-          <div class="project-card-infos">
-            <p><i class="fas fa-money-bill mr-2"></i> Budget: US$ <%= project.estimated_cost_formatted %></p>
-               <!-- progress bars -->
-               <p><i class="fas fa-percent mr-2"></i> Part of the budget executed: <%= (project.executed_budget_percentage*100).floor %> %</p>
-               <div id="<%= project.id%>-budget-bar" data-percentage ="<%=  project.executed_budget_percentage%>"></div>
-               <p><i class="fas fa-running mr-2"></i> Progress until end date: <%= (project.progress_date_percentage*100).floor %> % </p>
-               <div id="<%= project.id%>-time-bar" data-percentage ="<%=  project.progress_date_percentage%>"></div>
 
-               <!-- end of progress bars -->
+          <!-- Budget -->
 
-               <p><i class="fas fa-users mr-2"></i> In this project:</p>
+          <div class="d-flex justify-content-between">
+            <p>Budget:</p>
+            <p>US$ <%= project.estimated_cost_formatted %></p>
+          </div>
 
-                 <div class="d-flex align-items-center">
+          <!-- budget bar -->
 
-                    <%= image_tag "avatar_pics/#{current_user.first_name}.jpg", class: "avatar mr-2"%>
+           <div id="<%= project.id%>-budget-bar" data-percentage ="<%=  project.executed_budget_percentage%>"></div>
+           <p class="text-center"><%= (project.executed_budget_percentage*100).floor %>% spent</p>
+
+
+           <!-- progress until end date -->
+
+          <div class="d-flex justify-content-between">
+            <p>Estimated end date:</p>
+            <p><%= project.estimated_end_date.strftime("%d %B %Y") %></p>
+          </div>
+
+          <!-- progress until end date bar -->
+
+           <div id="<%= project.id%>-time-bar" data-percentage ="<%=  project.progress_date_percentage%>"></div>
+           <p class="text-center"><%= (project.progress_date_percentage*100).floor %>% until end date</p>
+
+
+           <!-- associates -->
+           <p>In this project:</p>
+
+                 <div class="d-flex align-items-center project-card-associate-container">
+
+                    <%= image_tag "avatar_pics/#{current_user.first_name}.jpg", class: "project-card-avatar"%>
 
                     <% users = project.users_as_billers %>
-                    <% users.first(7).each do |user| %>
+                    <% users.each do |user| %>
 
-                    <%= image_tag "avatar_pics/#{user.first_name}.jpg", class: "avatar mr-2"%>
+                    <%= image_tag "avatar_pics/#{user.first_name}.jpg", class: "project-card-avatar"%>
 
-                 <% end %>
-
-                 <% if users.count > 7 %>
-
-                  <i class="fas fa-plus m-0" style="font-size:20px"></i>
-
-                 <% end %>
+                    <% end %>
                   </div>
-              </div>
+
         </div>
         <% end %>
 
