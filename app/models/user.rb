@@ -4,8 +4,7 @@ class User < ApplicationRecord
 
   scope :senior_associates, -> { where("hourly_rate > 400 AND hourly_rate < 700") }
 
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+  devise :database_authenticatable, :recoverable, :rememberable, :validatable
   has_many :projects
   has_many :assignments
   has_many :projects_per_associate, through: :assignments, source: :project
