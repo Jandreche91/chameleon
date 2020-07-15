@@ -34,10 +34,10 @@ import {progressbar} from '../plugins/progressbar.js';
 import {togglerevealer} from '../plugins/togglerevealer.js';
 
 // importing specific charts
-import {milestone_piechart} from '../plugins/charts/milestone_piechart.js';
 import initUserChart from '../plugins/charts/user_chart';
 import initProjectValueChart from '../plugins/charts/project_value_chart';
 import initGeneralDashboardChart from '../plugins/charts/general_dashboard_chart';
+import initMilestonePiechart from '../plugins/charts/milestone_piechart';
 
 document.addEventListener('turbolinks:load', () => {
 
@@ -69,4 +69,5 @@ document.addEventListener('turbolinks:load', () => {
   initUserChart();
   initProjectValueChart();
   initGeneralDashboardChart();
+  initMilestonePiechart();
 });
