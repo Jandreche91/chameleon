@@ -30,7 +30,7 @@ import "../plugins/flatpickr"
 
 // Internal imports, e.g:
 // import { initSelect2 } from '../components/init_select2';
-import {progressbar} from '../plugins/progressbar.js';
+import initProgressBar from '../plugins/progressbar';
 import {togglerevealer} from '../plugins/togglerevealer.js';
 
 // importing specific charts
@@ -65,9 +65,13 @@ document.addEventListener('turbolinks:load', () => {
 
   // Call your functions here, e.g:
   // initSelect2();
-
+  // charts
   initUserChart();
   initProjectValueChart();
   initGeneralDashboardChart();
   initMilestonePiechart();
+
+  // progress bars
+
+  initProgressBar();
 });

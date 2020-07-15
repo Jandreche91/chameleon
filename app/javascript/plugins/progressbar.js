@@ -1,4 +1,7 @@
 
+
+const initProgressBar = () => {
+
 const ProgressBar = require('progressbar.js');
 
 
@@ -10,18 +13,18 @@ let projects = document.getElementById("projects-general-view")
 
 // method to adjust colors in progressbars according to progression of container
 
-const colorPicker = (container) => {
+// const colorPicker = (container) => {
 
-  const getColor = parseFloat(container.dataset.percentage);
+//   const getColor = parseFloat(container.dataset.percentage);
 
-  if (getColor < 0.4) {
-    return '#338508'
-  } else if (getColor < 0.8) {
-    return '#1C68AC'
-  } else {
-    return '#900C3F'
-  };
-};
+//   if (getColor < 0.4) {
+//     return '#338508'
+//   } else if (getColor < 0.8) {
+//     return '#1C68AC'
+//   } else {
+//     return '#900C3F'
+//   };
+// };
 
 
 if (projects) {
@@ -34,6 +37,8 @@ projects = JSON.parse(projects);
 
 const barGeneratorWithColor = (container, color) => {
 
+  container.innerHTML = ""
+
           let bar = new ProgressBar.Line( container ,{
                   strokeWidth: 4,
                   easing: 'easeInOut',
@@ -41,12 +46,7 @@ const barGeneratorWithColor = (container, color) => {
                   color: color,
                   trailColor: '#E2EAF4',
                   trailWidth: 4,
-                  svgStyle: {width: '100%', height: '12px'},
-                  // from: {color: '#AAEF68'},
-                  // to: {color: colorPicker(container)},
-                  // step: (state, bar) => {
-                  //   bar.path.setAttribute('stroke', state.color);
-                  // }
+                  svgStyle: {width: '100%', height: '12px'}
                 });
 
         bar.animate(parseFloat(container.dataset.percentage));  // Number from 0.0 to 1.0
@@ -91,9 +91,6 @@ projects.forEach( (projectId) => {
 
 let budgetBar = document.getElementById(`${projectId}-budget-bar`);
 let timeBar = document.getElementById(`${projectId}-time-bar`);
-budgetBar.innerHTML = "";
-timeBar.innerHTML = "";
-
 
   barGeneratorWithColor(budgetBar, '#B37600');
   barGeneratorWithColor(timeBar, '#7900B3');
@@ -104,9 +101,11 @@ timeBar.innerHTML = "";
 
 }
 
-console.log("Progressbar page is loading!");
+// console.log("Progressbar page is loading!");
 
+}
 
+export default initProgressBar
 
 
 
