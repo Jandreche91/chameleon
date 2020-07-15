@@ -32,21 +32,20 @@ const dataLogger = (arrayOfData) => {
       datasets: [{
         data: dataLogger(actualData),
         label: "Budget evolution",
-        borderColor: ['rgba(30, 51, 77, 1)'],
-        backgroundColor: ['rgba(170, 239, 104, 0.0)'],
+        borderColor: ['rgba(0, 107, 240, 1)'],
+        backgroundColor: ['rgba(0, 107, 240, 0.6)'],
         borderWidth: 4,
         pointRadius: 0,
         pointHitRadius: 8
-      }, // first dataset ends
-      { // dataset 2
+      }, { // dataset 2
         data: dataLogger(milestoneData),
-        borderColor: ['rgba(170, 239, 104, 0.9)'],
-        backgroundColor: ['rgba(51, 133, 8, 0.1)'],
+        borderColor: ['rgba(0, 179, 146, 0.9)'],
+        backgroundColor: ['rgba(0, 179, 146, 0.1)'],
         label: "Evolution according to milestones",
         pointRadius: 5,
         pointHitRadius: 10,
-        pointBorderColor: 'rgba(51, 133, 8, 0.9)',
-        pointBackgroundColor: 'rgba(51, 133, 8, 0.2)',
+        pointBorderColor: 'rgba(0, 179, 146, 0.9)',
+        pointBackgroundColor: 'rgba(121, 0, 179, 0.2)',
 
 
       }

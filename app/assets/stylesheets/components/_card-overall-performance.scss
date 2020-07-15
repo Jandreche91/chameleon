@@ -1,28 +1,12 @@
 
-.card-overall-performance {
-  padding: 32px;
-  background-color: white;
-  border-radius: 8px;
-  border-top-left-radius: 0;
-  box-shadow: 0 0 15px rgba(0,0,0,0.2);
-  height: 80vh;
-  h2{
-    margin-bottom: 8px;
-  }
-
-  p{
-    margin-bottom: 32px;
-  }
-};
-
-
 .card-overall-internal {
-  background-color: $dark-blue;
+  background-color: white;
   padding: 24px;
   border-radius: 8px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  height: 60vh;
+  height: 75vh;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
 };
 
 .dashboard-overall-chart {

@@ -38,8 +38,10 @@ import {togglerevealer} from '../plugins/togglerevealer.js';
 import {project_value_chart} from '../plugins/charts/project_value_chart.js';
 import {general_dashboard_chart} from '../plugins/charts/general_dashboard_chart.js';
 import {milestone_piechart} from '../plugins/charts/milestone_piechart.js';
+import initUserChart from '../plugins/charts/user_chart'
 
 document.addEventListener('turbolinks:load', () => {
+
   const userChoices = document.querySelectorAll(".user-choice");
 
   userChoices.forEach((userChoice) => {
@@ -60,4 +62,11 @@ document.addEventListener('turbolinks:load', () => {
       }
     })
   })
+
+  
+  // Call your functions here, e.g:
+  // initSelect2();
+  
+  initUserChart()
+
 });
