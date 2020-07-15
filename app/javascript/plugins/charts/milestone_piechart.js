@@ -1,5 +1,5 @@
 
-console.log("This file is charging!")
+require("chart.js");
 
 const milestoneProgressCanvas = document.getElementById("milestone-pie-chart")
 
