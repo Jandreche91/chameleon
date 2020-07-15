@@ -42,7 +42,7 @@ class ProjectsController < ApplicationController
   end
 
   def update
-    updated_pool_of_billers = params[:project][:users_as_biller_ids].reject { |i| i == "" }.map { |id| User.find(id.to_i) }
+    updated_pool_of_billers = params[:project][:user_ids].reject { |i| i == "" }.map { |id| User.find(id.to_i) }
     old_pool_of_billers = @project.users_as_billers
     if @project.update(project_params)
       update_assignments(updated_pool_of_billers, old_pool_of_billers)

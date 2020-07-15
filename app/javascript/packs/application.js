@@ -41,11 +41,32 @@ import {milestone_piechart} from '../plugins/charts/milestone_piechart.js';
 import initUserChart from '../plugins/charts/user_chart'
 
 document.addEventListener('turbolinks:load', () => {
-  initUserChart()
+
+  const userChoices = document.querySelectorAll(".user-choice");
+
+  userChoices.forEach((userChoice) => {
+    userChoice.addEventListener('click', function(event) {
+      const elementClicked = event.target;
+      const checkboxInput = elementClicked.querySelector('input')
+
+      if (elementClicked.classList.contains("active")) {
+        elementClicked.classList.remove("active");
+      } else {
+        elementClicked.classList.add("active");
+      }
+
+      if (checkboxInput.checked == false) {
+        checkboxInput.checked = true;
+      } else {
+        checkboxInput.checked = false;
+      }
+    })
+  })
+
+  
   // Call your functions here, e.g:
   // initSelect2();
+  
+  initUserChart()
+
 });
-
-
-// console.log("This document loads!");
-
