@@ -8,9 +8,9 @@
     border-radius: 8px;
     position: relative;
 
-  p {
+  .card-project-general-description {
     padding-bottom: 100px;
-    margin-bottom: 100px;
+    margin-bottom: 80px;
     font-size: 24px;
     text-align: center;
     border-bottom: solid 1px $grey;
@@ -26,7 +26,34 @@
 
 // Inside Card-project-general-info
 
-.key-info-flexbox {
+.key-info-grid {
+
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-gap: 16px;
+
+
+    .key-info-element {
+
+      display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        text-transform: uppercase;
+        border: solid 1px $grey;
+        padding: 16px;
+        justify-content: space-around;
+        border-radius: 8px;
+    }
+
+    .key-info-title {
+
+      color: $grey;
+    }
+
+    .key-info-specs{
+      color: $blue;
+    }
 
 }
 

@@ -3,16 +3,70 @@
  <p class="px-5">Started on <span style="color: "><strong><%= @project.estimated_start_date.strftime("%d %B %Y") %></strong></span></p>
 
 
+ <!-- General info card at the top of the page -->
+ <!-- General info card at the top of the page -->
+ <!-- General info card at the top of the page -->
+ <!-- General info card at the top of the page -->
+
 <div class="card-project-general-info">
 
     <%= link_to edit_project_path(@project) do %>
       <%= image_tag 'edit.png' %>
     <% end %>
 
-    <p><%= @project.description %></p>
+    <p class="card-project-general-description"><%= @project.description %></p>
 
-    div.key-info-flexbox
 
+    <!-- key info grid -->
+    <!-- key info grid -->
+    <!-- key info grid -->
+    <!-- key info grid -->
+    <!-- key info grid -->
+    <!-- key info grid -->
+
+
+    <div class="key-info-grid">
+
+      <!-- Budget -->
+
+      <div class="key-info-element">
+        <p class="key-info-title">Budget</p>
+        <p class="key-info-specs">USD <%= @project.estimated_cost_formatted %> </p>
+      </div>
+
+      <div class="key-info-element">
+          <p class="key-info-title">Budget spent</p>
+          <p class="key-info-specs">USD <%= @project.executed_cost_formatted %></p>
+
+      </div>
+
+      <div class="key-info-element">
+          <p class="key-info-title">Percentage spent</p>
+          <p class="key-info-specs"><%= (@project.executed_budget_percentage * 100).to_i %>%</p>
+      </div>
+
+      <div class="key-info-element">
+        <p class="key-info-title">Hours spent</p>
+        <p class="key-info-specs"><%= @project.hours_spent_formatted %></p>
+      </div>
+
+       <div class="key-info-element">
+        <p class="key-info-title">Avg. cost/ hour</p>
+        <p class="key-info-specs">USD <%= @project.cost_per_hour %></p>
+      </div>
+
+      <div class="key-info-element">
+        <p class="key-info-title">End date</p>
+        <p class="key-info-specs"><%= @project.estimated_end_date.strftime("%d %B %Y") %></p>
+      </div>
+
+      <div class="key-info-element">
+        <p class="key-info-title">hours left</p>
+        <p class="key-info-specs"><%= (@project.estimated_cost - @project.tasks.sum(:value)) / @project.cost_per_hour unless @project.cost_per_hour.zero? %></p>
+      </div>
+
+
+    </div>
 
 </div>
 
@@ -75,28 +129,25 @@
             <div class="card-project-dashboard">
 
               <div class="card-project-specifics-item">
-                <p>Budget:</p>
-                <p>US$ <%= @project.estimated_cost_formatted %> </p>
+
               </div>
               <div class="card-project-specifics-item">
-                <p>Budget spent:</p>
-                <p><strong> US$ <%= @project.executed_cost_formatted %> (<%= (@project.executed_budget_percentage * 100).to_i %>%)</strong></p>
+
               </div>
               <div class="card-project-specifics-item">
-                <p>Hours spent by the team:</p>
-                <p><%= @project.hours_spent_formatted %></p>
+
               </div>
               <div class="card-project-specifics-item">
-                <p>Average cost per hour:</p>
-                <p> US$ <%= @project.cost_per_hour %></p>
+                <p>:</p>
+                <p></p>
               </div>
               <div class="card-project-specifics-item">
-                <p>Estimated end date</p>
-                <span style="color:#900C3F"><p><%= @project.estimated_end_date.strftime("%d %B %Y") %></p></span>
+                <p>Estimated </p>
+                <span style="color:#900C3F"><p></p></span>
               </div>
               <div class="card-project-specifics-item">
-                <strong><p style="color: #900C3F">Avg. hours left of budgeted work:</p></strong>
-                <strong> <p style="color: #900C3F"><%= (@project.estimated_cost - @project.tasks.sum(:value)) / @project.cost_per_hour unless @project.cost_per_hour.zero? %></p> </strong>
+                <strong><p style="color: #900C3F">Avg.  of budgeted work:</p></strong>
+                <strong> <p style="color: #900C3F"></p> </strong>
               </div>
             </div>
         </div>
