@@ -9,8 +9,8 @@
     position: relative;
 
   .card-project-general-description {
-    padding-bottom: 100px;
-    margin-bottom: 80px;
+    padding-bottom: 60px;
+    margin-bottom: 60px;
     font-size: 24px;
     text-align: center;
     border-bottom: solid 1px $grey;
@@ -36,14 +36,15 @@
     .key-info-element {
 
       display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        text-transform: uppercase;
-        border: solid 1px $grey;
-        padding: 16px;
-        justify-content: space-around;
-        border-radius: 8px;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      text-transform: uppercase;
+      border: solid 1px $grey;
+      padding: 16px;
+      justify-content: space-between;
+      border-radius: 8px;
+      font-size: 16px;
     }
 
     .key-info-title {
@@ -57,30 +58,47 @@
 
 }
 
+@media (max-width: 1000px) {
+  .key-info-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
 
 
 
 .card-project-dashboard {
   background-color: white;
   // border-radius: 8px;
-  height: 80vh;
+  margin-right: 48px;
+  border-radius: 8px;
   padding: 32px;
-  // overflow: scroll;
-  // display: grid;
-  // grid-template-columns: 1fr 1fr;
-  // box-shadow: 0 0 15px rgba(0,0,0,0.2);
-
+  margin-left: -140px;
+  padding-left: 140px;
 }
 
-// container with all the information to the left
 
-// .card-project-dashboard-right {
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: space-around;
-//   // grid-column-start: 1;
-//   //   grid-column-end: 3;
-// }
+.project-dashboard-tab-container{
+  z-index: 1;
+
+  .nav-pills {
+    width: 79%;
+    margin-top: 24px;
+    margin-left: 16px;
+
+    .nav-link {
+      border-radius: 8px;
+      background-color: white;
+      margin-bottom: 8px;
+      border: solid 1px $blue;
+
+    }
+
+    .active {
+      background-color: $blue;
+    }
+  }
+}
 
 
 .card-project-dashboard-divider {
