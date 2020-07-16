@@ -1,10 +1,19 @@
 
+<h2 class="px-5 pt-5"><%= @project.name %></h2>
+ <p class="px-5">Started on <span style="color: "><strong><%= @project.estimated_start_date.strftime("%d %B %Y") %></strong></span></p>
+
 
 <div class="card-project-general-info">
-    <h2><%= @project.name %></h2>
-    <p>Started on <span style="color: "><strong><%= @project.estimated_start_date.strftime("%d %B %Y") %></strong></span></p>
+
+    <%= link_to edit_project_path(@project) do %>
+      <%= image_tag 'edit.png' %>
+    <% end %>
+
     <p><%= @project.description %></p>
-    <%= link_to "Edit this project", edit_project_path(@project), class: "btn btn-outline-success mt-3" %>
+
+    div.key-info-flexbox
+
+
 </div>
 
 
