@@ -14,10 +14,10 @@
         <% User.all.reject { |user| user == current_user }.each do |user| %>
           <div class="user-choice <%= "active" if @project.users_as_billers.include? user %>">
             <input type="checkbox" class="d-none" value="<%= user.id %>" name="project[user_ids][]" id="project_user_ids_<%= user.id %>" <%= "checked" if @project.users_as_billers.include? user %> >
-            <label for="project_user_ids_<%= user.id %>">
+            <div for="project_user_ids_<%= user.id %>">
               <%= image_tag "avatar_pics/#{user.first_name}.jpg", class: "avatar" %>
               <%= user.name %>
-            </label>
+            </div>
           </div>
         <% end %>
        </div>

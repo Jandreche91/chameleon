@@ -39,21 +39,16 @@ import initProjectValueChart from '../plugins/charts/project_value_chart';
 import initGeneralDashboardChart from '../plugins/charts/general_dashboard_chart';
 import initMilestonePiechart from '../plugins/charts/milestone_piechart';
 
-document.addEventListener('turbolinks:load', () => {
 
-  const userChoices = document.querySelectorAll(".user-choice");
-
-  userChoices.forEach((userChoice) => {
-    userChoice.addEventListener('click', function(event) {
-      const elementClicked = event.target;
-      const checkboxInput = elementClicked.querySelector('input')
-
-      if (elementClicked.classList.contains("active")) {
-        elementClicked.classList.remove("active");
-      } else {
-        elementClicked.classList.add("active");
-      }
-
+const toggleCard = () => {
+  console.log('coucou')
+  const userChoices = document.querySelectorAll('.user-choice');
+  userChoices.forEach((item) => {
+    console.log(item)
+    item.addEventListener('click', (e) => {
+      console.log(e.currentTarget)
+      e.currentTarget.classList.toggle('active')
+      const checkboxInput = e.currentTarget.querySelector('input')
       if (checkboxInput.checked == false) {
         checkboxInput.checked = true;
       } else {
@@ -61,6 +56,29 @@ document.addEventListener('turbolinks:load', () => {
       }
     })
   })
+}
+
+document.addEventListener('turbolinks:load', () => {
+  toggleCard()
+
+  // const userChoices = document.querySelectorAll(".user-choice");
+
+  // userChoices.forEach((userChoice) => {
+  //   userChoice.addEventListener('click', function(event) {
+  //     console.log(event.currentTarget);
+  //     const elementClicked = event.currentTarget;
+
+
+  //     if (elementClicked.classList.contains("active")) {
+  //       elementClicked.classList.remove("active");
+  //     } else {
+  //       elementClicked.classList.add("active");
+  //     }
+  //     // elementClicked.classList.toggle('active')
+
+
+  //   })
+  // })
 
 
   // Call your functions here, e.g:
