@@ -142,8 +142,8 @@
 
                       <div class="d-flex align-items-center">
 
-                        <div class="alert-card-color-tag color-tag-purple"></div>
-                        <p><%= alert.project.name %> <%= alert.description %></p>
+                        <div class="alert-card-color-tag color-tag-<%= @alert_budget.include?(alert.description) ? "gold" : "purple" %>"></div>
+                        <p><%= alert.project.name %>: <%= alert.description %></p>
 
                       </div>
                   </div>

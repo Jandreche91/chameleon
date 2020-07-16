@@ -7,7 +7,7 @@ class ProjectsController < ApplicationController
     @outstanding_alerts = Alert.outstanding
     @dashboard_data = Task.past_year
     @array_of_projects = Project.id
-    @alert_types = Alert.descriptions
+    @alert_budget = [] << Alert.descriptions[:budget_surpassed_85] << Alert.descriptions[:budget_surpassed_50] << Alert.descriptions[:progress_excess_budget]
   end
 
   def new

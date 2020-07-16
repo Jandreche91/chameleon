@@ -59,7 +59,7 @@ class Alert < ApplicationRecord
   def self.check_for_milestones_to_end(project)
     project.milestones.each do |milestone|
       if milestone.end_date < Date.today + 60 && milestone.end_date > Date.today
-        alert_description = "milestone #{milestone.description} will end in less than 60 days #{milestone.end_date}"
+        alert_description = "milestone #{milestone.description} will end in less than 60 days (#{milestone.end_date.strftime("%B %d, %Y")})"
         condition = project.alerts.where(description: alert_description).empty?
         Alert.create(description: alert_description, project: milestone.project) if condition
       end
