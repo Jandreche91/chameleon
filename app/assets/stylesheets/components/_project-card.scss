@@ -1,5 +1,4 @@
 
-
 .project-card-grid {
   padding: 0;
   display: grid;
@@ -7,8 +6,6 @@
   grid-gap: 24px;
   border-radius: 8px;
 }
-
-
 
 .project-card {
   background-color: white;
@@ -28,9 +25,7 @@
   .project-card-associate-container {
     margin-left: 16px;
     margin-top: 16px;
-
   }
-
 }
 
 .project-card h5 {
@@ -41,8 +36,6 @@
 .project-card p {
   margin-bottom: 0;
 }
-
-
 
 
 @media (max-width: 1000px) {

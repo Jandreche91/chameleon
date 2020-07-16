@@ -15,8 +15,8 @@
     text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
     font-size: 32px;
     font-weight: bold;
-    // animation: type 5s steps(39);
-    animation: type 4s linear;
+    animation: type 5s steps(39) infinite;
+    // animation: type 4s linear;
     overflow: hidden;
     white-space:nowrap;
     border-right:4px solid black;
@@ -99,7 +99,7 @@
     .home2-image {
        width: 50%;
       .image-home {
-        width: 150px;
+        width: 300px;
       }
     }
   }
