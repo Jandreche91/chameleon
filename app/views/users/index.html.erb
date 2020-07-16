@@ -1,16 +1,8 @@
 <div class="container mt-3 cards-team">
   <h5 class="section-title h1">OUR TEAM</h5>
-  <div class="row">
-    <% @users.each do |user| %>
-      <div class="col-xs-6 col-sm-2 col-md-6">
-        <div class="card-team">
-          <div class="card-body text-center">
-            <%= image_tag "avatar_pics/#{user.first_name}.jpg", class: "img-fluid" %>
-            <h4 class="card-title"><%= user.first_name %> <%= user.last_name %></h4>
-            <canvas class='user-chart' width="400" height="400" data-projects-hours="<%= user.total_hours_spent %>"></canvas>
-          </div>
-        </div>
-      </div>
-    <% end %>
-  </div>
+    <div class="row">
+      <% @users.each do |user| %>
+        <%= render "users/card", user: user %>
+      <% end %>
+    </div>
 </div>
