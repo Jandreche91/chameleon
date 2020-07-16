@@ -1,7 +1,13 @@
 .cards-team {
-    background: #1E334D;
+    // background: #1E334D;
+    // border-radius: 8px;
+    // box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    background-color: white;
+    color: $darkest-grey;
     border-radius: 8px;
-    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    height: 100%;
+    padding: 32px;
 }
 
 .cards-team {
