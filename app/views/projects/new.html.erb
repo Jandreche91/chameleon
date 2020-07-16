@@ -1,14 +1,4 @@
 <div class="container">
-  <h1>Add a new project</h1>
-  <%= simple_form_for(@project) do |f| %>
-    <%= f.input :name %>
-    <%= f.input :description, as: :text %>
-    <%= f.input :estimated_cost %>
-    <%= f.input :estimated_start_date, as: :string, required: false, input_html: {class: "datepicker"} %>
-    <%= f.input :estimated_end_date, as: :string, required: false, input_html: {class: "datepicker"} %>
-    <%= f.association :user, collection: User.all.reject{|user| user == current_user}, input_html: { multiple: true } %>
-    <%= f.button :submit, class: "btn-primary" %>
-  <% end %>
+  <h1>Create a project</h1>
+  <%= render "projects/form", project: @project %>
 </div>
-
-
