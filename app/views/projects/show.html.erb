@@ -1,10 +1,73 @@
 
+<h2 class="px-5 pt-5"><%= @project.name %></h2>
+ <p class="px-5">Started on <span style="color: "><strong><%= @project.estimated_start_date.strftime("%d %B %Y") %></strong></span></p>
+
+
+ <!-- General info card at the top of the page -->
+ <!-- General info card at the top of the page -->
+ <!-- General info card at the top of the page -->
+ <!-- General info card at the top of the page -->
 
 <div class="card-project-general-info">
-    <h2><%= @project.name %></h2>
-    <p>Started on <span style="color: "><strong><%= @project.estimated_start_date.strftime("%d %B %Y") %></strong></span></p>
-    <p><%= @project.description %></p>
-    <%= link_to "Edit this project", edit_project_path(@project), class: "btn btn-outline-success mt-3" %>
+
+    <%= link_to edit_project_path(@project) do %>
+      <%= image_tag 'edit.png' %>
+    <% end %>
+
+    <p class="card-project-general-description"><%= @project.description %></p>
+
+
+    <!-- key info grid -->
+    <!-- key info grid -->
+    <!-- key info grid -->
+    <!-- key info grid -->
+    <!-- key info grid -->
+    <!-- key info grid -->
+
+
+    <div class="key-info-grid">
+
+      <!-- Budget -->
+
+      <div class="key-info-element">
+        <p class="key-info-title">Budget</p>
+        <p class="key-info-specs">USD <%= @project.estimated_cost_formatted %> </p>
+      </div>
+
+      <div class="key-info-element">
+          <p class="key-info-title">Budget spent</p>
+          <p class="key-info-specs">USD <%= @project.executed_cost_formatted %></p>
+
+      </div>
+
+      <div class="key-info-element">
+          <p class="key-info-title">Percentage spent</p>
+          <p class="key-info-specs"><%= (@project.executed_budget_percentage * 100).to_i %>%</p>
+      </div>
+
+      <div class="key-info-element">
+        <p class="key-info-title">Hours spent</p>
+        <p class="key-info-specs"><%= @project.hours_spent_formatted %></p>
+      </div>
+
+       <div class="key-info-element">
+        <p class="key-info-title">Avg. cost/ hour</p>
+        <p class="key-info-specs">USD <%= @project.cost_per_hour %></p>
+      </div>
+
+      <div class="key-info-element">
+        <p class="key-info-title">End date</p>
+        <p class="key-info-specs"><%= @project.estimated_end_date.strftime("%d %B %Y") %></p>
+      </div>
+
+      <div class="key-info-element">
+        <p class="key-info-title">hours left</p>
+        <p class="key-info-specs"><%= (@project.estimated_cost - @project.tasks.sum(:value)) / @project.cost_per_hour unless @project.cost_per_hour.zero? %></p>
+      </div>
+
+
+    </div>
+
 </div>
 
 
@@ -12,10 +75,9 @@
 
 <div class="row mx-1">
 
-  <div class="col-2 p-0">
+  <div class="col-2 p-0 project-dashboard-tab-container">
     <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
       <a class="nav-link active" id="v-pills-budgetevolution-tab" data-toggle="pill" href="#v-pills-budgetevolution" role="tab" aria-controls="v-pills-budgetevolution" aria-selected="true">Budget evolution</a>
-      <a class="nav-link" id="v-pills-generalinfo-tab" data-toggle="pill" href="#v-pills-generalinfo" role="tab" aria-controls="v-pills-generalinfo" aria-selected="false">General insights</a>
       <a class="nav-link" id="v-pills-budgetdistribution-tab" data-toggle="pill" href="#v-pills-budgetdistribution" role="tab" aria-controls="v-pills-budgetdistribution" aria-selected="false">Budget distribution</a>
       <a class="nav-link" id="v-pills-associates-tab" data-toggle="pill" href="#v-pills-associates" role="tab" aria-controls="v-pills-associates" aria-selected="false">Associates in this project</a>
       <a class="nav-link" id="v-pills-tasks-tab" data-toggle="pill" href="#v-pills-tasks" role="tab" aria-controls="v-pills-tasks" aria-selected="false">Task Log</a>
@@ -55,41 +117,6 @@
 
 
           </div>
-        </div>
-
-          <!-- General Info -->
-          <!-- General Info -->
-          <!-- General Info -->
-          <!-- General Info -->
-
-        <div class="tab-pane fade" id="v-pills-generalinfo" role="tabpanel" aria-labelledby="v-pills-generalinfo-tab">
-            <div class="card-project-dashboard">
-
-              <div class="card-project-specifics-item">
-                <p>Budget:</p>
-                <p>US$ <%= @project.estimated_cost_formatted %> </p>
-              </div>
-              <div class="card-project-specifics-item">
-                <p>Budget spent:</p>
-                <p><strong> US$ <%= @project.executed_cost_formatted %> (<%= (@project.executed_budget_percentage * 100).to_i %>%)</strong></p>
-              </div>
-              <div class="card-project-specifics-item">
-                <p>Hours spent by the team:</p>
-                <p><%= @project.hours_spent_formatted %></p>
-              </div>
-              <div class="card-project-specifics-item">
-                <p>Average cost per hour:</p>
-                <p> US$ <%= @project.cost_per_hour %></p>
-              </div>
-              <div class="card-project-specifics-item">
-                <p>Estimated end date</p>
-                <span style="color:#900C3F"><p><%= @project.estimated_end_date.strftime("%d %B %Y") %></p></span>
-              </div>
-              <div class="card-project-specifics-item">
-                <strong><p style="color: #900C3F">Avg. hours left of budgeted work:</p></strong>
-                <strong> <p style="color: #900C3F"><%= (@project.estimated_cost - @project.tasks.sum(:value)) / @project.cost_per_hour unless @project.cost_per_hour.zero? %></p> </strong>
-              </div>
-            </div>
         </div>
 
           <!-- Budget Distribution -->

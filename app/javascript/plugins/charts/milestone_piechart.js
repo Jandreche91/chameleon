@@ -61,7 +61,7 @@ require("chart.js");
       }, // end data
       options: {
         legend: {
-          position: 'left'}, // end legend
+          display: false}, // end legend
 
           //
 
@@ -77,14 +77,14 @@ require("chart.js");
                 }
               } //end callbacks
             }, // end tooltips
-            layout: {
-                padding: {
-                    left: 0,
-                    right: 0,
-                    top: 0,
-                    bottom: 25
-                }
-              }
+            // layout: {
+            //     padding: {
+            //         left: 0,
+            //         right: 0,
+            //         top: 0,
+            //         bottom: 25
+            //     }
+            //   }
           } //  // end options
 
           //
