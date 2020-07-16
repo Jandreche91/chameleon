@@ -1,0 +1,25 @@
+<%= simple_form_for(project) do |f| %>
+  <%= f.input :name %>
+  <%= f.input :description, as: :text %>
+  <%= f.input :estimated_cost %>
+  <%= f.input :estimated_start_date, as: :string, required: false, input_html: {class: "datepicker"} %>
+  <%= f.input :estimated_end_date, as: :string, required: false, input_html: {class: "datepicker"}  %>
+
+  <div class="form-group">
+    <label class="control-label check_boxes optional">Assignments</label>
+    <input type="hidden" name="project[user_ids][]" value="">
+    <div class="user-choices">
+      <% User.all.reject { |user| user == current_user }.each do |user| %>
+        <div class="user-choice <%= "active" if @project.users_as_billers.include? user %>">
+          <input type="checkbox" class="d-none" value="<%= user.id %>" name="project[user_ids][]" id="project_user_ids_<%= user.id %>" <%= "checked" if @project.users_as_billers.include? user %> >
+          <div for="project_user_ids_<%= user.id %>">
+            <%= image_tag "avatar_pics/#{user.first_name}.jpg", class: "avatar" %>
+            <%= user.name %>
+          </div>
+        </div>
+      <% end %>
+     </div>
+  </div>
+
+  <%= f.button :submit, class: "btn-primary" %>
+<% end %>
