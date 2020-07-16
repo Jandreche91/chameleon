@@ -1,13 +1,30 @@
 
 .alert-card {
   background-color: white;
-
-  padding: 8px;
   border-radius: 8px;
   vertical-align: middle;
+  height: 64px;
+  margin-bottom: 16px;
   }
 
   .alert-card p {
     margin-bottom: 0;
     font-size: 12px;
   }
+
+
+  .alert-card-color-tag {
+
+    width: 1em;
+    height: 64px;
+    margin-right: 16px;
+    border-radius: 8px 0px 0px 8px;
+  }
+
+  .color-tag-gold {
+      background-color: $orange;
+    }
+
+    .color-tag-purple {
+      background-color: $purple;
+    }
