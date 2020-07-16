@@ -31,7 +31,10 @@ class Alert < ApplicationRecord
     check_for_85_surpass(project, surpass85, alerts)
     check_for_excess_time(project, excess_time, alerts)
     check_for_excess_budget(project, excess_budget, alerts)
+    check_for_milestones_to_end(project)
   end
+
+  # These methods also check ehwehter the alert has already been produced
 
   def self.check_for_50_surpass(project, surpass50, alerts)
     conditions = surpass50 && project.alerts.where(description: alerts[:budget_surpassed_50]).empty?
@@ -51,6 +54,16 @@ class Alert < ApplicationRecord
   def self.check_for_excess_budget(project, excess_budget, alerts)
     conditions = excess_budget && project.alerts.where(description: alerts[:progress_excess_budget]).empty?
     Alert.create(description: alerts[:progress_excess_budget], project: project) if conditions
+  end
+
+  def self.check_for_milestones_to_end(project)
+    project.milestones.each do |milestone|
+      if milestone.end_date < Date.today + 60 && milestone.end_date > Date.today
+        alert_description = "milestone #{milestone.description} will end in less than 60 days #{milestone.end_date}"
+        condition = project.alerts.where(description: alert_description).empty?
+        Alert.create(description: alert_description, project: milestone.project) if condition
+      end
+    end
   end
 
   private_class_method :check_for_50_surpass, :check_for_85_surpass, :check_for_excess_budget, :check_for_excess_time
