@@ -33,6 +33,16 @@ class User < ApplicationRecord
     results.to_json
   end
 
+  def total_budgets_spent
+    results = { projects: [], budgets: [] }
+    sorted_projects = projects_per_associate.map { |project| [project.name, total_hours_spent_per_project(project) * hourly_rate] }.sort_by { |project_array| -project_array.last }
+    sorted_projects.each do |project|
+      results[:projects] << project[0]
+      results[:budgets] << project[1]
+    end
+    results.to_json
+  end
+
   def past_projects
     a = total_projects_worked
     b = projects_per_associate
