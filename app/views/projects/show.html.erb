@@ -217,13 +217,15 @@
              <!-- Add new milestone -->
 
              <% if @project.unassigned_progress_rate.positive? %>
+
+             <h3>Create a new milestone</h3>
+
                   <div class="project-task-log-milestone-wrapper">
 
                     <div class="milestone-wrapper-color" style="background-color: <%= Milestone.generate_colors[@milestone_progress_rates[:colors].size - 1 ] %>"></div>
 
                     <div class="milestone-wrapper-info">
 
-                    <h3>Create a new milestone</h3>
                     <%= simple_form_for [@project, @new_milestone] do|f| %>
                       <%= f.input :description  %>
                       <%= f.input :end_date, as: :string, required: true, input_html: {class: "datepicker"} %>
