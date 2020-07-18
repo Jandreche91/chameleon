@@ -12,6 +12,6 @@ class Milestone < ApplicationRecord
   end
 
   def self.generate_colors
-    ['#B30000', '#006BF0', '#FFC65A', '#338508', '#1E334D', '#00B392', '#7900B3', '#AAEF68', '#B37600']
+    ['#7900B3', '#006BF0', '#338508', '#B37600', '#FFC65A', '#1E334D', '#B30000', '#00B392', '#AAEF68']
   end
 end

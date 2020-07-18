@@ -114,7 +114,9 @@
         <div class="card-project-dashboard">
             <p class="mb-5">Portion of the budget unnassigned: <%= @project.unassigned_progress_rate %>%</p>
             <!-- Here is the pie chart -->
-            <canvas height="100" id="milestone-pie-chart" data-milestone-progress-rates="<%= @milestone_progress_rates.to_json %>"></canvas>
+            <canvas height="100" id="milestone-pie-chart" data-milestone-colors="<%= @milestone_progress_rates[:colors] %>"
+              data-milestone-descriptions="<%= @milestone_progress_rates[:milestone_descriptions]%>"
+              data-milestone-values ="<%= @milestone_progress_rates[:milestone_proportions]%>"></canvas>
             <!-- Here ends the chart -->
         </div>
 
