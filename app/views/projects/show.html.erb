@@ -134,13 +134,17 @@
 
                <div class="milestone-legend-wrapper">
                 <div class="milestone-color-legend" style="background-color: <%=  @milestone_progress_rates[:colors][index]%>"></div>
-                <p><%= milestone.description %> - <%= milestone.progress_rate %>%<br><em><%= milestone.end_date < Date.today ? "Ended on #{milestone.end_date.strftime("%d %B %Y")}" : "Estimated to end on #{milestone.end_date.strftime("%d %B %Y")}" %></em></p>
+                <p><%= milestone.description %><br>
+                  USD <%= @milestone_progress_rates[:milestone_proportions][index].to_s.reverse.scan(/\d{3}|.+/).join(".").reverse  %> (<%= milestone.progress_rate %>%)<br>
+                  <em><%= milestone.end_date < Date.today ? "Ended on #{milestone.end_date.strftime("%d %B %Y")}" : "Estimated to end on #{milestone.end_date.strftime("%d %B %Y")}" %></em></p>
               </div>
                <% else %>
 
                <div class="milestone-legend-wrapper">
                 <div class="milestone-color-legend" style="background-color: <%=  @milestone_progress_rates[:colors][index]%>"></div>
-                <p><%= milestone %></p>
+                <p><%= milestone %><br>
+                   USD <%= @milestone_progress_rates[:milestone_proportions][index].to_s.reverse.scan(/\d{3}|.+/).join(".").reverse  %> (<%= @project.unassigned_progress_rate  %>%)
+                </p>
               </div>
 
                 <% end %>
@@ -152,18 +156,13 @@
 
 
             </div>
-
-
           </div>
 
-        </div>
-
-        <div class="card-project-dashboard">
-            <div class="milestone-manager">
+          <div class="milestone-manager">
               <!-- Show milestones that cannot be updated -->
               <div class=" mt-3">
                 <% unless @finished_milestones.empty? %>
-                <h3>You can only edit milestones that have not been completed</h3>
+                <p>You can only edit milestones that have not been completed</p>
                 <p class="mb-1">The following milestones have already been completed:</p>
 
                 <ul>
@@ -213,7 +212,8 @@
                   </div>
                   <% end %>
                 </div>
-              </div>
+
+        </div>
 
 
   </div>

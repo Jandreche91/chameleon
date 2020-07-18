@@ -98,7 +98,7 @@ class Project < ApplicationRecord
     results[:colors] << '#778089'
     results[:milestone_descriptions] << "Unassigned - #{unassigned_progress_rate}%"
     results[:milestone_proportions] << unassigned_progress_rate * estimated_cost / 100
-    results[:milestone_objects] << "Unassigned: #{unassigned_progress_rate}%"
+    results[:milestone_objects] << "Unassigned"
   end
     results
   end
