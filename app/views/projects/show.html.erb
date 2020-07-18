@@ -199,7 +199,7 @@
                               <%= f.input :description  %>
                               <div class="d-flex">
                               <%= f.input :end_date, as: :string, required: true, input_html: {class: "datepicker"} %>
-                                  <div class="ml-4">
+                                  <div class="ml-4 range-in-the-form">
                                     <%= f.input :progress_rate, collection: (0..(milestone.progress_rate + @project.unassigned_progress_rate)).to_a %>
                                   </div>
                               </div>
