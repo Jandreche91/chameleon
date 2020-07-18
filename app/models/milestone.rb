@@ -10,4 +10,8 @@ class Milestone < ApplicationRecord
   def hours_spent
     tasks.sum(:hours_spent)
   end
+
+  def self.generate_colors
+    ['#B30000', '#006BF0', '#FFC65A', '#338508', '#1E334D', '#00B392', '#7900B3', '#AAEF68', '#B37600']
+  end
 end
