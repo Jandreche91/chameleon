@@ -12,11 +12,11 @@
         </li>
       </ul>
       <div class="tab-content" id="myTabContent">
-        <div class="tab-pane fade show active" id="hours-<%= user.id %>" role="tabpanel" aria-labelledby="home-tab">
-          <canvas class='user-chart' width="400" height="400" data-projects-hours="<%= user.total_hours_spent %>"></canvas>
+        <div class="tab-pane fade show active" style="position: relative; width:100%" id="hours-<%= user.id %>" role="tabpanel" aria-labelledby="home-tab">
+          <canvas class='user-chart' data-projects-hours="<%= user.total_hours_spent %>"></canvas>
         </div>
-        <div class="tab-pane fade" id="budget-<%= user.id %>" role="tabpanel" aria-labelledby="profile-tab">
-         <canvas class='user-chart' width="400" height="400" data-projects-budgets="<%= user.total_budgets_spent %>"></canvas>
+        <div class="tab-pane fade" style="position: relative; width:100%" id="budget-<%= user.id %>" role="tabpanel" aria-labelledby="profile-tab">
+         <canvas class='user-chart' data-projects-budgets="<%= user.total_budgets_spent %>"></canvas>
         </div>
       </div>
     </div>
