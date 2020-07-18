@@ -41,12 +41,9 @@ import initMilestonePiechart from '../plugins/charts/milestone_piechart';
 
 
 const toggleCard = () => {
-  console.log('coucou')
   const userChoices = document.querySelectorAll('.user-choice');
   userChoices.forEach((item) => {
-    console.log(item)
     item.addEventListener('click', (e) => {
-      console.log(e.currentTarget)
       e.currentTarget.classList.toggle('active')
       const checkboxInput = e.currentTarget.querySelector('input')
       if (checkboxInput.checked == false) {
