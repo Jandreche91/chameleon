@@ -35,10 +35,15 @@ const initUserChart = () => {
             }]
         },
         options: {
+          // responsive: true,
             scales: {
                 yAxes: [{
-                    ticks: {
-                        beginAtZero: true
+                  barThickness : 30,
+                  categorySpacing: 0,
+                  barPercentage:1,
+                  categoryPercentage: 0.3,
+                  ticks: {
+                      beginAtZero: true,
                     }
                 }]
             }
