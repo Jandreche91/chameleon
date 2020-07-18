@@ -1,24 +1,45 @@
 <div class="col-xs-6 col-sm-2 col-md-6">
   <div class="card-team">
     <div class="card-body text-center">
-      <%= image_tag "avatar_pics/#{user.first_name}.jpg", class: "img-fluid" %>
-      <h4 class="card-title"><%= user.first_name %> <%= user.last_name %></h4>
-      <ul class="nav nav-tabs" id="myTab" role="tablist">
-        <li class="nav-item">
-          <a class="nav-link active" id="hours-tab" data-toggle="tab" href="#hours-<%= user.id %>" role="tab" aria-controls="hours" aria-selected="true">Hours</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" id="budget-tab" data-toggle="tab" href="#budget-<%= user.id %>" role="tab" aria-controls="budget" aria-selected="false">Budget</a>
-        </li>
-      </ul>
-      <div class="tab-content" id="myTabContent">
-        <div class="tab-pane fade show active" style="position: relative; width:100%" id="hours-<%= user.id %>" role="tabpanel" aria-labelledby="home-tab">
-          <canvas class='user-chart' data-projects-hours="<%= user.total_hours_spent %>"></canvas>
+
+      <div class="d-flex align-items-center justify-content-between px-3">
+
+        <div>
+          <% if !user.projects_per_associate.empty? %>
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active" id="hours-tab" data-toggle="tab" href="#hours-<%= user.id %>" role="tab" aria-controls="hours" aria-selected="true">Hours</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="budget-tab" data-toggle="tab" href="#budget-<%= user.id %>" role="tab" aria-controls="budget" aria-selected="false">Budget</a>
+              </li>
+            </ul>
+          <% end %>
         </div>
-        <div class="tab-pane fade" style="position: relative; width:100%" id="budget-<%= user.id %>" role="tabpanel" aria-labelledby="profile-tab">
-         <canvas class='user-chart' data-projects-budgets="<%= user.total_budgets_spent %>"></canvas>
+
+        <div>
+          <%= image_tag "avatar_pics/#{user.first_name}.jpg", class: "img-fluid" %>
+          <h4 class="card-title"><%= user.first_name %> <%= user.last_name %></h4>
         </div>
+
       </div>
+
+      <% if user.projects_per_associate.empty? %>
+        <div class="h-350 d-flex justify-content-center align-items-center">
+          <p>This associate wasn't assigned to any project yet</p>
+        </div>
+      <% else %>
+        <div class="h-350">
+          <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" style="position: relative; width:100%" id="hours-<%= user.id %>" role="tabpanel" aria-labelledby="home-tab">
+              <canvas class='user-chart' data-projects-hours="<%= user.total_hours_spent %>"></canvas>
+            </div>
+            <div class="tab-pane fade" style="position: relative; width:100%" id="budget-<%= user.id %>" role="tabpanel" aria-labelledby="profile-tab">
+             <canvas class='user-chart' data-projects-budgets="<%= user.total_budgets_spent %>"></canvas>
+            </div>
+          </div>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

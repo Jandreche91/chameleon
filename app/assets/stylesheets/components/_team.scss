@@ -1,28 +1,14 @@
 .cards-team {
     color: $darkest-grey;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.2);
-    height: 300px;
-    padding: 32px;
-    padding: 0;
-    // display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 24px;
-    border-radius: 8px;
-}
-
-// .card-team canvas {
-//   height: 200px;
-// }
-
-.cards-team {
-    padding: 60px 0;
-    padding-left: 30px;
-    padding-right: 30px;
-    height: 600px;
+    padding: 0 30px;
+    height: calc(100vh - 66px);
     overflow: scroll;
     overflow-x: hidden;
-    border-radius: 8px;
+}
+
+.h-350 {
+  height: 350px;
 }
 
 .cards-team .section-title {
@@ -45,6 +31,7 @@
 
 .card-team .card-title {
     color: black !important;
+    display:flex;
 }
 
 .card-team  .card-body img {
@@ -52,4 +39,5 @@
     height: 120px;
     border-radius: 50%;
     object-fit: cover;
+    display: flex;
 }
