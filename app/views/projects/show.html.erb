@@ -158,25 +158,31 @@
             </div>
           </div>
 
+          <!-- Convert into a tooltip -->
+
+          <div class=" mt-3">
+            <% unless @finished_milestones.empty? %>
+            <p class="mb-0">You can only edit milestones that have not been completed</p>
+            <p class="mb-1">The following milestones have already been completed:</p>
+
+            <ul>
+              <% @finished_milestones.sort_by(&:end_date).each do |milestone| %>
+                <li><%= milestone.description %> (completed on <%= milestone.end_date.strftime("%d %B %Y") %>) - <%= milestone.progress_rate %> %</li>
+                <% end %>
+            </ul>
+             <% end %>
+          </div>
+
+
           <div class="milestone-manager">
               <!-- Show milestones that cannot be updated -->
-              <div class=" mt-3">
-                <% unless @finished_milestones.empty? %>
-                <p>You can only edit milestones that have not been completed</p>
-                <p class="mb-1">The following milestones have already been completed:</p>
 
-                <ul>
-                  <% @finished_milestones.sort_by(&:end_date).each do |milestone| %>
-                    <li><%= milestone.description %> (completed on <%= milestone.end_date.strftime("%d %B %Y") %>) - <%= milestone.progress_rate %> %</li>
-                    <% end %>
-                </ul>
-              </div>
-                <% end %>
+
 
                 <!-- Edit unfinished milestones -->
 
                 <% unless @unfinished_milestones.empty?  %>
-                  <h3 class="mb-4"><i class="far fa-edit"></i> Edit milestones</h3>
+                  <h3 class="mb-4"><i class="far fa-edit"></i> Manage ongoing milestones</h3>
                   <% @unfinished_milestones.sort_by(&:end_date).each do |milestone| %>
                   <div class="project-task-log-milestone-wrapper">
                     <div class="d-flex align-items-baseline">
@@ -211,7 +217,7 @@
                     <% end %>
                   </div>
                   <% end %>
-                </div>
+          </div>
 
         </div>
 
