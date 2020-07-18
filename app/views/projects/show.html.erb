@@ -69,7 +69,7 @@
 <!-- Tabs Horizontal -->
 
 <nav>
-    <div class="nav nav-tabs d-flex justify-content-around" id="nav-tab" role="tablist">
+    <div class="nav nav-tabs d-flex" id="nav-tab" role="tablist" style="justify-content: space-evenly;">
       <a class="nav-item nav-link active" id="nav-budgetevolution-tab" data-toggle="tab" href="#nav-budgetevolution" role="tab" aria-controls="nav-budgetevolution" aria-selected="true"><h3><i class="fas fa-chart-line"></i> Budget Evolution</h3></a>
       <a class="nav-item nav-link" id="nav-budgetdistribution-tab" data-toggle="tab" href="#nav-budgetdistribution" role="tab" aria-controls="nav-budgetdistribution" aria-selected="false"><h3><i class="fas fa-chart-pie"></i> Budget distribution</h3></a>
       <a class="nav-item nav-link" id="nav-associates-tab" data-toggle="tab" href="#nav-associates" role="tab" aria-controls="nav-associates" aria-selected="false"><h3><i class="fas fa-users"></i>Associates</h3></a>
@@ -112,58 +112,120 @@
   <div class="tab-pane fade show" id="nav-budgetdistribution" role="tabpanel" aria-labelledby="nav-budgetdistribution-tab">
 
         <div class="card-project-dashboard">
-            <p class="mb-5">Portion of the budget unnassigned: <%= @project.unassigned_progress_rate %>%</p>
+          <p class="mb-5">Portion of the budget unnassigned: <%= @project.unassigned_progress_rate %>%</p>
+
+          <div class="milestone-piechart-grid">
+
+            <div class="piechart-container">
+
             <!-- Here is the pie chart -->
-            <canvas height="100" id="milestone-pie-chart" data-milestone-progress-rates="<%= @milestone_progress_rates.to_json %>"></canvas>
+            <canvas height="100" id="milestone-pie-chart" data-milestone-colors="<%= @milestone_progress_rates[:colors] %>"
+              data-milestone-descriptions="<%= @milestone_progress_rates[:milestone_descriptions]%>"
+              data-milestone-values ="<%= @milestone_progress_rates[:milestone_proportions]%>"></canvas>
             <!-- Here ends the chart -->
-        </div>
 
-        <div class="card-project-dashboard">
-            <div class="milestone-manager">
-              <!-- Show milestones that cannot be updated -->
-              <div class=" mt-3">
-                <% unless @finished_milestones.empty? %>
-                <h3>You can only edit milestones that have not been completed</h3>
-                <p class="mb-1">The following milestones have already been completed:</p>
+            </div>
 
-                <ul>
-                  <% @finished_milestones.sort_by(&:end_date).each do |milestone| %>
-                    <li><%= milestone.description %> (completed on <%= milestone.end_date.strftime("%d %B %Y") %>) - <%= milestone.progress_rate %> %</li>
-                    <% end %>
-                </ul>
+            <div class="milestone-legend">
+
+             <% @milestone_progress_rates[:milestone_objects].each_with_index do | milestone, index|%>
+
+               <% if milestone.class == Milestone  %>
+
+               <div class="milestone-legend-wrapper">
+                <div class="milestone-color-legend" style="background-color: <%=  @milestone_progress_rates[:colors][index]%>"></div>
+                <p><%= milestone.description %><br>
+                  USD <%= @milestone_progress_rates[:milestone_proportions][index].to_s.reverse.scan(/\d{3}|.+/).join(".").reverse  %> (<%= milestone.progress_rate %>%)<br>
+                  <em><%= milestone.end_date < Date.today ? "Ended on #{milestone.end_date.strftime("%d %B %Y")}" : "Estimated to end on #{milestone.end_date.strftime("%d %B %Y")}" %></em></p>
               </div>
+               <% else %>
+
+               <div class="milestone-legend-wrapper">
+                <div class="milestone-color-legend" style="background-color: <%=  @milestone_progress_rates[:colors][index]%>"></div>
+                <p><%= milestone %><br>
+                   USD <%= @milestone_progress_rates[:milestone_proportions][index].to_s.reverse.scan(/\d{3}|.+/).join(".").reverse  %> (<%= @project.unassigned_progress_rate  %>%)
+                </p>
+              </div>
+
                 <% end %>
 
-                <!-- Edit unfinished milestones -->
 
-                <% unless @unfinished_milestones.empty?  %>
-                  <h3 class="mb-4"><i class="far fa-edit"></i> Edit milestones</h3>
-                  <% @unfinished_milestones.sort_by(&:end_date).each do |milestone| %>
-                  <div class="project-task-log-milestone-wrapper">
-                    <div class="d-flex align-items-baseline">
-                      <h3><%= milestone.description %></h3><p class="ml-2">(Edit)</p>
+             <% end %>
+
+
+
+
+            </div>
+          </div>
+
+          <!-- Convert into a tooltip -->
+
+          <div class=" mt-3">
+            <% unless @finished_milestones.empty? %>
+            <p class="mb-0">You can only edit milestones that have not been completed</p>
+            <p class="mb-1">The following milestones have already been completed:</p>
+
+            <ul>
+              <% @finished_milestones.sort_by(&:end_date).each do |milestone| %>
+                <li><%= milestone.description %> (completed on <%= milestone.end_date.strftime("%d %B %Y") %>) - <%= milestone.progress_rate %> %</li>
+                <% end %>
+            </ul>
+             <% end %>
+          </div>
+
+            <!-- Edit unfinished milestones -->
+
+            <% unless @unfinished_milestones.empty?  %>
+              <h3 class="mt-5"><i class="far fa-edit"></i> Manage ongoing milestones</h3>
+              <% if @project.unassigned_progress_rate.zero?  %>
+                  <p class="mb-4">You cannot add new milestones because all budget has already been assigned.</p>
+              <% end %>
+
+                <% @milestone_progress_rates[:milestone_objects].each_with_index do |milestone, index| %>
+                <% if @unfinished_milestones.include?(milestone) %>
+                  <div class="project-milestone-wrapper">
+
+                    <div class="milestone-wrapper-color" style="background-color: <%= @milestone_progress_rates[:colors][index] %>"></div>
+
+                    <div class="milestone-wrapper-info">
+
+                      <p class="title"><%= milestone.description %></p>
+                      <p class="before-content">Until:
+                        <span class="after-content"> <%=milestone.end_date.strftime("%d %B %Y")%> </span><br>
+                        Weight: <span class="after-content"><%= "#{(milestone.progress_rate * @project.estimated_cost / 100).to_i.to_s.reverse.scan(/\d{3}|.+/).join(".").reverse} (#{milestone.progress_rate} %)" %></span></p>
+
+                        <p></p>
+                          <%= simple_form_for [@project, milestone] do|f| %>
+                              <%= f.input :description  %>
+                              <div class="d-flex">
+                              <%= f.input :end_date, as: :string, required: true, input_html: {class: "datepicker"} %>
+                                  <div class="ml-4 range-in-the-form">
+                                    <%= f.input :progress_rate, collection: (0..(milestone.progress_rate + @project.unassigned_progress_rate)).to_a %>
+                                  </div>
+                              </div>
+                              <%= f.button :submit, class: "btn btn-outline-primary" %>
+                            <% end %>
+                      </div>
+
                     </div>
-                    <p class="mb-0"><%="Estimated to end on #{milestone.end_date.strftime("%d %B %Y")}" %></p>
-                    <p><%= "Weight of the budget: #{(milestone.progress_rate * @project.estimated_cost / 100).to_i.to_s.reverse.scan(/\d{3}|.+/).join(".").reverse} (#{milestone.progress_rate} %)" %></p>
-                      <%= simple_form_for [@project, milestone] do|f| %>
-                          <%= f.input :description  %>
-                          <%= f.input :end_date, as: :string, required: true, input_html: {class: "datepicker"} %>
-                          <%= f.input :progress_rate, collection: (0..(milestone.progress_rate + @project.unassigned_progress_rate)).to_a %>
-                          <%= f.button :submit, class: "btn btn-primary" %>
-                        <% end %>
-                  </div>
+
+
                   <% end %>
-                  <% end %>
-                  <!-- Add new milestone -->
-                  <% if  @project.unassigned_progress_rate.zero? %>
-                  <div class="project-task-log-milestone-wrapper mt-3">
-                    <h3>Create a <span style="color: #900C3F">new milestone</span></h3>
-                    <p class="mb-1">You cannot add new Milestones because all budget has already been assigned.</p>
-                    <p class="mb-1">Edit the unfinished milestones above.</p>
-                  </div>
-                  <% else %>
-                  <div class="project-task-log-milestone-wrapper">
-                    <h3>Create a <span style="color: #900C3F">new milestone</span></h3>
+                <% end %>
+              <% end %>
+
+             <!-- Add new milestone -->
+
+             <% if @project.unassigned_progress_rate.positive? %>
+
+             <h3>Create a new milestone</h3>
+
+                  <div class="project-milestone-wrapper">
+
+                    <div class="milestone-wrapper-color" style="background-color: <%= Milestone.generate_colors[@milestone_progress_rates[:colors].size - 1 ] %>"></div>
+
+                    <div class="milestone-wrapper-info">
+
                     <%= simple_form_for [@project, @new_milestone] do|f| %>
                       <%= f.input :description  %>
                       <%= f.input :end_date, as: :string, required: true, input_html: {class: "datepicker"} %>
@@ -171,9 +233,10 @@
                       <%= f.button :submit, class: "btn btn-primary" %>
                     <% end %>
                   </div>
-                  <% end %>
-                </div>
-              </div>
+                  </div>
+              <% end %>
+
+      </div>
 
 
   </div>
@@ -232,7 +295,7 @@
 
     <div class="card-project-dashboard task-log">
             <% @project.milestones.sort_by { |milestone| milestone.end_date}.each do |milestone| %>
-            <div class="project-task-log-milestone-wrapper">
+            <div class="project-task-wrapper">
               <h3><%= milestone.description %></h3>
               <p><%= milestone.done ? "Ended on #{milestone.end_date.strftime("%d %B %Y")}" : "Estimated to end on #{milestone.end_date.strftime("%d %B %Y")}" %></p>
               <% if  milestone.tasks.empty?%>

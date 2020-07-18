@@ -12,7 +12,7 @@ class Project < ApplicationRecord
   has_many :milestones, dependent: :destroy
   has_many :tasks, through: :milestones
   has_many :users_as_billers, through: :assignments, source: :user
-  # has_many :users_that_billed, through: :tasks, source: :user
+
 
   # returns an array of hashes with the info of users billing
   # the time built and the value billed -- mirrors symbols of Taks model
@@ -82,15 +82,37 @@ class Project < ApplicationRecord
   end
 
   # returns a hash with progress rates -- including unassinged if != 0
+  # Returns an hash with the data to build a piechart. We use arrays to make sure an order is followed and we can pass
+  # the exact same values to the CSS and to the JS
 
   def hash_milestone_progress_rates
-    results = {}
-    milestones.sort_by(&:end_date).each do |milestone|
-      results[piechart_formatter(milestone)] = milestone.progress_rate * estimated_cost / 100
+    results = { colors: [], milestone_descriptions: [], milestone_proportions: [], milestone_objects: [] }
+    colors =  Milestone.generate_colors
+    milestones.sort_by(&:end_date).each_with_index do |milestone, index|
+      results[:colors] << colors[index]
+      results[:milestone_descriptions] << piechart_formatter(milestone)
+      results[:milestone_proportions] << milestone.progress_rate * estimated_cost / 100
+      results[:milestone_objects] << milestone
     end
-    results["Unassigned #{unassigned_progress_rate}%"] = unassigned_progress_rate * estimated_cost / 100 unless unassigned_progress_rate.zero?
+  unless unassigned_progress_rate.zero?
+    results[:colors] << '#778089'
+    results[:milestone_descriptions] << "Unassigned - #{unassigned_progress_rate}%"
+    results[:milestone_proportions] << unassigned_progress_rate * estimated_cost / 100
+    results[:milestone_objects] << "Unassigned"
+  end
     results
   end
+
+  #old method commented out below
+
+  # def hash_milestone_progress_rates
+  #   results = {}
+  #   milestones.sort_by(&:end_date).each do |milestone|
+  #     results[piechart_formatter(milestone)] = milestone.progress_rate * estimated_cost / 100
+  #   end
+  #   results["Unassigned #{unassigned_progress_rate}%"] = unassigned_progress_rate * estimated_cost / 100 unless unassigned_progress_rate.zero?
+  #   results
+  # end
 
   def hours_spent_formatted
     formatter(tasks.sum(:hours_spent))
