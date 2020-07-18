@@ -37,14 +37,19 @@ const initUserChart = () => {
         options: {
           // responsive: true,
             scales: {
-                yAxes: [{
+              yAxes:
+                [{
                   barThickness : 30,
                   categorySpacing: 0,
                   barPercentage:1,
                   categoryPercentage: 0.3,
+                }],
+              xAxes:
+                [{
                   ticks: {
-                      beginAtZero: true,
-                    }
+                    beginAtZero: true,
+                    callback: function(value) { return value.toLocaleString('en-IN', {maximumFractionDigits: 0}) }
+                  }
                 }]
             }
         }
