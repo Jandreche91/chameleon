@@ -1,0 +1,30 @@
+.milestone-piechart-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+
+  .piechart-container {
+    grid-column-start: 1;
+    grid-column-end: 3;
+  }
+
+.milestone-color-legend {
+    width: 60px;
+    height: 19px;
+    border-radius: 16px;
+    margin-left: -32px;
+    margin-right: 24px;
+  }
+
+  .milestone-legend {
+    margin-left: -140px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+
+  .milestone-legend-wrapper {
+    display: flex;
+    align-items: center;
+  }
+
+}

@@ -69,7 +69,7 @@
 <!-- Tabs Horizontal -->
 
 <nav>
-    <div class="nav nav-tabs d-flex justify-content-around" id="nav-tab" role="tablist">
+    <div class="nav nav-tabs d-flex" id="nav-tab" role="tablist" style="justify-content: space-evenly;">
       <a class="nav-item nav-link active" id="nav-budgetevolution-tab" data-toggle="tab" href="#nav-budgetevolution" role="tab" aria-controls="nav-budgetevolution" aria-selected="true"><h3><i class="fas fa-chart-line"></i> Budget Evolution</h3></a>
       <a class="nav-item nav-link" id="nav-budgetdistribution-tab" data-toggle="tab" href="#nav-budgetdistribution" role="tab" aria-controls="nav-budgetdistribution" aria-selected="false"><h3><i class="fas fa-chart-pie"></i> Budget distribution</h3></a>
       <a class="nav-item nav-link" id="nav-associates-tab" data-toggle="tab" href="#nav-associates" role="tab" aria-controls="nav-associates" aria-selected="false"><h3><i class="fas fa-users"></i>Associates</h3></a>
@@ -112,12 +112,50 @@
   <div class="tab-pane fade show" id="nav-budgetdistribution" role="tabpanel" aria-labelledby="nav-budgetdistribution-tab">
 
         <div class="card-project-dashboard">
-            <p class="mb-5">Portion of the budget unnassigned: <%= @project.unassigned_progress_rate %>%</p>
+          <p class="mb-5">Portion of the budget unnassigned: <%= @project.unassigned_progress_rate %>%</p>
+
+          <div class="milestone-piechart-grid">
+
+            <div class="piechart-container">
+
             <!-- Here is the pie chart -->
             <canvas height="100" id="milestone-pie-chart" data-milestone-colors="<%= @milestone_progress_rates[:colors] %>"
               data-milestone-descriptions="<%= @milestone_progress_rates[:milestone_descriptions]%>"
               data-milestone-values ="<%= @milestone_progress_rates[:milestone_proportions]%>"></canvas>
             <!-- Here ends the chart -->
+
+            </div>
+
+            <div class="milestone-legend">
+
+             <% @milestone_progress_rates[:milestone_objects].each_with_index do | milestone, index|%>
+
+               <% if milestone.class == Milestone  %>
+
+               <div class="milestone-legend-wrapper">
+                <div class="milestone-color-legend" style="background-color: <%=  @milestone_progress_rates[:colors][index]%>"></div>
+                <p><%= milestone.description %> - <%= milestone.progress_rate %>%<br><em><%= milestone.end_date < Date.today ? "Ended on #{milestone.end_date.strftime("%d %B %Y")}" : "Estimated to end on #{milestone.end_date.strftime("%d %B %Y")}" %></em></p>
+              </div>
+               <% else %>
+
+               <div class="milestone-legend-wrapper">
+                <div class="milestone-color-legend" style="background-color: <%=  @milestone_progress_rates[:colors][index]%>"></div>
+                <p><%= milestone %></p>
+              </div>
+
+                <% end %>
+
+
+             <% end %>
+
+
+
+
+            </div>
+
+
+          </div>
+
         </div>
 
         <div class="card-project-dashboard">
