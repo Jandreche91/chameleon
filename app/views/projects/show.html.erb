@@ -183,7 +183,7 @@
 
                 <% @milestone_progress_rates[:milestone_objects].each_with_index do |milestone, index| %>
                 <% if @unfinished_milestones.include?(milestone) %>
-                  <div class="project-task-log-milestone-wrapper">
+                  <div class="project-milestone-wrapper">
 
                     <div class="milestone-wrapper-color" style="background-color: <%= @milestone_progress_rates[:colors][index] %>"></div>
 
@@ -220,7 +220,7 @@
 
              <h3>Create a new milestone</h3>
 
-                  <div class="project-task-log-milestone-wrapper">
+                  <div class="project-milestone-wrapper">
 
                     <div class="milestone-wrapper-color" style="background-color: <%= Milestone.generate_colors[@milestone_progress_rates[:colors].size - 1 ] %>"></div>
 
@@ -295,7 +295,7 @@
 
     <div class="card-project-dashboard task-log">
             <% @project.milestones.sort_by { |milestone| milestone.end_date}.each do |milestone| %>
-            <div class="project-task-log-milestone-wrapper">
+            <div class="project-task-wrapper">
               <h3><%= milestone.description %></h3>
               <p><%= milestone.done ? "Ended on #{milestone.end_date.strftime("%d %B %Y")}" : "Estimated to end on #{milestone.end_date.strftime("%d %B %Y")}" %></p>
               <% if  milestone.tasks.empty?%>
