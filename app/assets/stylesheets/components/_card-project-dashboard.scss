@@ -4,7 +4,7 @@
 .card-project-general-info {
     margin: 24px 48px;
     background-color: white;
-    padding: 80px;
+    padding: 60px;
     border-radius: 8px;
     position: relative;
 
@@ -29,7 +29,7 @@
 .key-info-grid {
 
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   grid-gap: 16px;
 
 
@@ -54,6 +54,7 @@
 
     .key-info-specs{
       color: $blue;
+      font-size: 24px;
     }
 
 }
@@ -68,13 +69,11 @@
 
 
 .card-project-dashboard {
-  background-color: white;
-  // border-radius: 8px;
-  margin-right: 48px;
-  border-radius: 8px;
-  padding: 32px;
-  margin-left: -140px;
-  padding-left: 140px;
+    background-color: white;
+    margin-right: 48px;
+    margin-left: 48px;
+    border-radius: 8px;
+    padding: 32px;
 }
 
 

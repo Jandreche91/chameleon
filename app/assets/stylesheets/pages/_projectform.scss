@@ -18,7 +18,9 @@
     font-weight: bold;
   }
 }
-
+#project_description {
+  resize: none;
+}
 // Checkboxes design
 .user-choices {
   display: flex;
