@@ -1,6 +1,7 @@
 
 <h2 class="px-5 pt-5"><%= @project.name %></h2>
- <p class="px-5">Started on <span style="color: "><strong><%= @project.estimated_start_date.strftime("%d %B %Y") %></strong></span></p>
+ <p class="px-5 mb-0">Started on <span style="color: "><strong><%= @project.estimated_start_date.strftime("%d %B %Y") %></strong></span></p>
+ <p class="px-5">Expected to end on <strong><%= @project.estimated_end_date.strftime("%d %B %Y") %></strong></p>
 
 
  <!-- General info card at the top of the page -->
@@ -30,14 +31,13 @@
       <!-- Budget -->
 
       <div class="key-info-element">
-        <p class="key-info-title">Budget</p>
-        <p class="key-info-specs">USD <%= @project.estimated_cost_formatted %> </p>
+        <p class="key-info-title">Budget <br>(USD)</p>
+        <p class="key-info-specs"><%= @project.estimated_cost_formatted %></p>
       </div>
 
       <div class="key-info-element">
-          <p class="key-info-title">Budget spent</p>
-          <p class="key-info-specs">USD <%= @project.executed_cost_formatted %></p>
-
+          <p class="key-info-title">Spent<br>(USD)</p>
+          <p class="key-info-specs"><%= @project.executed_cost_formatted %></p>
       </div>
 
       <div class="key-info-element">
@@ -46,22 +46,17 @@
       </div>
 
       <div class="key-info-element">
-        <p class="key-info-title">Hours spent</p>
+        <p class="key-info-title">Hours<br>spent</p>
         <p class="key-info-specs"><%= @project.hours_spent_formatted %></p>
       </div>
 
        <div class="key-info-element">
-        <p class="key-info-title">Avg. cost/ hour</p>
-        <p class="key-info-specs">USD <%= @project.cost_per_hour %></p>
+        <p class="key-info-title">Cost/hour<br>AVG.(USD)</p>
+        <p class="key-info-specs"><%= @project.cost_per_hour %></p>
       </div>
 
       <div class="key-info-element">
-        <p class="key-info-title">End date</p>
-        <p class="key-info-specs"><%= @project.estimated_end_date.strftime("%d %B %Y") %></p>
-      </div>
-
-      <div class="key-info-element">
-        <p class="key-info-title">hours left</p>
+        <p class="key-info-title">hours left<br>(Avg.)</p>
         <p class="key-info-specs"><%= (@project.estimated_cost - @project.tasks.sum(:value)) / @project.cost_per_hour unless @project.cost_per_hour.zero? %></p>
       </div>
 
@@ -74,7 +69,7 @@
 <!-- Tabs Horizontal -->
 
 <nav>
-    <div class="nav nav-tabs ml-3" id="nav-tab" role="tablist">
+    <div class="nav nav-tabs d-flex justify-content-around" id="nav-tab" role="tablist">
       <a class="nav-item nav-link active" id="nav-budgetevolution-tab" data-toggle="tab" href="#nav-budgetevolution" role="tab" aria-controls="nav-budgetevolution" aria-selected="true"><h3><i class="fas fa-chart-line"></i> Budget Evolution</h3></a>
       <a class="nav-item nav-link" id="nav-budgetdistribution-tab" data-toggle="tab" href="#nav-budgetdistribution" role="tab" aria-controls="nav-budgetdistribution" aria-selected="false"><h3><i class="fas fa-chart-pie"></i> Budget distribution</h3></a>
       <a class="nav-item nav-link" id="nav-associates-tab" data-toggle="tab" href="#nav-associates" role="tab" aria-controls="nav-associates" aria-selected="false"><h3><i class="fas fa-users"></i>Associates</h3></a>
@@ -190,7 +185,7 @@
   <div class="tab-pane fade show" id="nav-associates" role="tabpanel" aria-labelledby="nav-associates-tab">
 
     <div class="card-project-dashboard">
-            <h2><i class="fas fa-users"></i> Associates in this project</h2>
+            <h3>Currently in the project</h3>
               <div class="grid-project-associate-cards">
                   <% @project.array_users_hours.each do |data| %>
                     <div class="card-project-user-performance">
@@ -209,7 +204,7 @@
                 <% unless @old_associates.empty? %>
 
 
-                <h2>Associates no longer in this project</h2>
+                <h3>No longer in this project</h3>
                 <div class="grid-project-associate-cards">
                 <% @old_associates.each do |data| %>
                       <div class="card-project-user-performance">
@@ -229,6 +224,8 @@
           </div>
 
   </div>
+
+  <!-- Task log -->
 
 
   <div class="tab-pane fade show" id="nav-tasks" role="tabpanel" aria-labelledby="nav-tasks-tab">
@@ -257,15 +254,4 @@
 
 
 </div>
-
-
- <!-- Old system -->
-
-
-
-
-
-
-
-
 
