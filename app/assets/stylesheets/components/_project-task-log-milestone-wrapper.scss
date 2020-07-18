@@ -2,7 +2,35 @@
 
   margin-bottom: 24px;
   border-radius: 8px;
-  border: solid 1px $dark-blue;
-  padding: 24px;
+  // border: solid 1px $dark-blue;
+  display: flex;
 
- }
+  .milestone-wrapper-color {
+      width: 24px;
+      height: inherit;
+      border-radius: 8px 0 0 8px;
+      margin-right: 40px;
+    }
+
+  .milestone-wrapper-info{
+    flex-grow: 1;
+    padding: 24px 0;
+    padding-right: 24px;
+
+    .title {
+      font-size: 24px;
+      margin-bottom: 0;
+    }
+
+    .before-content {
+      color: $medium-grey;
+    }
+
+    .after-content {
+        color: $dark-grey;
+        font-size: 24px;
+      }
+
+
+    }
+  }
