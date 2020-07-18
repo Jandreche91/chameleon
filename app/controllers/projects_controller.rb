@@ -19,7 +19,7 @@ class ProjectsController < ApplicationController
     @project.user = current_user
     if @project.save
       # users_assigned
-      @users_assigned = params[:project][:user_id]
+      @users_assigned = params[:project][:user_ids]
       create_assignments(@users_assigned, @project)
       redirect_to project_path(@project)
     else
