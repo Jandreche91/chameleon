@@ -1,6 +1,7 @@
 
 <h2 class="px-5 pt-5"><%= @project.name %></h2>
- <p class="px-5">Started on <span style="color: "><strong><%= @project.estimated_start_date.strftime("%d %B %Y") %></strong></span></p>
+ <p class="px-5 mb-0">Started on <span style="color: "><strong><%= @project.estimated_start_date.strftime("%d %B %Y") %></strong></span></p>
+ <p class="px-5">Expected to end on <strong><%= @project.estimated_end_date.strftime("%d %B %Y") %></strong></p>
 
 
  <!-- General info card at the top of the page -->
@@ -30,38 +31,32 @@
       <!-- Budget -->
 
       <div class="key-info-element">
-        <p class="key-info-title">Budget</p>
-        <p class="key-info-specs">USD <%= @project.estimated_cost_formatted %> </p>
+        <p class="key-info-title">Budget <br>(USD)</p>
+        <p class="key-info-specs"><%= @project.estimated_cost_formatted %></p>
       </div>
 
       <div class="key-info-element">
-          <p class="key-info-title">Budget spent</p>
-          <p class="key-info-specs">USD <%= @project.executed_cost_formatted %></p>
-
+          <p class="key-info-title">Spent<br>(USD)</p>
+          <p class="key-info-specs"><%= @project.executed_cost_formatted %></p>
       </div>
 
       <div class="key-info-element">
-          <p class="key-info-title">Percentage spent</p>
+          <p class="key-info-title">Portion<br>spent</p>
           <p class="key-info-specs"><%= (@project.executed_budget_percentage * 100).to_i %>%</p>
       </div>
 
       <div class="key-info-element">
-        <p class="key-info-title">Hours spent</p>
+        <p class="key-info-title">Hours<br>spent</p>
         <p class="key-info-specs"><%= @project.hours_spent_formatted %></p>
       </div>
 
        <div class="key-info-element">
-        <p class="key-info-title">Avg. cost/ hour</p>
-        <p class="key-info-specs">USD <%= @project.cost_per_hour %></p>
+        <p class="key-info-title">Cost/hour<br>AVG.(USD)</p>
+        <p class="key-info-specs"><%= @project.cost_per_hour %></p>
       </div>
 
       <div class="key-info-element">
-        <p class="key-info-title">End date</p>
-        <p class="key-info-specs"><%= @project.estimated_end_date.strftime("%d %B %Y") %></p>
-      </div>
-
-      <div class="key-info-element">
-        <p class="key-info-title">hours left</p>
+        <p class="key-info-title">hours left<br>(Avg.)</p>
         <p class="key-info-specs"><%= (@project.estimated_cost - @project.tasks.sum(:value)) / @project.cost_per_hour unless @project.cost_per_hour.zero? %></p>
       </div>
 
@@ -71,37 +66,31 @@
 </div>
 
 
-  <!-- Tabs on the sidebar -->
+<!-- Tabs Horizontal -->
 
-<div class="row mx-1">
-
-  <div class="col-2 p-0 project-dashboard-tab-container">
-    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-      <a class="nav-link active" id="v-pills-budgetevolution-tab" data-toggle="pill" href="#v-pills-budgetevolution" role="tab" aria-controls="v-pills-budgetevolution" aria-selected="true">Budget evolution</a>
-      <a class="nav-link" id="v-pills-budgetdistribution-tab" data-toggle="pill" href="#v-pills-budgetdistribution" role="tab" aria-controls="v-pills-budgetdistribution" aria-selected="false">Budget distribution</a>
-      <a class="nav-link" id="v-pills-associates-tab" data-toggle="pill" href="#v-pills-associates" role="tab" aria-controls="v-pills-associates" aria-selected="false">Associates in this project</a>
-      <a class="nav-link" id="v-pills-tasks-tab" data-toggle="pill" href="#v-pills-tasks" role="tab" aria-controls="v-pills-tasks" aria-selected="false">Task Log</a>
-      <a class="nav-link" id="v-pills-managemilestones-tab" data-toggle="pill" href="#v-pills-managemilestones" role="tab" aria-controls="v-pills-managemilestones" aria-selected="false">Manage Milestones</a>
+<nav>
+    <div class="nav nav-tabs d-flex justify-content-around" id="nav-tab" role="tablist">
+      <a class="nav-item nav-link active" id="nav-budgetevolution-tab" data-toggle="tab" href="#nav-budgetevolution" role="tab" aria-controls="nav-budgetevolution" aria-selected="true"><h3><i class="fas fa-chart-line"></i> Budget Evolution</h3></a>
+      <a class="nav-item nav-link" id="nav-budgetdistribution-tab" data-toggle="tab" href="#nav-budgetdistribution" role="tab" aria-controls="nav-budgetdistribution" aria-selected="false"><h3><i class="fas fa-chart-pie"></i> Budget distribution</h3></a>
+      <a class="nav-item nav-link" id="nav-associates-tab" data-toggle="tab" href="#nav-associates" role="tab" aria-controls="nav-associates" aria-selected="false"><h3><i class="fas fa-users"></i>Associates</h3></a>
+      <a class="nav-item nav-link" id="nav-tasks-tab" data-toggle="tab" href="#nav-tasks" role="tab" aria-controls="nav-tasks" aria-selected="false"><h3><i class="fas fa-stream"></i> Tasks</h3></a>
     </div>
-  </div>
+  </nav>
 
-          <!-- sidebar logic -->
 
-  <div class="col-10 p-0">
-    <div class="tab-content" id="v-pills-tabContent">
-      <!-- Begning of contents within the tabs -->
+  <!-- Tabs content  -->
 
-          <!-- Budget Evolution -->
-          <!-- Budget Evolution -->
-          <!-- Budget Evolution -->
-          <!-- Budget Evolution -->
 
-        <div class="tab-pane fade show active" id="v-pills-budgetevolution" role="tabpanel" aria-labelledby="v-pills-budgetevolution-tab">
-          <div class="card-project-dashboard">
+<div class="tab-content mb-4" id="nav-tabContent">
 
-            <h2><%= image_tag "task-log-icon.png", size: "38x38", class: "mr-2" %>Evolution of budget in time</h2>
+
+  <!-- Budget evolution -->
+
+  <div class="tab-pane fade show active" id="nav-budgetevolution" role="tabpanel" aria-labelledby="nav-budgetevolution-tab">
+
+    <div class="card-project-dashboard">
+
             <p>Time effectively spent vs. time according to milestone projection</p>
-
 
             <div class="card-project-dashboard-divider">
 
@@ -112,110 +101,24 @@
             </canvas>
 
             </div>
+      </div>
+
+  </div>
 
 
 
+  <!-- Budget distribution -->
 
-          </div>
-        </div>
+  <div class="tab-pane fade show" id="nav-budgetdistribution" role="tabpanel" aria-labelledby="nav-budgetdistribution-tab">
 
-          <!-- Budget Distribution -->
-          <!-- Budget Distribution -->
-          <!-- Budget Distribution -->
-          <!-- Budget Distribution -->
-
-        <div class="tab-pane fade" id="v-pills-budgetdistribution" role="tabpanel" aria-labelledby="v-pills-budgetdistribution-tab">
-          <div class="card-project-dashboard">
-            <h2 class=""> Distribution of budget by milestones</h2>
+        <div class="card-project-dashboard">
             <p class="mb-5">Portion of the budget unnassigned: <%= @project.unassigned_progress_rate %>%</p>
             <!-- Here is the pie chart -->
             <canvas height="100" id="milestone-pie-chart" data-milestone-progress-rates="<%= @milestone_progress_rates.to_json %>"></canvas>
             <!-- Here ends the chart -->
-          </div>
         </div>
 
-
-            <!-- Associates in the project -->
-            <!-- Associates in the project -->
-            <!-- Associates in the project -->
-            <!-- Associates in the project -->
-
-        <div class="tab-pane fade" id="v-pills-associates" role="tabpanel" aria-labelledby="v-pills-associates-tab">
-          <div class="card-project-dashboard">
-            <h2><i class="fas fa-users"></i> Associates in this project</h2>
-              <div class="grid-project-associate-cards">
-                  <% @project.array_users_hours.each do |data| %>
-                    <div class="card-project-user-performance">
-                      <div class="d-flex align-items-center mb-3">
-                        <%= image_tag "avatar_pics/#{data[:user].first_name}.jpg", class: "avatar mr-2"%>
-                        <% if User.senior_associates.include?(data[:user])  %>
-                            <strong><span style="color: #900C3F"><p><%= "#{data[:user].first_name} #{data[:user].last_name}" %> (Senior Associate) (US$ <%= data[:user].hourly_rate %> / hour) </p></span></strong>
-                        <% else %>
-                            <strong><p><%= "#{data[:user].first_name} #{data[:user].last_name}" %> (US$ <%= data[:user].hourly_rate %> / hour)</p></strong>
-                        <% end %>
-                      </div>
-                      <p>Has billed <span style="color: #900C3F">US$ <%= data[:value].to_s.reverse.scan(/\d{3}|.+/).join(".").reverse %></span> and spent <span style="color: #900C3F"><%= data[:hours_spent] %> hours</span> in this project</p>
-                    </div>
-                  <% end %>
-              </div>
-              <% unless @old_associates.empty? %>
-
-
-                <h2>Associates no longer in this project</h2>
-                <div class="grid-project-associate-cards">
-                <% @old_associates.each do |data| %>
-                      <div class="card-project-user-performance">
-                        <div class="d-flex align-items-center mb-3">
-                          <%= image_tag "avatar_pics/#{data[:user].first_name}.jpg", class: "avatar mr-2"%>
-                          <% if User.senior_associates.include?(data[:user])  %>
-                              <strong><span style="color: #900C3F"><p><%= "#{data[:user].first_name} #{data[:user].last_name}" %> (Senior Associate) (US$ <%= data[:user].hourly_rate %> / hour) </p></span></strong>
-                          <% else %>
-                              <strong><p><%= "#{data[:user].first_name} #{data[:user].last_name}" %> (US$ <%= data[:user].hourly_rate %> / hour)</p></strong>
-                          <% end %>
-                        </div>
-                        <p>Billed <span style="color: #900C3F">US$ <%= data[:value].to_s.reverse.scan(/\d{3}|.+/).join(".").reverse %></span> and spent <span style="color: #900C3F"><%= data[:hours_spent] %> hours</span> in this project</p>
-                      </div>
-                    <% end %>
-                </div>
-              <% end %>
-          </div>
-        </div>
-
-            <!-- Task log -->
-            <!-- Task log -->
-            <!-- Task log -->
-            <!-- Task log -->
-
-        <div class="tab-pane fade" id="v-pills-tasks" role="tabpanel" aria-labelledby="v-pills-tasks-tab">
-          <div class="card-project-dashboard task-log">
-            <h2 class="mb-4"> <i class="fas fa-stream"></i> Task Log</h2>
-            <% @project.milestones.sort_by { |milestone| milestone.end_date}.each do |milestone| %>
-            <div class="project-task-log-milestone-wrapper">
-              <h3><%= milestone.description %></h3>
-              <p><%= milestone.done ? "Ended on #{milestone.end_date.strftime("%d %B %Y")}" : "Estimated to end on #{milestone.end_date.strftime("%d %B %Y")}" %></p>
-              <% if  milestone.tasks.empty?%>
-                <strong><p>No tasks have been logged toward the completion of this milestone.</p></strong>
-              <% else %>
-                <p class="mb-2 border-bottom border-success">Tasks logged associated with this milestone:</p>
-                <div class="project-card-task-log">
-                  <% milestone.tasks.sort_by {|task| task.date } .reverse.each do |task| %>
-                    <p>On <%= task.date.strftime("%d %B %Y") %>, <%= task.user.username %> spent <%= task.hours_spent %> hours on <%= task.description.downcase %> and billed US$ <%= task.value %></p>
-                  <% end %>
-                </div>
-              <% end %>
-            </div>
-            <% end %>
-          </div>
-        </div>
-
-            <!-- Manage Milestones -->
-            <!-- Manage Milestones -->
-            <!-- Manage Milestones -->
-            <!-- Manage Milestones -->
-
-        <div class="tab-pane fade" id="v-pills-managemilestones" role="tabpanel" aria-labelledby="v-pills-managemilestones-tab">
-
-          <div class="card-project-dashboard">
+        <div class="card-project-dashboard">
             <div class="milestone-manager">
               <!-- Show milestones that cannot be updated -->
               <div class=" mt-3">
@@ -271,16 +174,84 @@
                   <% end %>
                 </div>
               </div>
-            </div>
 
 
-
-        <!-- End of content -->
-    </div>
   </div>
+
+
+  <!-- Associates -->
+
+
+  <div class="tab-pane fade show" id="nav-associates" role="tabpanel" aria-labelledby="nav-associates-tab">
+
+    <div class="card-project-dashboard">
+            <h3>Currently in the project</h3>
+              <div class="grid-project-associate-cards">
+                  <% @project.array_users_hours.each do |data| %>
+                    <div class="card-project-user-performance">
+                      <div class="d-flex align-items-center mb-3">
+                        <%= image_tag "avatar_pics/#{data[:user].first_name}.jpg", class: "avatar mr-2"%>
+                        <% if User.senior_associates.include?(data[:user])  %>
+                            <strong><span style="color: #900C3F"><p><%= "#{data[:user].first_name} #{data[:user].last_name}" %> (Senior Associate) (US$ <%= data[:user].hourly_rate %> / hour) </p></span></strong>
+                        <% else %>
+                            <strong><p><%= "#{data[:user].first_name} #{data[:user].last_name}" %> (US$ <%= data[:user].hourly_rate %> / hour)</p></strong>
+                        <% end %>
+                      </div>
+                      <p>Has billed <span style="color: #900C3F">US$ <%= data[:value].to_s.reverse.scan(/\d{3}|.+/).join(".").reverse %></span> and spent <span style="color: #900C3F"><%= data[:hours_spent] %> hours</span> in this project</p>
+                    </div>
+                    <% end %>
+              </div>
+                <% unless @old_associates.empty? %>
+
+
+                <h3>No longer in this project</h3>
+                <div class="grid-project-associate-cards">
+                <% @old_associates.each do |data| %>
+                      <div class="card-project-user-performance">
+                        <div class="d-flex align-items-center mb-3">
+                          <%= image_tag "avatar_pics/#{data[:user].first_name}.jpg", class: "avatar mr-2"%>
+                          <% if User.senior_associates.include?(data[:user])  %>
+                              <strong><span style="color: #900C3F"><p><%= "#{data[:user].first_name} #{data[:user].last_name}" %> (Senior Associate) (US$ <%= data[:user].hourly_rate %> / hour) </p></span></strong>
+                          <% else %>
+                              <strong><p><%= "#{data[:user].first_name} #{data[:user].last_name}" %> (US$ <%= data[:user].hourly_rate %> / hour)</p></strong>
+                          <% end %>
+                        </div>
+                        <p>Billed <span style="color: #900C3F">US$ <%= data[:value].to_s.reverse.scan(/\d{3}|.+/).join(".").reverse %></span> and spent <span style="color: #900C3F"><%= data[:hours_spent] %> hours</span> in this project</p>
+                      </div>
+                        <% end %>
+                </div>
+                    <% end %>
+          </div>
+
+  </div>
+
+  <!-- Task log -->
+
+
+  <div class="tab-pane fade show" id="nav-tasks" role="tabpanel" aria-labelledby="nav-tasks-tab">
+
+    <div class="card-project-dashboard task-log">
+            <% @project.milestones.sort_by { |milestone| milestone.end_date}.each do |milestone| %>
+            <div class="project-task-log-milestone-wrapper">
+              <h3><%= milestone.description %></h3>
+              <p><%= milestone.done ? "Ended on #{milestone.end_date.strftime("%d %B %Y")}" : "Estimated to end on #{milestone.end_date.strftime("%d %B %Y")}" %></p>
+              <% if  milestone.tasks.empty?%>
+                <strong><p>No tasks have been logged toward the completion of this milestone.</p></strong>
+              <% else %>
+                <p class="mb-2 border-bottom border-success">Tasks logged associated with this milestone:</p>
+                <div class="project-card-task-log">
+                  <% milestone.tasks.sort_by {|task| task.date } .reverse.each do |task| %>
+                    <p>On <%= task.date.strftime("%d %B %Y") %>, <%= task.user.username %> spent <%= task.hours_spent %> hours on <%= task.description.downcase %> and billed US$ <%= task.value %></p>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+            <% end %>
+      </div>
+
+  </div>
+
+
+
 </div>
-
-
-
-
 
