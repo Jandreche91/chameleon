@@ -1,0 +1,46 @@
+<body>
+  <div id="wrapper">
+
+    <!-- Sidebar -->
+    <div id="sidebar-wrapper">
+      <ul class="sidebar-nav">
+        <%= link_to root_path, class: "navbar-brand" do %>
+        <%= image_tag "logo.png" %><span style="color:#AAEF68"><strong><!-- Chameleon --></strong></span>
+        <% end %>
+
+        <li class="nav-item">
+        <%= link_to projects_path, class: "nav-link" do %>
+          <i class="fas fa-tasks"></i> <!-- Projects -->
+        <% end %>
+
+
+        <li class="nav-item">
+          <%= link_to users_path, class: "nav-link" do %>
+            <i class="fas fa-users"></i> <!-- Associates -->
+          <% end %>
+        </li>
+
+        <li class="nav-item">
+          <%= link_to new_project_path, class: "nav-link" do %>
+          <i class="fas fa-plus-circle"></i> <!-- Add project -->
+          <% end %>
+        </li>
+
+        <li class="nav-item">
+          <%= link_to "Login", new_user_session_path, class: "nav-link" %>
+        </li>
+
+      </ul>
+    </div>
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-12">
+            <a href="#" class="btn" id="menu-toggle"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
