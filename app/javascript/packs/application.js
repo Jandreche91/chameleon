@@ -26,11 +26,11 @@ require("datejs");
 
 // External imports
 import "bootstrap";
-import "../plugins/flatpickr"
 
 // Internal imports, e.g:
 // import { initSelect2 } from '../components/init_select2';
 import initProgressBar from '../plugins/progressbar';
+import {flatpickr} from "../plugins/flatpickr";
 
 
 // importing specific charts
