@@ -273,6 +273,10 @@
                 <h3>No longer in this project</h3>
                 <div class="grid-project-associate-cards">
                 <% @old_associates.each do |data| %>
+
+                    <% if @project.users_as_billers.include?(data[:user]) == false  %>
+
+
                       <div class="card-project-user-performance">
                         <div class="d-flex align-items-center mb-3">
                           <%= image_tag "avatar_pics/#{data[:user].first_name}.jpg", class: "avatar mr-2"%>
@@ -284,6 +288,8 @@
                         </div>
                         <p>Billed <span style="color: #900C3F">US$ <%= data[:value].to_s.reverse.scan(/\d{3}|.+/).join(".").reverse %></span> and spent <span style="color: #900C3F"><%= data[:hours_spent] %> hours</span> in this project</p>
                       </div>
+
+                      <% end %>
                         <% end %>
                 </div>
                     <% end %>
