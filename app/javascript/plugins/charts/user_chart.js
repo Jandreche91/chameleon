@@ -35,6 +35,7 @@ const initUserChart = () => {
             }]
         },
         options: {
+          // maintainAspectRatio: false,
           // responsive: true,
             scales: {
               yAxes:
