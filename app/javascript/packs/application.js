@@ -38,45 +38,15 @@ import initUserChart from '../plugins/charts/user_chart';
 import initProjectValueChart from '../plugins/charts/project_value_chart';
 import initGeneralDashboardChart from '../plugins/charts/general_dashboard_chart';
 import initMilestonePiechart from '../plugins/charts/milestone_piechart';
+import toggleCard from '../plugins/toggle_card';
 
 
-const toggleCard = () => {
-  const userChoices = document.querySelectorAll('.user-choice');
-  userChoices.forEach((item) => {
-    item.addEventListener('click', (e) => {
-      e.currentTarget.classList.toggle('active')
-      const checkboxInput = e.currentTarget.querySelector('input')
-      if (checkboxInput.checked == false) {
-        checkboxInput.checked = true;
-      } else {
-        checkboxInput.checked = false;
-      }
-    })
-  })
-}
 
 document.addEventListener('turbolinks:load', () => {
+
+  // togglecard is the method that manages the selection of users in the edit and new forms of projects
+
   toggleCard()
-
-  // const userChoices = document.querySelectorAll(".user-choice");
-
-  // userChoices.forEach((userChoice) => {
-  //   userChoice.addEventListener('click', function(event) {
-  //     console.log(event.currentTarget);
-  //     const elementClicked = event.currentTarget;
-
-
-  //     if (elementClicked.classList.contains("active")) {
-  //       elementClicked.classList.remove("active");
-  //     } else {
-  //       elementClicked.classList.add("active");
-  //     }
-  //     // elementClicked.classList.toggle('active')
-
-
-  //   })
-  // })
-
 
   // Call your functions here, e.g:
   // initSelect2();
@@ -87,6 +57,5 @@ document.addEventListener('turbolinks:load', () => {
   initMilestonePiechart();
 
   // progress bars
-
   initProgressBar();
 });

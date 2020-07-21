@@ -176,7 +176,7 @@
             <!-- Edit unfinished milestones -->
 
             <% unless @unfinished_milestones.empty?  %>
-              <h3 class="mt-5"><i class="far fa-edit"></i> Manage ongoing milestones</h3>
+              <h3 class="mt-5" id="manage-ongoing-milestones" data-milestones-ids="<%= @unfinished_milestones.pluck(:id) %>" data-budget = "<%= @project.estimated_cost %>"><i class="far fa-edit"></i> Manage ongoing milestones</h3>
               <% if @project.unassigned_progress_rate.zero?  %>
                   <p class="mb-4">You cannot add new milestones because all budget has already been assigned.</p>
               <% end %>
@@ -200,7 +200,7 @@
                               <div class="d-flex">
                               <%= f.input :end_date, as: :string, required: true, input_html: {class: "datepicker"} %>
                                   <div class="ml-4 range-in-the-form">
-                                    <%= f.input :progress_rate, collection: (0..(milestone.progress_rate + @project.unassigned_progress_rate)).to_a %>
+                                    <%= f.input :progress_rate, collection: (0..(milestone.progress_rate + @project.unassigned_progress_rate)).to_a, input_html: { id: "form-progress-milestone-#{milestone.id}"} %>
                                   </div>
                               </div>
                               <%= f.button :submit, class: "btn btn-outline-primary" %>
