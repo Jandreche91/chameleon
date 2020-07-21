@@ -26,11 +26,13 @@ require("datejs");
 
 // External imports
 import "bootstrap";
+import flatpickr from "flatpickr";
+// require("flatpickr/dist/themes/material_blue.css");
 
 // Internal imports, e.g:
 // import { initSelect2 } from '../components/init_select2';
 import initProgressBar from '../plugins/progressbar';
-import {flatpickr} from "../plugins/flatpickr";
+// import {flatpickr} from "../plugins/flatpickr.js";
 
 
 // importing specific charts
@@ -63,4 +65,12 @@ document.addEventListener('turbolinks:load', () => {
 
   // progress bars
   initProgressBar();
+
+  // flatpickr
+
+  flatpickr(".datepicker", {
+  altInput: true,
+  allowInput: true
+});
+
 });
