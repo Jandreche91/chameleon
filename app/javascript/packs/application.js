@@ -31,7 +31,7 @@ import "../plugins/flatpickr"
 // Internal imports, e.g:
 // import { initSelect2 } from '../components/init_select2';
 import initProgressBar from '../plugins/progressbar';
-import {togglerevealer} from '../plugins/togglerevealer.js';
+
 
 // importing specific charts
 import initUserChart from '../plugins/charts/user_chart';
@@ -39,6 +39,7 @@ import initProjectValueChart from '../plugins/charts/project_value_chart';
 import initGeneralDashboardChart from '../plugins/charts/general_dashboard_chart';
 import initMilestonePiechart from '../plugins/charts/milestone_piechart';
 import toggleCard from '../plugins/toggle_card';
+import initDinamicBudgetCalculator from '../plugins/dinamic_budget_calculator';
 
 
 
@@ -46,7 +47,11 @@ document.addEventListener('turbolinks:load', () => {
 
   // togglecard is the method that manages the selection of users in the edit and new forms of projects
 
-  toggleCard()
+  toggleCard();
+
+  // this function dinamically shows the budget in the update milestone forms
+
+  initDinamicBudgetCalculator();
 
   // Call your functions here, e.g:
   // initSelect2();

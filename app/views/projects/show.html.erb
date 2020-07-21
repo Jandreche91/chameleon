@@ -200,7 +200,10 @@
                               <div class="d-flex">
                               <%= f.input :end_date, as: :string, required: true, input_html: {class: "datepicker"} %>
                                   <div class="ml-4 range-in-the-form">
-                                    <%= f.input :progress_rate, collection: (0..(milestone.progress_rate + @project.unassigned_progress_rate)).to_a, input_html: { id: "form-progress-milestone-#{milestone.id}"} %>
+                                    <%= f.input :progress_rate, label: "Weight (%)" , collection: (0..(milestone.progress_rate + @project.unassigned_progress_rate)).to_a, input_html: { id: "form-progress-milestone-#{milestone.id}"} %>
+                                  </div>
+                                  <div class="form-converter-in-dollars">
+                                    <p id="milestone-form-dollars-id-<%= milestone.id %>">(USD 000.000)</p>
                                   </div>
                               </div>
                               <%= f.button :submit, class: "btn btn-outline-primary" %>
