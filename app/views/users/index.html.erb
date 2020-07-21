@@ -1,6 +1,6 @@
 <div class=" pt-3 cards-team">
     <div class="row">
-      <% @users.each do |user| %>
+      <% @users.reject{|user| user == current_user}.each do |user| %>
         <%= render "users/card", user: user %>
       <% end %>
     </div>

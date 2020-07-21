@@ -176,7 +176,7 @@
             <!-- Edit unfinished milestones -->
 
             <% unless @unfinished_milestones.empty?  %>
-              <h3 class="mt-5"><i class="far fa-edit"></i> Manage ongoing milestones</h3>
+              <h3 class="mt-5" id="manage-ongoing-milestones" data-milestones-ids="<%= @unfinished_milestones.pluck(:id) %>" data-budget = "<%= @project.estimated_cost %>"><i class="far fa-edit"></i> Manage ongoing milestones</h3>
               <% if @project.unassigned_progress_rate.zero?  %>
                   <p class="mb-4">You cannot add new milestones because all budget has already been assigned.</p>
               <% end %>
@@ -200,7 +200,10 @@
                               <div class="d-flex">
                               <%= f.input :end_date, as: :string, required: true, input_html: {class: "datepicker"} %>
                                   <div class="ml-4 range-in-the-form">
-                                    <%= f.input :progress_rate, collection: (0..(milestone.progress_rate + @project.unassigned_progress_rate)).to_a %>
+                                    <%= f.input :progress_rate, label: "Weight (%)" , collection: (0..(milestone.progress_rate + @project.unassigned_progress_rate)).to_a, input_html: { id: "form-progress-milestone-#{milestone.id}"} %>
+                                  </div>
+                                  <div class="form-converter-in-dollars">
+                                    <p id="milestone-form-dollars-id-<%= milestone.id %>">(USD 000.000)</p>
                                   </div>
                               </div>
                               <%= f.button :submit, class: "btn btn-outline-primary" %>
@@ -270,6 +273,10 @@
                 <h3>No longer in this project</h3>
                 <div class="grid-project-associate-cards">
                 <% @old_associates.each do |data| %>
+
+                    <% if @project.users_as_billers.include?(data[:user]) == false  %>
+
+
                       <div class="card-project-user-performance">
                         <div class="d-flex align-items-center mb-3">
                           <%= image_tag "avatar_pics/#{data[:user].first_name}.jpg", class: "avatar mr-2"%>
@@ -281,6 +288,8 @@
                         </div>
                         <p>Billed <span style="color: #900C3F">US$ <%= data[:value].to_s.reverse.scan(/\d{3}|.+/).join(".").reverse %></span> and spent <span style="color: #900C3F"><%= data[:hours_spent] %> hours</span> in this project</p>
                       </div>
+
+                      <% end %>
                         <% end %>
                 </div>
                     <% end %>
