@@ -1,0 +1,17 @@
+<div class="sidebar d-flex flex-column">
+  <%= link_to root_path do %>
+    <%= image_tag "logo.png" %>
+  <% end %>
+
+  <%= link_to projects_path, class: "nav-link" do %>
+    <i class="fas fa-tasks"></i>
+  <% end %>
+
+  <%= link_to users_path, class: "nav-link" do %>
+    <i class="fas fa-users"></i>
+  <% end %>
+
+  <%= link_to new_project_path, class: "nav-link" do %>
+    <i class="fas fa-plus-circle"></i>
+  <% end %>
+</div>
