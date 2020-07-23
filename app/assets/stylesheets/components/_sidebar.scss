@@ -1,10 +1,18 @@
 .sidebar {
   width: 50px;
   height: 100vh;
-  background: #08214E;
+  background: $dark-blue;
   padding-top: 20px;
-  i{
-    color: #c9d7e6;
+
+
+  // .logout-separator {
+  //   border-top: solid 1px $white-blue;
+  //   // padding: 8px;
+  // }
+
+  i {
+    color: $white-blue;
+
   }
 
 

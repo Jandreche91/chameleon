@@ -1,27 +1,32 @@
 <div class="sidebar d-flex flex-column">
-  <%= link_to root_path, class: "nav-logo" do %>
-    <%= image_tag "logo.png" %>
+
+  <%= link_to root_path , class: "nav-logo" do %>
+    <span data-toggle="tooltip" data-placement="right" title="Home"><%= image_tag "logo.png" %></span>
+
   <% end %>
 
-  <% if current_user  %>
+
+  <%= link_to projects_path, class: "nav-link" do %>
+    <span  data-toggle="tooltip" data-placement="right" title="Projects"><i class="fas fa-tasks"></i></span>
+  <% end %>
+
+  <%= link_to users_path, class: "nav-link" do %>
+    <span  data-toggle="tooltip" data-placement="right" title="Associates"><i class="fas fa-users"></i></span>
+  <% end %>
+
+  <%= link_to new_project_path, class: "nav-link" do %>
+    <span data-toggle="tooltip" data-placement="right" title="Add a new project"><i class="fas fa-plus-circle"></i></span>
+  <% end %>
+
+
+   <% if current_user  %>
     <%= link_to destroy_user_session_path, method: :delete, class: "nav-link" do %>
-       <i class="fas fa-sign-out-alt"></i>
+       <span data-toggle="tooltip" data-placement="right" title="Logout"><i class="fas fa-sign-out-alt pt-4 border-top"></i></span>
     <% end %>
   <% else %>
     <%= link_to new_user_session_path, class: "nav-link" do %>
        <i class="fas fa-sign-in-alt"></i>
     <% end %>
-  <% end %>
-  <%= link_to projects_path, class: "nav-link" do %>
-    <i class="fas fa-tasks"></i>
-  <% end %>
-
-  <%= link_to users_path, class: "nav-link" do %>
-    <i class="fas fa-users"></i>
-  <% end %>
-
-  <%= link_to new_project_path, class: "nav-link" do %>
-    <i class="fas fa-plus-circle"></i>
   <% end %>
 
 
