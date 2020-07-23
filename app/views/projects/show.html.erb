@@ -355,10 +355,15 @@
     <div class="">
             <div class="alert-board" style="">
                 <% if @project.outstanding_alerts.empty? %>
+                    <div class="alert-card">
 
-                <div class="alert-card">
-                  <p>You don't have outstanding alerts. Congratulations!</p>
-                </div>
+                      <div class="d-flex align-items-center">
+
+                        <div class="alert-card-color-tag" style="background-color: green;"></div>
+                        <p>You don't have outstanding alerts. Congratulations!</p>
+
+                      </div>
+                  </div>
 
                 <% else %>
 
