@@ -24,48 +24,6 @@
   }
 }
 
-// Inside Card-project-general-info
-
-.key-info-grid {
-
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 16px;
-
-
-    .key-info-element {
-
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      text-transform: uppercase;
-      border: solid 1px $grey;
-      padding: 16px;
-      justify-content: space-between;
-      border-radius: 8px;
-      font-size: 16px;
-    }
-
-    .key-info-title {
-
-      color: $grey;
-    }
-
-    .key-info-specs{
-      color: $blue;
-      font-size: 24px;
-    }
-
-}
-
-@media (max-width: 1000px) {
-  .key-info-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-
 
 
 .card-project-dashboard {

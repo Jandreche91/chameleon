@@ -18,50 +18,7 @@
     <p class="card-project-general-description"><%= @project.description %></p>
 
 
-    <!-- key info grid -->
-    <!-- key info grid -->
-    <!-- key info grid -->
-    <!-- key info grid -->
-    <!-- key info grid -->
-    <!-- key info grid -->
 
-
-    <div class="key-info-grid">
-
-      <!-- Budget -->
-
-      <div class="key-info-element">
-        <p class="key-info-title">Budget <br>(USD)</p>
-        <p class="key-info-specs"><%= @project.estimated_cost_formatted %></p>
-      </div>
-
-      <div class="key-info-element">
-          <p class="key-info-title">Spent<br>(USD)</p>
-          <p class="key-info-specs"><%= @project.executed_cost_formatted %></p>
-      </div>
-
-      <div class="key-info-element">
-          <p class="key-info-title">Portion<br>spent</p>
-          <p class="key-info-specs"><%= (@project.executed_budget_percentage * 100).to_i %>%</p>
-      </div>
-
-      <div class="key-info-element">
-        <p class="key-info-title">Hours<br>spent</p>
-        <p class="key-info-specs"><%= @project.hours_spent_formatted %></p>
-      </div>
-
-       <div class="key-info-element">
-        <p class="key-info-title">Cost/hour<br>AVG.(USD)</p>
-        <p class="key-info-specs"><%= @project.cost_per_hour %></p>
-      </div>
-
-      <div class="key-info-element">
-        <p class="key-info-title">hours left<br>(Avg.)</p>
-        <p class="key-info-specs"><%= (@project.estimated_cost - @project.tasks.sum(:value)) / @project.cost_per_hour unless @project.cost_per_hour.zero? %></p>
-      </div>
-
-
-    </div>
 
 </div>
 
@@ -70,10 +27,22 @@
 
 <nav>
     <div class="nav nav-tabs d-flex" id="nav-tab" role="tablist" style="justify-content: space-evenly;">
-      <a class="nav-item nav-link active" id="nav-budgetevolution-tab" data-toggle="tab" href="#nav-budgetevolution" role="tab" aria-controls="nav-budgetevolution" aria-selected="true"><h3><i class="fas fa-chart-line"></i> Budget Evolution</h3></a>
-      <a class="nav-item nav-link" id="nav-budgetdistribution-tab" data-toggle="tab" href="#nav-budgetdistribution" role="tab" aria-controls="nav-budgetdistribution" aria-selected="false"><h3><i class="fas fa-chart-pie"></i> Budget distribution</h3></a>
-      <a class="nav-item nav-link" id="nav-associates-tab" data-toggle="tab" href="#nav-associates" role="tab" aria-controls="nav-associates" aria-selected="false"><h3><i class="fas fa-users"></i>Associates</h3></a>
-      <a class="nav-item nav-link" id="nav-tasks-tab" data-toggle="tab" href="#nav-tasks" role="tab" aria-controls="nav-tasks" aria-selected="false"><h3><i class="fas fa-stream"></i> Tasks</h3></a>
+      <a class="nav-item nav-link active" id="nav-budgetevolution-tab" data-toggle="tab" href="#nav-budgetevolution" role="tab" aria-controls="nav-budgetevolution" aria-selected="true"><h4><i class="fas fa-chart-line"></i> Budget Evolution</h4></a>
+      <a class="nav-item nav-link" id="nav-budgetdistribution-tab" data-toggle="tab" href="#nav-budgetdistribution" role="tab" aria-controls="nav-budgetdistribution" aria-selected="false"><h4><i class="fas fa-chart-pie"></i> Budget distribution</h4></a>
+      <a class="nav-item nav-link" id="nav-keyfigures-tab" data-toggle="tab" href="#nav-keyfigures" role="tab" aria-controls="nav-keyfigures" aria-selected="false"><h4><i class="far fa-lightbulb"></i> Key figures</h4></a>
+      <a class="nav-item nav-link" id="nav-associates-tab" data-toggle="tab" href="#nav-associates" role="tab" aria-controls="nav-associates" aria-selected="false"><h4><i class="fas fa-users"></i>Associates</h4></a>
+      <a class="nav-item nav-link" id="nav-tasks-tab" data-toggle="tab" href="#nav-tasks" role="tab" aria-controls="nav-tasks" aria-selected="false"><h4><i class="fas fa-stream"></i> Tasks</h4></a>
+       <a class="nav-item nav-link" id="nav-alerts-tab" data-toggle="tab" href="#nav-alerts" role="tab" aria-controls="nav-alerts" aria-selected="false">
+        <div class="d-flex"><h4><i class="mr-2 fas fa-exclamation-circle"></i> Alerts</h4>
+          <% unless @project.outstanding_alerts.empty? %>
+
+          <div class="alert-count ml-2"><%= @project.outstanding_alerts.count%></div>
+
+          <% end %>
+
+
+          </div>
+      </a>
     </div>
   </nav>
 
@@ -244,6 +213,62 @@
 
   </div>
 
+  <!-- Key figures -->
+
+  <div class="tab-pane fade show" id="nav-keyfigures" role="tabpanel" aria-labelledby="nav-keyfigures-tab">
+
+    <div class="card-project-dashboard">
+
+      <!-- key info grid -->
+    <!-- key info grid -->
+    <!-- key info grid -->
+    <!-- key info grid -->
+    <!-- key info grid -->
+    <!-- key info grid -->
+
+
+    <div class="key-info-grid">
+
+      <!-- Budget -->
+
+      <div class="key-info-element">
+        <p class="key-info-title">Budget <br>(USD)</p>
+        <p class="key-info-specs"><%= @project.estimated_cost_formatted %></p>
+      </div>
+
+      <div class="key-info-element">
+          <p class="key-info-title">Spent<br>(USD)</p>
+          <p class="key-info-specs"><%= @project.executed_cost_formatted %></p>
+      </div>
+
+      <div class="key-info-element">
+          <p class="key-info-title">Portion<br>spent</p>
+          <p class="key-info-specs"><%= (@project.executed_budget_percentage * 100).to_i %>%</p>
+      </div>
+
+      <div class="key-info-element">
+        <p class="key-info-title">Hours<br>spent</p>
+        <p class="key-info-specs"><%= @project.hours_spent_formatted %></p>
+      </div>
+
+       <div class="key-info-element">
+        <p class="key-info-title">Cost/hour<br>AVG.(USD)</p>
+        <p class="key-info-specs"><%= @project.cost_per_hour %></p>
+      </div>
+
+      <div class="key-info-element">
+        <p class="key-info-title">hours left<br>(Avg.)</p>
+        <p class="key-info-specs"><%= (@project.estimated_cost - @project.tasks.sum(:value)) / @project.cost_per_hour unless @project.cost_per_hour.zero? %></p>
+      </div>
+
+
+    </div>
+
+    </div>
+  </div>
+
+
+
 
   <!-- Associates -->
 
@@ -321,6 +346,45 @@
             <% end %>
       </div>
 
+  </div>
+
+  <!-- Alert board -->
+
+  <div class="tab-pane fade" id="nav-alerts" role="tabpanel" aria-labelledby="nav-alerts-tab">
+
+    <div class="">
+            <div class="alert-board" style="">
+                <% if @project.outstanding_alerts.empty? %>
+
+                <div class="alert-card">
+                  <p>You don't have outstanding alerts. Congratulations!</p>
+                </div>
+
+                <% else %>
+
+                  <% @project.outstanding_alerts.each do |alert| %>
+
+                  <%= link_to project_path(alert.project), class: "index-link" do %>
+
+                  <div class="alert-card">
+
+
+                      <div class="d-flex align-items-center">
+
+                        <div class="alert-card-color-tag color-tag-<%= @alert_budget.include?(alert.description) ? "gold" : "purple" %>"></div>
+                        <p>This project <%= alert.description %></p>
+
+                      </div>
+                  </div>
+
+                  <% end %>
+
+                  <% end %>
+
+                <% end %>
+
+
+    </div>
   </div>
 
 
