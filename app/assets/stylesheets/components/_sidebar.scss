@@ -1,8 +1,16 @@
 .sidebar {
   width: 50px;
   height: 100vh;
-  background: #08214E;
+  background: $dark-blue;
   padding-top: 20px;
+  // display: flex;
+  // flex-direction: column;
+  // justify-content: space-around;
+
+  .logout-button {
+    border-top: solid 1px $blue;
+  }
+
 
   img {
     width: 100%;
