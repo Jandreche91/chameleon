@@ -3,6 +3,10 @@
   height: 100vh;
   background: #08214E;
   padding-top: 20px;
+  i{
+    color: #c9d7e6;
+  }
+
 
   img {
     width: 100%;
@@ -15,4 +19,17 @@ main {
   height: 100vh;
   overflow: scroll;
   overflow-x: hidden;
+}
+
+.nav-link{
+  &:hover {
+    background-color: #89C5CC;
+    i {
+      color: black;
+    }
+  }
+}
+
+.nav-logo{
+  margin-bottom: 15px;
 }
