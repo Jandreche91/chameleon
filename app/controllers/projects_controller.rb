@@ -36,6 +36,7 @@ class ProjectsController < ApplicationController
     @unfinished_milestones = @project.milestones.select { |m| m.done == false }
     @new_milestone = Milestone.new
     @old_associates = @project.array_past_associates
+    @alert_budget = [] << Alert.descriptions[:budget_surpassed_85] << Alert.descriptions[:budget_surpassed_50] << Alert.descriptions[:progress_excess_budget]
   end
 
   def edit
