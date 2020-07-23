@@ -19,10 +19,9 @@
   <% end %>
 
 
-
-  <% if current_user  %>
+   <% if current_user  %>
     <%= link_to destroy_user_session_path, method: :delete, class: "nav-link" do %>
-       <span data-toggle="tooltip" data-placement="right" title="Logout"><i class="fas fa-sign-out-alt mt-4 pt-4 logout-button"></i></span>
+       <span data-toggle="tooltip" data-placement="right" title="Logout"><i class="fas fa-sign-out-alt pt-4 border-top"></i></span>
     <% end %>
   <% else %>
     <%= link_to new_user_session_path, class: "nav-link" do %>
