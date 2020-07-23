@@ -1,0 +1,28 @@
+<div class="sidebar d-flex flex-column">
+  <%= link_to root_path do %>
+    <%= image_tag "logo.png" %>
+  <% end %>
+
+  <% if current_user  %>
+    <%= link_to destroy_user_session_path, method: :delete, class: "nav-link" do %>
+       <i class="fas fa-sign-out-alt"></i>
+    <% end %>
+  <% else %>
+    <%= link_to new_user_session_path, class: "nav-link" do %>
+       <i class="fas fa-sign-in-alt"></i>
+    <% end %>
+  <% end %>
+  <%= link_to projects_path, class: "nav-link" do %>
+    <i class="fas fa-tasks"></i>
+  <% end %>
+
+  <%= link_to users_path, class: "nav-link" do %>
+    <i class="fas fa-users"></i>
+  <% end %>
+
+  <%= link_to new_project_path, class: "nav-link" do %>
+    <i class="fas fa-plus-circle"></i>
+  <% end %>
+
+
+</div>
