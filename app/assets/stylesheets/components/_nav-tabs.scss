@@ -5,7 +5,11 @@
   margin-bottom: 4px;
 
   a:hover {
-    color: $dark-grey
+    color: $dark-blue
+  }
+
+  .nav-link:hover {
+    border-color: transparent;
   }
 
 
@@ -17,17 +21,17 @@
 
   .active:hover {
     border: 0;
-    color: $dark-grey;
+    color: $dark-blue;
       }
 
 }
 
 .nav-item {
   border: 0;
-  color: $medium-grey;
+  color: $grey;
   }
 
 
 .nav-item:hover {
-    border: 0;
+    // border: none;
 }
