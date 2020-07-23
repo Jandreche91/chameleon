@@ -73,4 +73,8 @@ document.addEventListener('turbolinks:load', () => {
   allowInput: true
 });
 
+  $(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+  })
+
 });

@@ -27,13 +27,13 @@
 
 <nav>
     <div class="nav nav-tabs d-flex" id="nav-tab" role="tablist" style="justify-content: space-evenly;">
-      <a class="nav-item nav-link active" id="nav-budgetevolution-tab" data-toggle="tab" href="#nav-budgetevolution" role="tab" aria-controls="nav-budgetevolution" aria-selected="true"><h4><i class="fas fa-chart-line"></i> Budget Evolution</h4></a>
-      <a class="nav-item nav-link" id="nav-budgetdistribution-tab" data-toggle="tab" href="#nav-budgetdistribution" role="tab" aria-controls="nav-budgetdistribution" aria-selected="false"><h4><i class="fas fa-chart-pie"></i> Budget distribution</h4></a>
-      <a class="nav-item nav-link" id="nav-keyfigures-tab" data-toggle="tab" href="#nav-keyfigures" role="tab" aria-controls="nav-keyfigures" aria-selected="false"><h4><i class="far fa-lightbulb"></i> Key figures</h4></a>
-      <a class="nav-item nav-link" id="nav-associates-tab" data-toggle="tab" href="#nav-associates" role="tab" aria-controls="nav-associates" aria-selected="false"><h4><i class="fas fa-users"></i>Associates</h4></a>
-      <a class="nav-item nav-link" id="nav-tasks-tab" data-toggle="tab" href="#nav-tasks" role="tab" aria-controls="nav-tasks" aria-selected="false"><h4><i class="fas fa-stream"></i> Tasks</h4></a>
+      <a class="nav-item nav-link active" id="nav-budgetevolution-tab" data-toggle="tab" href="#nav-budgetevolution" role="tab" aria-controls="nav-budgetevolution" aria-selected="true"><h5><i class="fas fa-chart-line"></i> Budget Evolution</h5></a>
+      <a class="nav-item nav-link" id="nav-budgetdistribution-tab" data-toggle="tab" href="#nav-budgetdistribution" role="tab" aria-controls="nav-budgetdistribution" aria-selected="false"><h5><i class="fas fa-chart-pie"></i> Budget distribution</h5></a>
+      <a class="nav-item nav-link" id="nav-keyfigures-tab" data-toggle="tab" href="#nav-keyfigures" role="tab" aria-controls="nav-keyfigures" aria-selected="false"><h5><i class="far fa-lightbulb"></i> Key figures</h5></a>
+      <a class="nav-item nav-link" id="nav-associates-tab" data-toggle="tab" href="#nav-associates" role="tab" aria-controls="nav-associates" aria-selected="false"><h5><i class="fas fa-users"></i>Associates</h5></a>
+      <a class="nav-item nav-link" id="nav-tasks-tab" data-toggle="tab" href="#nav-tasks" role="tab" aria-controls="nav-tasks" aria-selected="false"><h5><i class="fas fa-stream"></i> Tasks</h5></a>
        <a class="nav-item nav-link" id="nav-alerts-tab" data-toggle="tab" href="#nav-alerts" role="tab" aria-controls="nav-alerts" aria-selected="false">
-        <div class="d-flex"><h4><i class="mr-2 fas fa-exclamation-circle"></i> Alerts</h4>
+        <div class="d-flex"><h5><i class="mr-2 fas fa-exclamation-circle"></i> Alerts</h5>
           <% unless @project.outstanding_alerts.empty? %>
 
           <div class="alert-count ml-2"><%= @project.outstanding_alerts.count%></div>
@@ -127,25 +127,35 @@
             </div>
           </div>
 
-          <!-- Convert into a tooltip -->
 
-          <div class=" mt-3">
-            <% unless @finished_milestones.empty? %>
-            <p class="mb-0">You can only edit milestones that have not been completed</p>
-            <p class="mb-1">The following milestones have already been completed:</p>
 
-            <ul>
-              <% @finished_milestones.sort_by(&:end_date).each do |milestone| %>
-                <li><%= milestone.description %> (completed on <%= milestone.end_date.strftime("%d %B %Y") %>) - <%= milestone.progress_rate %> %</li>
-                <% end %>
-            </ul>
-             <% end %>
-          </div>
 
             <!-- Edit unfinished milestones -->
 
             <% unless @unfinished_milestones.empty?  %>
-              <h3 class="mt-5" id="manage-ongoing-milestones" data-milestones-ids="<%= @unfinished_milestones.pluck(:id) %>" data-budget = "<%= @project.estimated_cost %>"><i class="far fa-edit"></i> Manage ongoing milestones</h3>
+
+            <div class="d-flex mt-4">
+              <h3 class="" id="manage-ongoing-milestones" data-milestones-ids="<%= @unfinished_milestones.pluck(:id) %>" data-budget = "<%= @project.estimated_cost %>"><i class="far fa-edit"></i> Manage ongoing milestones</h3>
+
+              <!-- Tooltip automatically generated -->
+
+              <p><i class="far fa-question-circle" data-toggle="tooltip" data-placement="top" data-html="true" title="
+                      <p>You can only edit milestones that have not been completed</p>
+                      <% unless @finished_milestones.empty? %>
+
+                        <p>The following milestones have already been completed:</p>
+
+                        <ul>
+                          <% @finished_milestones.sort_by(&:end_date).each do |milestone| %>
+                            <li><%= milestone.description %> (completed on <%= milestone.end_date.strftime("%d %B %Y") %>) - <%= milestone.progress_rate %> %</li>
+                            <% end %>
+                        </ul>
+                    <% end %>">
+
+             </i></p>
+            </div>
+
+
               <% if @project.unassigned_progress_rate.zero?  %>
                   <p class="mb-4">You cannot add new milestones because all budget has already been assigned.</p>
               <% end %>
@@ -355,10 +365,15 @@
     <div class="">
             <div class="alert-board" style="">
                 <% if @project.outstanding_alerts.empty? %>
+                    <div class="alert-card">
 
-                <div class="alert-card">
-                  <p>You don't have outstanding alerts. Congratulations!</p>
-                </div>
+                      <div class="d-flex align-items-center">
+
+                        <div class="alert-card-color-tag" style="background-color: green;"></div>
+                        <p>You don't have outstanding alerts. Congratulations!</p>
+
+                      </div>
+                  </div>
 
                 <% else %>
 
