@@ -3,12 +3,15 @@
   height: 100vh;
   background: $dark-blue;
   padding-top: 20px;
-  // display: flex;
-  // flex-direction: column;
-  // justify-content: space-around;
+
 
   .logout-button {
-    border-top: solid 1px $blue;
+    border-top: solid 1px $white-blue;
+  }
+
+  i {
+    color: $white-blue;
+
   }
 
 
@@ -23,4 +26,17 @@ main {
   height: 100vh;
   overflow: scroll;
   overflow-x: hidden;
+}
+
+.nav-link{
+  &:hover {
+    background-color: #89C5CC;
+    i {
+      color: black;
+    }
+  }
+}
+
+.nav-logo{
+  margin-bottom: 15px;
 }
