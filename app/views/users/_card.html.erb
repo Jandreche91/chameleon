@@ -25,11 +25,11 @@
       </div>
 
       <% if user.projects_per_associate.empty? %>
-        <div class="h-350 d-flex justify-content-center align-items-center">
+        <div class="d-flex justify-content-center align-items-center">
           <p>This associate wasn't assigned to any project yet</p>
         </div>
       <% else %>
-        <div class="h-350">
+        <div>
           <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" style="position: relative; width:100%" id="hours-<%= user.id %>" role="tabpanel" aria-labelledby="home-tab">
               <canvas class='user-chart' data-projects-hours="<%= user.total_hours_spent %>"></canvas>
